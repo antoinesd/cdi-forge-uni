@@ -1,0 +1,172 @@
+= CDI & Forge
+Antoine Sabot-Durand; Antonio Goncalves
+:description: CDI & Forge univeristy
+:copyright: CC BY-SA 4.0
+:backend: dzslides
+:sectids!:
+:experimental:
+:toc2:
+:sectanchors:
+:idprefix:
+:idseparator: -
+:icons: font
+:source-highlighter: highlightjs
+:source-language: java
+:language: no-highlight
+:macros-on: subs="macros"
+:caption-off: caption=""
+:title-off: title="", caption=""
+:dzslides-aspect: 16-9
+:imagesdir: images
+:next-label: pass:quotes,attributes[*Next* [icon:caret-right[]]
+:dzslides-style: asciidoctor
+:dzslides-highlight: github
+:dzslides-transition: fade
+:dzslides-fonts: family=Neuton:400,700,800,400italic|Cedarville+Cursive
+:hide-uri-scheme:
+
+
+[.topic.source]
+== Antoine Sabot-Durand
+
+====
+* icon:user[] Senior Software Engineer
+* icon:user[] CDI spec lead, Java EE 8 EG
+* icon:institution[] Red Hat, Inc.
+* icon:twitter[] @antoine_sd
+* icon:rss[] www.next-presso.com
+* icon:github[] github.com/antoinesd
+====
+
+[.topic.source]
+== Antonio Goncalves
+
+====
+* icon:user[] Rock Star
+* icon:institution[] Self Employed
+* icon:globe[] http://antoniogoncalves.org
+* icon:twitter[] @agoncal
+* icon:github[] github.com/agoncal
+====
+
+
+
+[.topic.source]
+== Should I stay or should I go?
+
+====
+* icon:cogs[] A talk about *advanced* CDI
+====
+
+====
+* icon:sign-out[] Might be hard for beginners
+====
+
+====
+* icon:sign-in[] Don't need to be a CDI guru
+====
+
+
+[.topic.source]
+== Should I stay or should I go ?
+
+TIP: If you know the most of these you can stay
+
+[.split]
+* `@Inject`
+* `@Produces`
+* `Event<T>`
+* `@Observes`
+* `@Qualifier`
+* `InjectionPoint`
+
+
+[.topic.source]
+== More concretely
+
+CAUTION: What's included:
+
+. Real use cases from real life with real users
+. New approach to introduce portable extension concepts
+. Code in IDE with tests
+
+CAUTION: What's not included:
+
+. Introduction to CDI
+. Old content on extension
+. Work with Context (need 2 more hours)
+
+
+[.topic.source]
+== Tools used in the code 1/2
+
+[.statement]
+====
+Apache Deltaspike
+
+image::deltaspike.png[role="pull-right", width="300"]
+
+. Apache DeltaSpike is a great CDI toolbox
+. Provide helpers to develop extension
+. And a collection of modules like:
+.. Security
+.. Data
+.. Scheduler
+. More info on http://deltaspike.apache.org
+====
+
+
+[.topic.source]
+== Tools used in the code 2/2
+
+[.statement]
+====
+Arquillian
+
+image::arquillian.png[role="pull-right", width="250"]
+
+. Arquillian is an integration test platform
+. It integrates with JUnit
+. Create your deployment in a dedicated method
+. And launch your tests against the container of your choice
+. We'll use the `weld-se-embedded` and `weld-ee-embedded` container
+. The right solution to test Java EE code
+. More info on http://arquillian.org
+====
+
+
+[.topic.source]
+== Agenda
+
+[.recap]
+====
+* icon:info-circle[] Meet CDI SPI
+* icon:info-circle[] Introducing CDI Extensions
+// * icon:info-circle[] Legacy Code
+* icon:info-circle[] Metrics CDI
+* icon:info-circle[] CDI Quizz
+* icon:info-circle[] Camel CDI
+====
+
+
+
+[.topic.intro]
+== Conclusion
+
+
+[.topic.source]
+== References
+
+NOTE: CDI Specification - http://cdi-spec.org
+
+
+NOTE: Slides generated with _Asciidoctor_, _PlantUML_ and _DZSlides_ backend
+
+NOTE: Original slide template - _Dan Allen_ & _Sarah White_
+
+
+[.topic.ending, hrole="name"]
+== Antoine Sabot-Durand Antonio Goncalves
+
+[.footer]
+icon:twitter[] @antoine_sd @agoncal
