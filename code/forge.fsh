@@ -48,16 +48,25 @@ scaffold-generate --provider Faces --targets org.expenses.web.model.* ;
 #  Creates the expenses currency project  #
 #  #####################################  #
 
+cd ~~ ;
+cd .. ;
+
 project-new --named expenses-currency --topLevelPackage org.expenses.currency --type jar ;
 
 #  #####################################  #
 #  Creates the expenses billing project   #
 #  #####################################  #
 
+cd ~~ ;
+cd .. ;
+
 project-new --named expenses-billing --topLevelPackage org.expenses.billing --type jar ;
 
 #  #####################################  #
 #  Creates the expenses banking project   #
 #  #####################################  #
+
+cd ~~ ;
+cd .. ;
 
 project-new --named expenses-banking --topLevelPackage org.expenses.banking --type jar ;
