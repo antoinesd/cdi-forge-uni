@@ -1,0 +1,10 @@
+alter table t_reimbursement drop constraint FKerfadapb600fyumya4gevcyhh
+alter table t_reimbursement drop constraint FKp2h0hvxb2wapjn17klfwtflce
+alter table t_reimbursement_t_expense drop constraint FKm5w6qi6nst8hght0llhh08o4m
+alter table t_reimbursement_t_expense drop constraint FKf08bod2wlottgc6ds7y85n6ye
+drop table t_conference
+drop table t_expense
+drop table t_reimbursement
+drop table t_reimbursement_t_expense
+drop table t_user
+drop sequence hibernate_sequence restrict
