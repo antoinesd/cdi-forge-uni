@@ -15,7 +15,11 @@ Then run:
 bundle install
 ----
 
-Install http://www.graphviz.org/[Graphviz] and have the `dot` executable in the path.
+Install http://www.graphviz.org/[Graphviz]:
+
+----
+brew install graphviz
+----
 
 == Build instructions
 
@@ -33,7 +37,7 @@ To start, make sure that you have all the needed gems installed:
 bundle update
 ----
 
-Then install the http://feedback.livereload.com/knowledgebase/articles/86242-how-do-i-install-and-use-the-browser-extensions-[LiveReload plugin] for your browser (Chrome, Firefox and Safari are supported).
+Then install the http://livereload.com/extensions/[LiveReload plugin] for your browser (Chrome, Firefox and Safari are supported).
 
 Finally, launch Guard:
 ----
