@@ -39,20 +39,20 @@
             </h:column>
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="Total amound"/>
+                    <h:outputText value="Total amount"/>
                 </f:facet>
                 <h:outputText id="forgeviewdisplayitemUser" value="#{forgeview:display(_item.totalAmount)}"/>
             </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Currency"/>
+                </f:facet>
+                <h:outputText id="itemCurrency" value="#{_item.currency}"/>
+            </h:column>
+            <ui:include src="/resources/scaffold/paginator.xhtml">
+                <ui:param name="paginatorBean" value='#{reimbursementsBean}'/>
+            </ui:include>
         </h:dataTable>
-        <h:column>
-            <f:facet name="header">
-                <h:outputText value="Currency"/>
-            </f:facet>
-            <h:outputText id="itemCurrency" value="#{_item.currency}"/>
-        </h:column>
-        <ui:include src="/resources/scaffold/paginator.xhtml">
-            <ui:param name="paginatorBean" value='#{reimbursementsBean}'/>
-        </ui:include>
     </ui:define>
 
 </ui:composition>
