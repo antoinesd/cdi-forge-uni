@@ -6,77 +6,49 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="/resources/scaffold/pageTemplate.xhtml">
 
-    <ui:define name="title">Signup</ui:define>
+    <ui:param name="pageTitle" value="Signin"/>
 
-    <ui:define name="message">Sign up</ui:define>
+    <ui:define name="header">
+        Signun
+    </ui:define>
 
-    <ui:define name="body">
+    <ui:define name="subheader">
+        Create a new account
+    </ui:define>
 
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <h:form id="form" class="form-horizontal">
-                    <div class="form-group">
-                        <h:outputLabel for="inputLogin" class="col-sm-2 control-label" value="Login"/>
+    <ui:define name="main">
+        <h:form>
+            <h:panelGrid columnClasses="label,component,required" columns="2">
 
-                        <div class="col-sm-10">
-                            <h:inputText class="form-control" id="inputLogin" value="#{accountBean.user.login}"
-                                         label="Login"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <h:outputLabel for="inputPassword1" class="col-sm-2 control-label" value="Password"/>
+                <h:outputLabel for="inputLogin" class="col-sm-2 control-label" value="Login"/>
+                <h:inputText class="form-control" id="inputLogin" value="#{accountBean.user.login}"
+                             label="Login"/>
 
-                        <div class="col-sm-10">
-                            <p:password id="inputPassword1" value="#{accountBean.password1}" feedback="true"
-                                        inline="true"
-                                        match="inputPassword2" required="true" label="Password 1"/>
-                        </div>
+                <h:outputLabel for="inputPassword1" class="col-sm-2 control-label" value="Password"/>
+                <h:inputSecret id="inputPassword1" value="#{accountBean.password1}" required="true"/>
 
-                    </div>
-                    <div class="form-group">
-                        <h:outputLabel for="inputPassword2" class="col-sm-2 control-label" value="Re-type Password"/>
+                <h:outputLabel for="inputPassword2" class="col-sm-2 control-label" value="Re-type Password"/>
+                <h:inputSecret id="inputPassword2" value="#{accountBean.password2}" required="true"/>
 
-                        <div class="col-sm-10">
-                            <p:password id="inputPassword2" value="#{accountBean.password2}" feedback="false"
-                                        required="true" label="Password 2"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <h:outputLabel for="inputRole" class="col-sm-2 control-label" value="Role"/>
+                <h:outputLabel for="inputRole" class="col-sm-2 control-label" value="Role"/>
+                <h:selectOneMenu value="#{accountBean.user.role}" class="form-control" id="inputRole">
+                    <f:selectItems value="#{accountBean.roles}"/>
+                </h:selectOneMenu>
 
-                        <div class="col-sm-10">
-                            <h:selectOneMenu value="#{accountBean.user.role}" class="form-control" id="inputRole">
-                                <f:selectItems value="#{accountBean.roles}"/>
-                            </h:selectOneMenu>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <h:outputLabel for="inputFirstName" class="col-sm-2 control-label" value="First name"/>
+                <h:outputLabel for="inputFirstName" class="col-sm-2 control-label" value="Name"/>
+                <h:inputText class="form-control" id="inputFirstName"
+                             value="#{accountBean.user.name}"/>
 
-                        <div class="col-sm-10">
-                            <h:inputText class="form-control" id="inputFirstName"
-                                         value="#{accountBean.user.name}"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <h:outputLabel for="inputEmail" class="col-sm-2 control-label" value="Email"/>
+                <h:outputLabel for="inputEmail" class="col-sm-2 control-label" value="Email"/>
+                <h:inputText pt:type="email" class="form-control" id="inputEmail"
+                             value="#{accountBean.user.email}"/>
+            </h:panelGrid>
 
-                        <div class="col-sm-10">
-                            <h:inputText pt:type="email" class="form-control" id="inputEmail"
-                                         value="#{accountBean.user.email}"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <h:commandButton class="btn btn-default" value="Sign up" action="#{accountBean.doSignup}"/>
-                        </div>
-                    </div>
-                </h:form>
+            <div class="buttons">
+                <h:commandButton class="btn btn-primary" value="Sign up" action="#{accountBean.doSignup}"/>
             </div>
-            <div class="col-md-2"></div>
-        </div>
 
+        </h:form>
 
     </ui:define>
 
