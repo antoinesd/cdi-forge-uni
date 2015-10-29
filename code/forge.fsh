@@ -1,12 +1,39 @@
-
 project-new --named expenses --type parent ;
+
+#  #################################  #
+#  Creates the expenses core project  #
+#  #################################  #
+
+project-new --named expenses-core --topLevelPackage org.expenses.core --type jar ;
+
+# Sets the project to use Java EE 7 artifacts
+# #################
+
+jpa-setup --jpaVersion 2.1 --persistenceUnitName expenses-pu ;
+cdi-setup --cdiVersion 1.1 ;
+
+
 
 #  ################################  #
 #  Creates the expenses web project  #
 #  ################################  #
 
-project-new --named expenses-web --topLevelPackage org.expenses.web ;
+cd ~~ ;
+cd .. ;
 
+project-new --named expenses-web --topLevelPackage org.expenses.web --type war ;
+
+# Sets the project to use Java EE 7 artifacts
+# #################
+
+jpa-setup --jpaVersion 2.1 --persistenceUnitName expenses-pu ;
+cdi-setup --cdiVersion 1.1 ;
+faces-setup --facesVersion 2.2 ;
+servlet-setup --servletVersion 3.1 ;
+
+
+# Creates the entities
+# #################
 
 jpa-new-entity --named User --tableName t_user ;
 jpa-new-field --named login ;
@@ -45,7 +72,12 @@ jpa-new-field --named user --type ~.model.User --relationshipType Many-to-One ;
 jpa-new-field --named conference --type ~.model.Conference --relationshipType Many-to-One ;
 
 
+# Scaffolds a JSF application
+# ###########################
+
 scaffold-generate --provider Faces --targets org.expenses.web.model.* ;
+
+
 
 #  #####################################  #
 #  Creates the expenses currency project  #
@@ -56,6 +88,13 @@ cd .. ;
 
 project-new --named expenses-currency --topLevelPackage org.expenses.currency --type jar ;
 
+# Sets the project to use Java EE 7 artifacts
+# #################
+
+cdi-setup --cdiVersion 1.1 ;
+
+
+
 #  #####################################  #
 #  Creates the expenses billing project   #
 #  #####################################  #
@@ -65,6 +104,13 @@ cd .. ;
 
 project-new --named expenses-billing --topLevelPackage org.expenses.billing --type jar ;
 
+# Sets the project to use Java EE 7 artifacts
+# #################
+
+cdi-setup --cdiVersion 1.1 ;
+
+
+
 #  #####################################  #
 #  Creates the expenses banking project   #
 #  #####################################  #
@@ -73,3 +119,10 @@ cd ~~ ;
 cd .. ;
 
 project-new --named expenses-banking --topLevelPackage org.expenses.banking --type jar ;
+
+# Sets the project to use Java EE 7 artifacts
+# #################
+
+cdi-setup --cdiVersion 1.1 ;
+
+
