@@ -111,6 +111,16 @@ public class Reimbursement implements Serializable
       this.conference = conference;
    }
 
+   public Float getTotalAmount()
+   {
+      Float totalAmount = new Float(0);
+      for (Expense expense : expenses)
+      {
+         totalAmount += expense.getAmount();
+      }
+      return totalAmount;
+   }
+
    @Override
    public boolean equals(Object obj)
    {

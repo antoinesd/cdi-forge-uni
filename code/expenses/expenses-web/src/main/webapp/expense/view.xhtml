@@ -2,26 +2,32 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:forgeview="http://jboss.org/forge/view"
                 template="/resources/scaffold/pageTemplate.xhtml">
 
-    <ui:param name="pageTitle" value="View Expenses"/>
+    <f:metadata>
+        <f:viewParam name="page" value='#{reimbursementsBean.page}'/>
+        <f:event type="preRenderView" listener='#{reimbursementsBean.paginate}'/>
+    </f:metadata>
+
+    <ui:param name="pageTitle" value="View Reimbursements"/>
 
     <ui:define name="header">
-        View expenses
+        View reimbursements
     </ui:define>
 
     <ui:define name="subheader">
-        Confirm your expenses for #{expenseesBean.conference.name}
+        View all my reimbursements
     </ui:define>
 
     <ui:define name="main">
-        <h:dataTable id="expenseBeanPageItems" styleClass="data-table" value="#{expenseesBean.reimbursement.expenses}"
+        <h:dataTable id="reimbursementBeanPageItems" styleClass="data-table" value="#{reimbursementsBean.pageItems}"
                      var="_item">
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="Description"/>
+                    <h:outputText value="Conference"/>
                 </f:facet>
-                <h:outputText id="itemDescription" value="#{_item.description}"/>
+                <h:outputText id="itemConference" value="#{_item.conference.name}"/>
             </h:column>
             <h:column>
                 <f:facet name="header">
@@ -33,30 +39,20 @@
             </h:column>
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="Amount"/>
+                    <h:outputText value="Total amound"/>
                 </f:facet>
-                <h:outputText id="itemAmount" value="#{_item.amount}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Expense Type"/>
-                </f:facet>
-                <h:outputText id="itemExpenseType" value="#{_item.expenseType}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Currency"/>
-                </f:facet>
-                <h:outputText id="itemCurrency" value="#{_item.currency}"/>
+                <h:outputText id="forgeviewdisplayitemUser" value="#{forgeview:display(_item.totalAmount)}"/>
             </h:column>
         </h:dataTable>
-
-        <h:form>
-            <div class="buttons">
-                <h:link value="Back" outcome="/expense/create" styleClass="btn btn-primary"/>
-                <h:commandLink value="Confirm" action="#{expenseesBean.confirm}" styleClass="btn btn-primary"/>
-            </div>
-        </h:form>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Currency"/>
+            </f:facet>
+            <h:outputText id="itemCurrency" value="#{_item.currency}"/>
+        </h:column>
+        <ui:include src="/resources/scaffold/paginator.xhtml">
+            <ui:param name="paginatorBean" value='#{reimbursementsBean}'/>
+        </ui:include>
     </ui:define>
 
 </ui:composition>
