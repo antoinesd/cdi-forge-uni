@@ -39,7 +39,7 @@
                     <f:facet name="header">
                         <h:outputText value="Description"/>
                     </f:facet>
-                    <h:link outcome="/expense/view">
+                    <h:link outcome="/admin/expense/view">
                         <f:param name="id" value="#{_item.id}"/>
                         <h:outputText id="itemDescription" value="#{_item.description}"/>
                     </h:link>
@@ -48,7 +48,7 @@
                     <f:facet name="header">
                         <h:outputText value="Date"/>
                     </f:facet>
-                    <h:link outcome="/expense/view">
+                    <h:link outcome="/admin/expense/view">
                         <f:param name="id" value="#{_item.id}"/>
                         <h:outputText id="itemDate" value="#{_item.date}">
                             <f:convertDateTime type="date"/>
@@ -59,7 +59,7 @@
                     <f:facet name="header">
                         <h:outputText value="Amount"/>
                     </f:facet>
-                    <h:link outcome="/expense/view">
+                    <h:link outcome="/admin/expense/view">
                         <f:param name="id" value="#{_item.id}"/>
                         <h:outputText id="itemAmount" value="#{_item.amount}"/>
                     </h:link>
@@ -68,7 +68,7 @@
                     <f:facet name="header">
                         <h:outputText value="Expense Type"/>
                     </f:facet>
-                    <h:link outcome="/expense/view">
+                    <h:link outcome="/admin/expense/view">
                         <f:param name="id" value="#{_item.id}"/>
                         <h:outputText id="itemExpenseType" value="#{_item.expenseType}"/>
                     </h:link>
@@ -77,7 +77,7 @@
                     <f:facet name="header">
                         <h:outputText value="Currency"/>
                     </f:facet>
-                    <h:link outcome="/expense/view">
+                    <h:link outcome="/admin/expense/view">
                         <f:param name="id" value="#{_item.id}"/>
                         <h:outputText id="itemCurrency" value="#{_item.currency}"/>
                     </h:link>
@@ -89,14 +89,14 @@
                           value="#{reimbursementBean.reimbursement.currency}"/>
             <h:outputText/>
             <h:outputLabel for="reimbursementBeanReimbursementUser" value="User:"/>
-            <h:link id="reimbursementBeanReimbursementUser" outcome="/user/view"
+            <h:link id="reimbursementBeanReimbursementUser" outcome="/admin/user/view"
                     rendered="#{!empty reimbursementBean.reimbursement.user}"
                     value="#{reimbursementBean.reimbursement.user}">
                 <f:param name="id" value="#{reimbursementBean.reimbursement.user.id}"/>
             </h:link>
             <h:outputText/>
             <h:outputLabel for="reimbursementBeanReimbursementConference" value="Conference:"/>
-            <h:link id="reimbursementBeanReimbursementConference" outcome="/conference/view"
+            <h:link id="reimbursementBeanReimbursementConference" outcome="/admin/conference/view"
                     rendered="#{!empty reimbursementBean.reimbursement.conference}"
                     value="#{reimbursementBean.reimbursement.conference}">
                 <f:param name="id" value="#{reimbursementBean.reimbursement.conference.id}"/>

@@ -61,7 +61,7 @@
                     <f:facet name="header">
                         <h:outputText value="Login"/>
                     </f:facet>
-                    <h:link outcome="/user/view">
+					<h:link outcome="/admin/user/view">
                         <f:param name="id" value="#{_item.id}"/>
                         <h:outputText id="itemLogin" value="#{_item.login}"/>
                     </h:link>
@@ -70,7 +70,7 @@
                     <f:facet name="header">
                         <h:outputText value="Password"/>
                     </f:facet>
-                    <h:link outcome="/user/view">
+					<h:link outcome="/admin/user/view">
                         <f:param name="id" value="#{_item.id}"/>
                         <h:outputText id="itemPassword" value="#{_item.password}"/>
                     </h:link>
@@ -79,7 +79,7 @@
                     <f:facet name="header">
                         <h:outputText value="Name"/>
                     </f:facet>
-                    <h:link outcome="/user/view">
+                    <h:link outcome="/admin/user/view">
                         <f:param name="id" value="#{_item.id}"/>
                         <h:outputText id="itemName" value="#{_item.name}"/>
                     </h:link>

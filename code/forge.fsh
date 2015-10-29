@@ -75,7 +75,7 @@ jpa-new-field --named conference --type ~.model.Conference --relationshipType Ma
 # Scaffolds a JSF application
 # ###########################
 
-scaffold-generate --provider Faces --targets org.expenses.web.model.* ;
+scaffold-generate --provider Faces --targets org.expenses.web.model.* --webRoot admin ;
 
 
 

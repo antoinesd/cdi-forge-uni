@@ -1,22 +1,19 @@
 package org.expenses.core.model;
 
-import org.expenses.core.utils.DigestPassword;
-import sun.misc.BASE64Encoder;
-
 import java.io.Serializable;
-import java.security.MessageDigest;
 
 import javax.persistence.*;
+
+import org.expenses.core.utils.DigestPassword;
 
 @Entity
 @Table(name = "t_user")
 @NamedQueries({
-        @NamedQuery(name = User.FIND_BY_EMAIL, query = "SELECT u FROM User u WHERE u.email = :email"),
-        @NamedQuery(name = User.FIND_BY_UUID, query = "SELECT u FROM User u WHERE u.uuid = :uuid"),
-        @NamedQuery(name = User.FIND_BY_LOGIN, query = "SELECT u FROM User u WHERE u.login = :login"),
-        @NamedQuery(name = User.FIND_BY_LOGIN_PASSWORD, query = "SELECT u FROM User u WHERE u.login = :login AND u.password = :password"),
-        @NamedQuery(name = User.FIND_ALL, query = "SELECT u FROM User u")
-})
+         @NamedQuery(name = User.FIND_BY_EMAIL, query = "SELECT u FROM User u WHERE u.email = :email"),
+         @NamedQuery(name = User.FIND_BY_UUID, query = "SELECT u FROM User u WHERE u.uuid = :uuid"),
+         @NamedQuery(name = User.FIND_BY_LOGIN, query = "SELECT u FROM User u WHERE u.login = :login"),
+         @NamedQuery(name = User.FIND_BY_LOGIN_PASSWORD, query = "SELECT u FROM User u WHERE u.login = :login AND u.password = :password"),
+         @NamedQuery(name = User.FIND_ALL, query = "SELECT u FROM User u") })
 public class User implements Serializable
 {
 
@@ -104,27 +101,33 @@ public class User implements Serializable
       this.name = name;
    }
 
-   public String getUuid() {
+   public String getUuid()
+   {
       return uuid;
    }
 
-   public void setUuid(String uuid) {
+   public void setUuid(String uuid)
+   {
       this.uuid = uuid;
    }
 
-   public String getEmail() {
+   public String getEmail()
+   {
       return email;
    }
 
-   public void setEmail(String email) {
+   public void setEmail(String email)
+   {
       this.email = email;
    }
 
-   public UserRole getRole() {
+   public UserRole getRole()
+   {
       return role;
    }
 
-   public void setRole(UserRole role) {
+   public void setRole(UserRole role)
+   {
       this.role = role;
    }
 

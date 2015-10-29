@@ -81,7 +81,7 @@
                     <f:facet name="header">
                         <h:outputText value="Date"/>
                     </f:facet>
-                    <h:link outcome="/reimbursement/view">
+                    <h:link outcome="/admin/reimbursement/view">
                         <f:param name="id" value="#{_item.id}"/>
                         <h:outputText id="itemDate" value="#{_item.date}">
                             <f:convertDateTime type="date"/>
@@ -92,7 +92,7 @@
                     <f:facet name="header">
                         <h:outputText value="Currency"/>
                     </f:facet>
-                    <h:link outcome="/reimbursement/view">
+                    <h:link outcome="/admin/reimbursement/view">
                         <f:param name="id" value="#{_item.id}"/>
                         <h:outputText id="itemCurrency" value="#{_item.currency}"/>
                     </h:link>
@@ -101,7 +101,7 @@
                     <f:facet name="header">
                         <h:outputText value="User"/>
                     </f:facet>
-                    <h:link outcome="/reimbursement/view">
+                    <h:link outcome="/admin/reimbursement/view">
                         <f:param name="id" value="#{_item.id}"/>
                         <h:outputText id="forgeviewdisplayitemUser" value="#{forgeview:display(_item.user)}"/>
                     </h:link>

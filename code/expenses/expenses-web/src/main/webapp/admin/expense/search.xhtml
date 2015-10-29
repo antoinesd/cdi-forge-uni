@@ -72,7 +72,7 @@
                     <f:facet name="header">
                         <h:outputText value="Description"/>
                     </f:facet>
-                    <h:link outcome="/expense/view">
+                    <h:link outcome="/admin/expense/view">
                         <f:param name="id" value="#{_item.id}"/>
                         <h:outputText id="itemDescription" value="#{_item.description}"/>
                     </h:link>
@@ -81,7 +81,7 @@
                     <f:facet name="header">
                         <h:outputText value="Date"/>
                     </f:facet>
-                    <h:link outcome="/expense/view">
+                    <h:link outcome="/admin/expense/view">
                         <f:param name="id" value="#{_item.id}"/>
                         <h:outputText id="itemDate" value="#{_item.date}">
                             <f:convertDateTime type="date"/>
@@ -92,7 +92,7 @@
                     <f:facet name="header">
                         <h:outputText value="Amount"/>
                     </f:facet>
-                    <h:link outcome="/expense/view">
+                    <h:link outcome="/admin/expense/view">
                         <f:param name="id" value="#{_item.id}"/>
                         <h:outputText id="itemAmount" value="#{_item.amount}"/>
                     </h:link>
