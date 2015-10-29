@@ -25,7 +25,7 @@ public class Reimbursement implements Serializable
    private Date date;
 
    @OneToMany
-   private Set<Expense> expenses = new HashSet<Expense>();
+   private Set<Expense> expenses = new HashSet<>();
 
    @Enumerated
    private Currency currency;
@@ -64,6 +64,11 @@ public class Reimbursement implements Serializable
    public void setDate(Date date)
    {
       this.date = date;
+   }
+
+   public void add(Expense expense)
+   {
+      expenses.add(expense);
    }
 
    public Set<Expense> getExpenses()

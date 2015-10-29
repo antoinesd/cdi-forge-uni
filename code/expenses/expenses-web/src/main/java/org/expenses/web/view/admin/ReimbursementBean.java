@@ -1,4 +1,4 @@
-package org.expenses.web.view;
+package org.expenses.web.view.admin;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,26 +12,26 @@ import javax.faces.convert.Converter;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.expenses.core.model.Expense;
-import org.expenses.core.service.ExpenseService;
+import org.expenses.core.model.Reimbursement;
+import org.expenses.core.service.ReimbursementService;
 
 /**
- * Backing bean for Expense entities.
+ * Backing bean for Reimbursement entities.
  * <p/>
- * This class provides CRUD functionality for all Expense entities. It focuses purely on Java EE 6 standards (e.g.
+ * This class provides CRUD functionality for all Reimbursement entities. It focuses purely on Java EE 6 standards (e.g.
  * <tt>&#64;ConversationScoped</tt> for state management, <tt>PersistenceContext</tt> for persistence,
  * <tt>CriteriaBuilder</tt> for searches) rather than introducing a CRUD framework or custom base class.
  */
 
 @Named
 @ConversationScoped
-public class ExpenseBean implements Serializable
+public class ReimbursementBean implements Serializable
 {
 
    private static final long serialVersionUID = 1L;
 
    /*
-    * Support creating and retrieving Expense entities
+    * Support creating and retrieving Reimbursement entities
     */
 
    private Long id;
@@ -46,23 +46,23 @@ public class ExpenseBean implements Serializable
       this.id = id;
    }
 
-   private Expense expense;
+   private Reimbursement reimbursement;
 
-   public Expense getExpense()
+   public Reimbursement getReimbursement()
    {
-      return this.expense;
+      return this.reimbursement;
    }
 
-   public void setExpense(Expense expense)
+   public void setReimbursement(Reimbursement reimbursement)
    {
-      this.expense = expense;
+      this.reimbursement = reimbursement;
    }
 
    @Inject
    private Conversation conversation;
 
    @Inject
-   private ExpenseService service;
+   private ReimbursementService service;
 
    public String create()
    {
@@ -88,22 +88,22 @@ public class ExpenseBean implements Serializable
 
       if (this.id == null)
       {
-         this.expense = this.example;
+         this.reimbursement = this.example;
       }
       else
       {
-         this.expense = findById(getId());
+         this.reimbursement = findById(getId());
       }
    }
 
-   public Expense findById(Long id)
+   public Reimbursement findById(Long id)
    {
 
       return this.service.findById(id);
    }
 
    /*
-    * Support updating and deleting Expense entities
+    * Support updating and deleting Reimbursement entities
     */
 
    public String update()
@@ -114,13 +114,14 @@ public class ExpenseBean implements Serializable
       {
          if (this.id == null)
          {
-            this.service.persist(this.expense);
+            this.service.persist(this.reimbursement);
             return "search?faces-redirect=true";
          }
          else
          {
-            this.service.merge(this.expense);
-            return "view?faces-redirect=true&id=" + this.expense.getId();
+            this.service.merge(this.reimbursement);
+            return "view?faces-redirect=true&id="
+                     + this.reimbursement.getId();
          }
       }
       catch (Exception e)
@@ -137,7 +138,7 @@ public class ExpenseBean implements Serializable
 
       try
       {
-         Expense deletableEntity = findById(getId());
+         Reimbursement deletableEntity = findById(getId());
 
          this.service.remove(deletableEntity);
          return "search?faces-redirect=true";
@@ -151,14 +152,14 @@ public class ExpenseBean implements Serializable
    }
 
    /*
-    * Support searching Expense entities with pagination
+    * Support searching Reimbursement entities with pagination
     */
 
    private int page;
    private long count;
-   private List<Expense> pageItems;
+   private List<Reimbursement> pageItems;
 
-   private Expense example = new Expense();
+   private Reimbursement example = new Reimbursement();
 
    public int getPage()
    {
@@ -175,12 +176,12 @@ public class ExpenseBean implements Serializable
       return 10;
    }
 
-   public Expense getExample()
+   public Reimbursement getExample()
    {
       return this.example;
    }
 
-   public void setExample(Expense example)
+   public void setExample(Reimbursement example)
    {
       this.example = example;
    }
@@ -202,7 +203,7 @@ public class ExpenseBean implements Serializable
 
    }
 
-   public List<Expense> getPageItems()
+   public List<Reimbursement> getPageItems()
    {
       return this.pageItems;
    }
@@ -213,10 +214,10 @@ public class ExpenseBean implements Serializable
    }
 
    /*
-    * Support listing and POSTing back Expense entities (e.g. from inside an HtmlSelectOneMenu)
+    * Support listing and POSTing back Reimbursement entities (e.g. from inside an HtmlSelectOneMenu)
     */
 
-   public List<Expense> getAll()
+   public List<Reimbursement> getAll()
    {
 
       return this.service.listAll();
@@ -246,7 +247,7 @@ public class ExpenseBean implements Serializable
                return "";
             }
 
-            return String.valueOf(((Expense) value).getId());
+            return String.valueOf(((Reimbursement) value).getId());
          }
       };
    }
@@ -255,17 +256,17 @@ public class ExpenseBean implements Serializable
     * Support adding children to bidirectional, one-to-many tables
     */
 
-   private Expense add = new Expense();
+   private Reimbursement add = new Reimbursement();
 
-   public Expense getAdd()
+   public Reimbursement getAdd()
    {
       return this.add;
    }
 
-   public Expense getAdded()
+   public Reimbursement getAdded()
    {
-      Expense added = this.add;
-      this.add = new Expense();
+      Reimbursement added = this.add;
+      this.add = new Reimbursement();
       return added;
    }
 }

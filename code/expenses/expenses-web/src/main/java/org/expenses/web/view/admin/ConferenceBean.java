@@ -1,4 +1,4 @@
-package org.expenses.web.view;
+package org.expenses.web.view.admin;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,26 +12,26 @@ import javax.faces.convert.Converter;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.expenses.core.model.User;
-import org.expenses.core.service.UserService;
+import org.expenses.core.model.Conference;
+import org.expenses.core.service.ConferenceService;
 
 /**
- * Backing bean for User entities.
+ * Backing bean for Conference entities.
  * <p/>
- * This class provides CRUD functionality for all User entities. It focuses purely on Java EE 6 standards (e.g.
+ * This class provides CRUD functionality for all Conference entities. It focuses purely on Java EE 6 standards (e.g.
  * <tt>&#64;ConversationScoped</tt> for state management, <tt>PersistenceContext</tt> for persistence,
  * <tt>CriteriaBuilder</tt> for searches) rather than introducing a CRUD framework or custom base class.
  */
 
 @Named
 @ConversationScoped
-public class UserBean implements Serializable
+public class ConferenceBean implements Serializable
 {
 
    private static final long serialVersionUID = 1L;
 
    /*
-    * Support creating and retrieving User entities
+    * Support creating and retrieving Conference entities
     */
 
    private Long id;
@@ -46,23 +46,23 @@ public class UserBean implements Serializable
       this.id = id;
    }
 
-   private User user;
+   private Conference conference;
 
-   public User getUser()
+   public Conference getConference()
    {
-      return this.user;
+      return this.conference;
    }
 
-   public void setUser(User user)
+   public void setConference(Conference conference)
    {
-      this.user = user;
+      this.conference = conference;
    }
 
    @Inject
    private Conversation conversation;
 
    @Inject
-   private UserService service;
+   private ConferenceService service;
 
    public String create()
    {
@@ -88,22 +88,22 @@ public class UserBean implements Serializable
 
       if (this.id == null)
       {
-         this.user = this.example;
+         this.conference = this.example;
       }
       else
       {
-         this.user = findById(getId());
+         this.conference = findById(getId());
       }
    }
 
-   public User findById(Long id)
+   public Conference findById(Long id)
    {
 
       return this.service.findById(id);
    }
 
    /*
-    * Support updating and deleting User entities
+    * Support updating and deleting Conference entities
     */
 
    public String update()
@@ -114,13 +114,13 @@ public class UserBean implements Serializable
       {
          if (this.id == null)
          {
-            this.service.persist(this.user);
+            this.service.persist(this.conference);
             return "search?faces-redirect=true";
          }
          else
          {
-            this.service.merge(this.user);
-            return "view?faces-redirect=true&id=" + this.user.getId();
+            this.service.merge(this.conference);
+            return "view?faces-redirect=true&id=" + this.conference.getId();
          }
       }
       catch (Exception e)
@@ -137,7 +137,7 @@ public class UserBean implements Serializable
 
       try
       {
-         User deletableEntity = findById(getId());
+         Conference deletableEntity = findById(getId());
 
          this.service.remove(deletableEntity);
          return "search?faces-redirect=true";
@@ -151,14 +151,14 @@ public class UserBean implements Serializable
    }
 
    /*
-    * Support searching User entities with pagination
+    * Support searching Conference entities with pagination
     */
 
    private int page;
    private long count;
-   private List<User> pageItems;
+   private List<Conference> pageItems;
 
-   private User example = new User();
+   private Conference example = new Conference();
 
    public int getPage()
    {
@@ -175,12 +175,12 @@ public class UserBean implements Serializable
       return 10;
    }
 
-   public User getExample()
+   public Conference getExample()
    {
       return this.example;
    }
 
-   public void setExample(User example)
+   public void setExample(Conference example)
    {
       this.example = example;
    }
@@ -202,7 +202,7 @@ public class UserBean implements Serializable
 
    }
 
-   public List<User> getPageItems()
+   public List<Conference> getPageItems()
    {
       return this.pageItems;
    }
@@ -213,10 +213,10 @@ public class UserBean implements Serializable
    }
 
    /*
-    * Support listing and POSTing back User entities (e.g. from inside an HtmlSelectOneMenu)
+    * Support listing and POSTing back Conference entities (e.g. from inside an HtmlSelectOneMenu)
     */
 
-   public List<User> getAll()
+   public List<Conference> getAll()
    {
 
       return this.service.listAll();
@@ -246,7 +246,7 @@ public class UserBean implements Serializable
                return "";
             }
 
-            return String.valueOf(((User) value).getId());
+            return String.valueOf(((Conference) value).getId());
          }
       };
    }
@@ -255,17 +255,17 @@ public class UserBean implements Serializable
     * Support adding children to bidirectional, one-to-many tables
     */
 
-   private User add = new User();
+   private Conference add = new Conference();
 
-   public User getAdd()
+   public Conference getAdd()
    {
       return this.add;
    }
 
-   public User getAdded()
+   public Conference getAdded()
    {
-      User added = this.add;
-      this.add = new User();
+      Conference added = this.add;
+      this.add = new Conference();
       return added;
    }
 }
