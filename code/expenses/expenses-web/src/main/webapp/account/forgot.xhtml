@@ -4,26 +4,30 @@
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
                 template="/resources/scaffold/pageTemplate.xhtml">
 
-    <ui:define name="title">Forgot password</ui:define>
+    <ui:param name="pageTitle" value="Profile"/>
 
-    <ui:define name="body">
-
-        <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-                <h:form class="form-forgot">
-                    <h2 class="form-forgot-heading">An email will be sent with your new password</h2>
-                    <label for="inputEmail" class="sr-only">Email address</label>
-                    <h:inputText id="inputEmail" pt:type="email" class="form-control" pt:placeholder="Email address"
-                                 pt:required="true" pt:autofocus="true" value="#{accountBean.user.email}"/>
-                    <br/>
-                    <h:commandButton styleClass="btn btn-lg btn-primary btn-block" value="Send email"
-                                     action="#{accountBean.doForgotPassword}"/>
-                </h:form>
-            </div>
-            <div class="col-md-4"></div>
-        </div>
-
+    <ui:define name="header">
+        Forgot your password
     </ui:define>
 
+    <ui:define name="subheader">
+        An email will be sent with your new password
+    </ui:define>
+
+    <ui:define name="main">
+        <h:form>
+            <h:panelGrid columnClasses="label,component,required" columns="2">
+
+                <label for="inputEmail" class="sr-only">Email address</label>
+                <h:inputText id="inputEmail" pt:type="email" class="form-control" pt:placeholder="Email address"
+                             pt:required="true" pt:autofocus="true" value="#{accountBean.user.email}"/>
+            </h:panelGrid>
+
+            <div class="buttons">
+                <h:commandButton class="btn btn-primary" value="Send email"
+                                 action="#{accountBean.doForgotPassword}"/>
+            </div>
+
+        </h:form>
+    </ui:define>
 </ui:composition>
