@@ -128,7 +128,6 @@ public class Conference implements Serializable
       String result = getClass().getSimpleName() + " ";
       if (id != null)
          result += "id: " + id;
-      result += ", version: " + version;
       if (name != null && !name.trim().isEmpty())
          result += ", name: " + name;
       if (date != null)

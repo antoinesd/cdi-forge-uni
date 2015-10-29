@@ -143,7 +143,6 @@ public class Reimbursement implements Serializable
       String result = getClass().getSimpleName() + " ";
       if (id != null)
          result += "id: " + id;
-      result += ", version: " + version;
       if (date != null)
          result += ", date: " + date;
       if (expenses != null)

@@ -141,7 +141,6 @@ public class Expense implements Serializable
       String result = getClass().getSimpleName() + " ";
       if (id != null)
          result += "id: " + id;
-      result += ", version: " + version;
       if (description != null && !description.trim().isEmpty())
          result += ", description: " + description;
       if (date != null)

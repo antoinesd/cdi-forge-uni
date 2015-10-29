@@ -168,11 +168,8 @@ public class User implements Serializable
       String result = getClass().getSimpleName() + " ";
       if (id != null)
          result += "id: " + id;
-      result += ", version: " + version;
       if (login != null && !login.trim().isEmpty())
          result += ", login: " + login;
-      if (password != null && !password.trim().isEmpty())
-         result += ", password: " + password;
       if (name != null && !name.trim().isEmpty())
          result += ", name: " + name;
       return result;
