@@ -14,6 +14,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.NoResultException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -81,17 +82,17 @@ public class AccountBean implements Serializable
       if (coockieValue == null)
          return;
 
-      user = service.findByUUID(coockieValue);
-
-      if (user != null)
+      try
       {
+         user = service.findByUUID(coockieValue);
+
          // If the user is an administrator
          if (user.getRole().equals(UserRole.ADMIN))
             admin = true;
          // The user is now logged in
          loggedIn = true;
       }
-      else
+      catch (NoResultException e)
       {
          // The user maybe has an old coockie, let's get rid of it
          removeCookie();
@@ -107,7 +108,7 @@ public class AccountBean implements Serializable
       // Does the login already exists ?
       if (service.findByLogin(user.getLogin()).size() > 0)
       {
-         FacesContext.getCurrentInstance().addMessage(null,
+         facesContext.addMessage(null,
                   new FacesMessage(FacesMessage.SEVERITY_WARN, "Login already exists " + user.getLogin(),
                            "You must choose a different login"));
          return null;
@@ -117,22 +118,21 @@ public class AccountBean implements Serializable
       user.setPassword(password1);
       user = service.persist(user);
       resetPasswords();
-      FacesContext.getCurrentInstance().addMessage(null,
+      facesContext.addMessage(null,
                new FacesMessage(FacesMessage.SEVERITY_INFO, "Hi " + user.getName(), "Welcome to this website"));
-      // facesContext.addMessage(null,
-      // new FacesMessage(FacesMessage.SEVERITY_INFO, "Hi " + user.getFirstName(), "Welcome to this website"));
       loggedIn = true;
       if (user.getRole().equals(UserRole.ADMIN))
          admin = true;
-      return "index";
+
+      return "/index";
    }
 
    public String doSignin()
    {
-      user = service.findByLoginPassword(user.getLogin(), user.getPassword());
-
-      if (user != null)
+      try
       {
+         user = service.findByLoginPassword(user.getLogin(), user.getPassword());
+
          // If the user is an administrator
          if (user.getRole().equals(UserRole.ADMIN))
          {
@@ -152,13 +152,12 @@ public class AccountBean implements Serializable
          }
          // The user is now logged in
          loggedIn = true;
-         return "index";
+         return "/index";
       }
-      else
+      catch (NoResultException e)
       {
-         FacesContext.getCurrentInstance().addMessage(null,
-                  new FacesMessage(FacesMessage.SEVERITY_WARN, "Wrong user/password",
-                           "Check your inputs or ask for a new password"));
+         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Wrong user/password",
+                  "Check your inputs or ask for a new password"));
          return null;
       }
 
@@ -170,7 +169,7 @@ public class AccountBean implements Serializable
       Bean<?> myBean = beanManager.getBeans(AccountBean.class).iterator().next();
       ctx.destroy(myBean);
 
-      return "index";
+      return "/index";
    }
 
    public String doLogoutAndRemoveCookie()
@@ -181,25 +180,26 @@ public class AccountBean implements Serializable
       AlterableContext ctx = (AlterableContext) beanManager.getContext(SessionScoped.class);
       Bean<?> myBean = beanManager.getBeans(AccountBean.class).iterator().next();
       ctx.destroy(myBean);
-      return "index";
+      return "/index";
    }
 
    public String doForgotPassword()
    {
-      user = service.findByEmail(user.getEmail());
-      if (user != null)
+      try
       {
+         user = service.findByEmail(user.getEmail());
+
          String temporaryPassword = Lorem.getWords(1);
          user.setPassword(DigestPassword.digest(temporaryPassword));
          user = service.merge(user);
-         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Email sent",
+         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Email sent",
                   "An email has been sent to " + user.getEmail() + " with temporary password :" + temporaryPassword));
          // send an email with the password "dummyPassword"
          return doLogout();
       }
-      else
+      catch (NoResultException e)
       {
-         FacesContext.getCurrentInstance().addMessage(null,
+         facesContext.addMessage(null,
                   new FacesMessage(FacesMessage.SEVERITY_WARN, "Unknown email",
                            "This email address is unknonw in our system"));
          return null;
@@ -212,15 +212,11 @@ public class AccountBean implements Serializable
          user.setPassword(DigestPassword.digest(password1));
       user = service.merge(user);
       resetPasswords();
-      FacesContext.getCurrentInstance().addMessage(null,
+      facesContext.addMessage(null,
                new FacesMessage(FacesMessage.SEVERITY_INFO, "Profile has been updated for " + user.getName(),
                         null));
-      return null;
-   }
 
-   public String doSearch()
-   {
-      return "search";
+      return "/index";
    }
 
    // Cookie

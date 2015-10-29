@@ -17,11 +17,12 @@
 
     <ui:define name="main">
         <h:form>
+            <h:messages globalOnly="true" styleClass="error"/>
             <h:panelGrid columnClasses="label,component,required" columns="2">
 
                 <h:outputLabel for="inputLogin" class="col-sm-2 control-label" value="Login"/>
                 <h:inputText class="form-control" id="inputLogin" value="#{accountBean.user.login}"
-                             label="Login"/>
+                             label="Login" required="true"/>
 
                 <h:outputLabel for="inputPassword1" class="col-sm-2 control-label" value="Password"/>
                 <h:inputSecret id="inputPassword1" value="#{accountBean.password1}" required="true"/>
@@ -36,11 +37,11 @@
 
                 <h:outputLabel for="inputFirstName" class="col-sm-2 control-label" value="Name"/>
                 <h:inputText class="form-control" id="inputFirstName"
-                             value="#{accountBean.user.name}"/>
+                             value="#{accountBean.user.name}" required="true"/>
 
                 <h:outputLabel for="inputEmail" class="col-sm-2 control-label" value="Email"/>
                 <h:inputText pt:type="email" class="form-control" id="inputEmail"
-                             value="#{accountBean.user.email}"/>
+                             value="#{accountBean.user.email}" required="true"/>
             </h:panelGrid>
 
             <div class="buttons">
