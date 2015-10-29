@@ -55,6 +55,22 @@
                     <h:message for="userBeanUserName" styleClass="error"/>
                 </h:panelGroup>
                 <h:outputText/>
+                <h:outputLabel for="userBeanUserEmail" value="Email:"/>
+                <h:panelGroup>
+                    <h:inputText id="userBeanUserEmail" value="#{userBean.user.email}"/>
+                    <h:message for="userBeanUserEmail" styleClass="error"/>
+                </h:panelGroup>
+                <h:outputText/>
+                <h:outputLabel for="userBeanUserRole" value="Role:"/>
+                <h:panelGroup>
+                    <h:selectOneMenu id="userBeanUserRole" value="#{userBean.user.role}">
+                        <f:selectItem/>
+                        <f:selectItem itemValue="USER"/>
+                        <f:selectItem itemValue="ADMIN"/>
+                    </h:selectOneMenu>
+                    <h:message for="userBeanUserRole" styleClass="error"/>
+                </h:panelGroup>
+                <h:outputText/>
             </h:panelGrid>
 
             <div class="buttons">

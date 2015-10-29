@@ -56,6 +56,56 @@ public class Reimbursement implements Serializable
       this.version = version;
    }
 
+   public Date getDate()
+   {
+      return date;
+   }
+
+   public void setDate(Date date)
+   {
+      this.date = date;
+   }
+
+   public Set<Expense> getExpenses()
+   {
+      return this.expenses;
+   }
+
+   public void setExpenses(final Set<Expense> expenses)
+   {
+      this.expenses = expenses;
+   }
+
+   public Currency getCurrency()
+   {
+      return currency;
+   }
+
+   public void setCurrency(Currency currency)
+   {
+      this.currency = currency;
+   }
+
+   public User getUser()
+   {
+      return this.user;
+   }
+
+   public void setUser(final User user)
+   {
+      this.user = user;
+   }
+
+   public Conference getConference()
+   {
+      return this.conference;
+   }
+
+   public void setConference(final Conference conference)
+   {
+      this.conference = conference;
+   }
+
    @Override
    public boolean equals(Object obj)
    {
@@ -87,36 +137,6 @@ public class Reimbursement implements Serializable
       return result;
    }
 
-   public Date getDate()
-   {
-      return date;
-   }
-
-   public void setDate(Date date)
-   {
-      this.date = date;
-   }
-
-   public Set<Expense> getExpenses()
-   {
-      return this.expenses;
-   }
-
-   public void setExpenses(final Set<Expense> expenses)
-   {
-      this.expenses = expenses;
-   }
-
-   public Currency getCurrency()
-   {
-      return currency;
-   }
-
-   public void setCurrency(Currency currency)
-   {
-      this.currency = currency;
-   }
-
    @Override
    public String toString()
    {
@@ -131,25 +151,5 @@ public class Reimbursement implements Serializable
       if (currency != null)
          result += ", currency: " + currency;
       return result;
-   }
-
-   public User getUser()
-   {
-      return this.user;
-   }
-
-   public void setUser(final User user)
-   {
-      this.user = user;
-   }
-
-   public Conference getConference()
-   {
-      return this.conference;
-   }
-
-   public void setConference(final Conference conference)
-   {
-      this.conference = conference;
    }
 }
