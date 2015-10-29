@@ -1,7 +1,7 @@
 ## Ruby
 
 ## Asciidoctor
-*.html
+slides/*.html
 
 ## Java
 .classpath
