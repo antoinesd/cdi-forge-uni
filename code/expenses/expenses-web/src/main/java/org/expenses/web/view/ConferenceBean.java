@@ -70,7 +70,7 @@ public class ConferenceBean implements Serializable {
 	@Inject
 	private Conversation conversation;
 
-	@PersistenceContext(unitName = "expenses-pu", type = PersistenceContextType.EXTENDED)
+	@PersistenceContext(unitName = "expenses-pu")
 	private EntityManager entityManager;
 
 	public String create() {

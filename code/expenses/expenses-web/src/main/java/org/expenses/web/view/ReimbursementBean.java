@@ -17,7 +17,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -73,7 +73,7 @@ public class ReimbursementBean implements Serializable {
 	@Inject
 	private Conversation conversation;
 
-	@PersistenceContext(unitName = "expenses-pu", type = PersistenceContextType.EXTENDED)
+	@PersistenceContext(unitName = "expenses-pu")
 	private EntityManager entityManager;
 
 	public String create() {
@@ -103,7 +103,18 @@ public class ReimbursementBean implements Serializable {
 
 	public Reimbursement findById(Long id) {
 
-		return this.entityManager.find(Reimbursement.class, id);
+		TypedQuery<Reimbursement> findByIdQuery = this.entityManager
+				.createQuery(
+						"SELECT DISTINCT r FROM Reimbursement r LEFT JOIN FETCH r.expenses LEFT JOIN FETCH r.user LEFT JOIN FETCH r.conference WHERE r.id = :entityId ORDER BY r.id",
+						Reimbursement.class);
+		findByIdQuery.setParameter("entityId", id);
+		Reimbursement entity;
+		try {
+			entity = findByIdQuery.getSingleResult();
+		} catch (NoResultException nre) {
+			entity = null;
+		}
+		return entity;
 	}
 
 	/*
