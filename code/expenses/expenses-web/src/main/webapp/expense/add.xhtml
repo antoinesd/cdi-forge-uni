@@ -2,7 +2,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:forgeview="http://jboss.org/forge/view"
+                xmlns:forgeview="http://jboss.org/forge/view" xmlns:p="http://primefaces.org/ui"
                 template="/resources/scaffold/pageTemplate.xhtml">
 
     <ui:param name="pageTitle" value="Add Expense"/>
@@ -42,9 +42,8 @@
 
                 <h:outputLabel for="expenseBeanExpenseDate" value="Date:"/>
                 <h:panelGroup>
-                    <h:inputText id="expenseBeanExpenseDate" value="#{expenseesBean.expense.date}">
-                        <f:convertDateTime type="date"/>
-                    </h:inputText>
+                    <p:calendar id="expenseBeanExpenseDate" display="inline" navigator="true" pattern="d/M/yyyy"
+                                value="#{expenseesBean.expense.date}"/>
                     <h:message for="expenseBeanExpenseDate" styleClass="error"/>
                 </h:panelGroup>
                 <h:outputText/>

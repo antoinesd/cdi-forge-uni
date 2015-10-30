@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
     <title>#{empty pageTitle ? 'Page Title' : pageTitle}</title>
     <link rel="icon" href='#{resource["favicon.ico"]}'/>
     <h:outputStylesheet library="webjars" name="bootstrap/2.3.2/css/bootstrap.min.css"/>
     <h:outputStylesheet name="forge-style.css"/>
-    <h:outputScript name="forge-style.css"/>
 </h:head>
 
 <h:body>
@@ -58,10 +58,12 @@
             </h:link>
             <ul>
                 <li>
-                    <h:link outcome="/expense/add" value="New expense" rendered="#{accountBean.loggedIn and !accountBean.admin}"/>
+                    <h:link outcome="/expense/add" value="New expense"
+                            rendered="#{accountBean.loggedIn and !accountBean.admin}"/>
                 </li>
                 <li>
-                    <h:link outcome="/expense/view" value="View expenses" rendered="#{accountBean.loggedIn and !accountBean.admin}"/>
+                    <h:link outcome="/expense/view" value="View expenses"
+                            rendered="#{accountBean.loggedIn and !accountBean.admin}"/>
                 </li>
                 <li>
                     <h:link outcome="/admin/conference/search" value="Conference" rendered="#{accountBean.admin}"/>
@@ -94,11 +96,13 @@
 
     <footer>
         <div id="footer-wrapper">
-            <p>Powered by <a href="http://jboss.org/forge">Forge</a></p>
+            <p:clock />
         </div>
     </footer>
 
-    <h:outputScript library="webjars" name="jquery/1.11.3/jquery.min.js"/>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
     <h:outputScript library="webjars" name="bootstrap/2.3.2/js/bootstrap.min.js"/>
 
 </h:body>
