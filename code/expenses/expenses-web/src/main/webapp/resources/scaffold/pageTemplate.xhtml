@@ -8,6 +8,7 @@
     <link rel="icon" href='#{resource["favicon.ico"]}'/>
     <h:outputStylesheet library="webjars" name="bootstrap/2.3.2/css/bootstrap.min.css"/>
     <h:outputStylesheet name="forge-style.css"/>
+    <h:outputScript name="forge-style.css"/>
 </h:head>
 
 <h:body>
@@ -41,7 +42,6 @@
                                     <li><h:link outcome="/account/profile" value="Profile"/></li>
                                     <li role="separator" class="divider"></li>
                                     <li><h:commandLink action="#{accountBean.doLogout}" value="Logout"/></li>
-                                    <li><h:commandLink action="#{accountBean.doLogoutAndRemoveCookie}" value="Logout and remove cookie"/></li>
                                 </ul>
                             </li>
                         </ul>
@@ -70,7 +70,8 @@
                     <h:link outcome="/admin/expense/search" value="Expense" rendered="#{accountBean.admin}"/>
                 </li>
                 <li>
-                    <h:link outcome="/admin/reimbursement/search" value="Reimbursement" rendered="#{accountBean.admin}"/>
+                    <h:link outcome="/admin/reimbursement/search" value="Reimbursement"
+                            rendered="#{accountBean.admin}"/>
                 </li>
                 <li>
                     <h:link outcome="/admin/user/search" value="User" rendered="#{accountBean.admin}"/>
@@ -96,6 +97,9 @@
             <p>Powered by <a href="http://jboss.org/forge">Forge</a></p>
         </div>
     </footer>
+
+    <h:outputScript library="webjars" name="jquery/1.11.3/jquery.min.js"/>
+    <h:outputScript library="webjars" name="bootstrap/2.3.2/js/bootstrap.min.js"/>
 
 </h:body>
 </html>
