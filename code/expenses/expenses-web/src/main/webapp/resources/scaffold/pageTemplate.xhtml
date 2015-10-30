@@ -58,10 +58,10 @@
             </h:link>
             <ul>
                 <li>
-                    <h:link outcome="/expense/add" value="New expense"/>
+                    <h:link outcome="/expense/add" value="New expense" rendered="#{accountBean.loggedIn and !accountBean.admin}"/>
                 </li>
                 <li>
-                    <h:link outcome="/expense/view" value="View expenses"/>
+                    <h:link outcome="/expense/view" value="View expenses" rendered="#{accountBean.loggedIn and !accountBean.admin}"/>
                 </li>
                 <li>
                     <h:link outcome="/admin/conference/search" value="Conference" rendered="#{accountBean.admin}"/>

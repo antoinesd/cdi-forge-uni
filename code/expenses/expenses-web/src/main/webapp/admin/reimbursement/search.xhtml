@@ -87,15 +87,6 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="Currency"/>
-                    </f:facet>
-                    <h:link outcome="/admin/reimbursement/view">
-                        <f:param name="id" value="#{_item.id}"/>
-                        <h:outputText id="itemCurrency" value="#{_item.currency}"/>
-                    </h:link>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
                         <h:outputText value="User"/>
                     </f:facet>
                     <h:link outcome="/admin/reimbursement/view">
@@ -111,6 +102,15 @@
                         <f:param name="id" value="#{_item.id}"/>
                         <h:outputText id="forgeviewdisplayitemConference"
                                       value="#{forgeview:display(_item.conference)}"/>
+                    </h:link>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Currency"/>
+                    </f:facet>
+                    <h:link outcome="/admin/reimbursement/view">
+                        <f:param name="id" value="#{_item.id}"/>
+                        <h:outputText id="itemCurrency" value="#{_item.currency}"/>
                     </h:link>
                 </h:column>
             </h:dataTable>

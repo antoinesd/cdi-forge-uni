@@ -139,18 +139,10 @@ public class Expense implements Serializable
    public String toString()
    {
       String result = getClass().getSimpleName() + " ";
-      if (id != null)
-         result += "id: " + id;
       if (description != null && !description.trim().isEmpty())
          result += ", description: " + description;
-      if (date != null)
-         result += ", date: " + date;
       if (amount != null)
          result += ", amount: " + amount;
-      if (expenseType != null)
-         result += ", expenseType: " + expenseType;
-      if (currency != null)
-         result += ", currency: " + currency;
       return result;
    }
 }

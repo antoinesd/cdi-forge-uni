@@ -33,12 +33,6 @@
                             <h:message for="userBeanExampleLogin" styleClass="error"/>
                         </h:panelGroup>
                         <h:outputText/>
-                        <h:outputLabel for="userBeanExamplePassword" value="Password:"/>
-                        <h:panelGroup>
-                            <h:inputText id="userBeanExamplePassword" value="#{userBean.example.password}"/>
-                            <h:message for="userBeanExamplePassword" styleClass="error"/>
-                        </h:panelGroup>
-                        <h:outputText/>
                         <h:outputLabel for="userBeanExampleName" value="Name:"/>
                         <h:panelGroup>
                             <h:inputText id="userBeanExampleName" value="#{userBean.example.name}"/>
@@ -65,20 +59,20 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="Password"/>
-                    </f:facet>
-					<h:link outcome="/admin/user/view">
-                        <f:param name="id" value="#{_item.id}"/>
-                        <h:outputText id="itemPassword" value="#{_item.password}"/>
-                    </h:link>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
                         <h:outputText value="Name"/>
                     </f:facet>
                     <h:link outcome="/admin/user/view">
                         <f:param name="id" value="#{_item.id}"/>
                         <h:outputText id="itemName" value="#{_item.name}"/>
+                    </h:link>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Role"/>
+                    </f:facet>
+                    <h:link outcome="/admin/user/view">
+                        <f:param name="id" value="#{_item.id}"/>
+                        <h:outputText id="itemPassword" value="#{_item.role}"/>
                     </h:link>
                 </h:column>
             </h:dataTable>

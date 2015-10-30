@@ -13,9 +13,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.NoResultException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.expenses.core.model.User;
 import org.expenses.core.model.UserRole;
@@ -148,6 +145,8 @@ public class AccountBean implements Serializable
          user.setPassword(DigestPassword.digest(password1));
       user = service.merge(user);
       resetPasswords();
+      admin = user.getRole().equals(UserRole.ADMIN);
+
       facesContext.addMessage(null,
                new FacesMessage(FacesMessage.SEVERITY_INFO, "Profile has been updated for " + user.getName(),
                         null));

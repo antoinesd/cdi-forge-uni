@@ -152,13 +152,6 @@ public class User implements Serializable
    @Override
    public String toString()
    {
-      String result = getClass().getSimpleName() + " ";
-      if (id != null)
-         result += "id: " + id;
-      if (login != null && !login.trim().isEmpty())
-         result += ", login: " + login;
-      if (name != null && !name.trim().isEmpty())
-         result += ", name: " + name;
-      return result;
+      return name;
    }
 }

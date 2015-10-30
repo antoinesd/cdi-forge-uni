@@ -125,17 +125,6 @@ public class Conference implements Serializable
    @Override
    public String toString()
    {
-      String result = getClass().getSimpleName() + " ";
-      if (id != null)
-         result += "id: " + id;
-      if (name != null && !name.trim().isEmpty())
-         result += ", name: " + name;
-      if (date != null)
-         result += ", date: " + date;
-      if (country != null && !country.trim().isEmpty())
-         result += ", country: " + country;
-      if (city != null && !city.trim().isEmpty())
-         result += ", city: " + city;
-      return result;
+      return name;
    }
 }
