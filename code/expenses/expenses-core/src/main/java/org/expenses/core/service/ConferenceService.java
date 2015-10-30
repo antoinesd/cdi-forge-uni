@@ -29,7 +29,7 @@ public class ConferenceService extends AbstractService<Conference>
    {
 
       CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
-      List<Predicate> predicatesList = new ArrayList<Predicate>();
+      List<Predicate> predicatesList = new ArrayList<>();
 
       String name = example.getName();
       if (name != null && !"".equals(name))

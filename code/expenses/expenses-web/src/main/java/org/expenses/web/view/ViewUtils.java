@@ -24,7 +24,7 @@ public final class ViewUtils
          return null;
       }
 
-      return new ArrayList<T>(collection);
+      return new ArrayList<>(collection);
    }
 
    public static String display(Object object)

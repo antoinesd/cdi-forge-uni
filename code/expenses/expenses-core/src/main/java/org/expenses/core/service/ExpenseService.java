@@ -32,7 +32,7 @@ public class ExpenseService extends AbstractService<Expense>
    {
 
       CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
-      List<Predicate> predicatesList = new ArrayList<Predicate>();
+      List<Predicate> predicatesList = new ArrayList<>();
 
       String description = example.getDescription();
       if (description != null && !"".equals(description))

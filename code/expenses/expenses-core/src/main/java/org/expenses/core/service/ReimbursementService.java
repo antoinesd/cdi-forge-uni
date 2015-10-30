@@ -54,7 +54,7 @@ public class ReimbursementService extends AbstractService<Reimbursement>
    {
 
       CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
-      List<Predicate> predicatesList = new ArrayList<Predicate>();
+      List<Predicate> predicatesList = new ArrayList<>();
 
       Currency currency = example.getCurrency();
       if (currency != null)

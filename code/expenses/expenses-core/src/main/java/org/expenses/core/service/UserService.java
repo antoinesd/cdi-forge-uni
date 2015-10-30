@@ -52,7 +52,7 @@ public class UserService extends AbstractService<User>
    protected Predicate[] getSearchPredicates(Root<User> root, User example)
    {
       CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
-      List<Predicate> predicatesList = new ArrayList<Predicate>();
+      List<Predicate> predicatesList = new ArrayList<>();
 
       String login = example.getLogin();
       if (login != null && !"".equals(login))
