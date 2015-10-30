@@ -30,11 +30,6 @@
                 <h:outputLabel for="inputPassword2" class="col-sm-2 control-label" value="Re-type Password"/>
                 <h:inputSecret id="inputPassword2" value="#{accountBean.password2}" required="true"/>
 
-                <h:outputLabel for="inputRole" class="col-sm-2 control-label" value="Role"/>
-                <h:selectOneMenu value="#{accountBean.user.role}" class="form-control" id="inputRole">
-                    <f:selectItems value="#{accountBean.roles}"/>
-                </h:selectOneMenu>
-
                 <h:outputLabel for="inputFirstName" class="col-sm-2 control-label" value="Name"/>
                 <h:inputText class="form-control" id="inputFirstName"
                              value="#{accountBean.user.name}" required="true"/>
@@ -42,6 +37,11 @@
                 <h:outputLabel for="inputEmail" class="col-sm-2 control-label" value="Email"/>
                 <h:inputText pt:type="email" class="form-control" id="inputEmail"
                              value="#{accountBean.user.email}" required="true"/>
+
+                <h:outputLabel for="inputRole" class="col-sm-2 control-label" value="Role"/>
+                <h:selectOneMenu value="#{accountBean.user.role}" class="form-control" id="inputRole">
+                    <f:selectItems value="#{accountBean.roles}"/>
+                </h:selectOneMenu>
             </h:panelGrid>
 
             <div class="buttons">
