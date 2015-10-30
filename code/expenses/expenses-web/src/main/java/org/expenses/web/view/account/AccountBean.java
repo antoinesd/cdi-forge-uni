@@ -1,9 +1,7 @@
 package org.expenses.web.view.account;
 
 import java.io.Serializable;
-import java.util.UUID;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.context.spi.AlterableContext;
@@ -41,12 +39,6 @@ public class AccountBean implements Serializable
    @Inject
    private FacesContext facesContext;
 
-   @Inject
-   private HttpServletResponse response;
-
-   @Inject
-   private HttpServletRequest request;
-
    // Logged user
    private User user = new User();
 
@@ -56,11 +48,6 @@ public class AccountBean implements Serializable
 
    private String password1;
    private String password2;
-   // Remember me and cookie
-   private static final String COOKIE_NAME = "JSFSampleCookie";
-   private static final int COOKIE_AGE = 60; // Expires after 60 seconds or even 2_592_000 for one month
-
-   private boolean rememberMe;
 
    @Inject
    private Conversation conversation;
@@ -70,34 +57,6 @@ public class AccountBean implements Serializable
 
    @Inject
    Instance<AccountBean> me;
-
-   // ======================================
-   // = Lifecycle methods =
-   // ======================================
-
-   @PostConstruct
-   private void checkIfUserHasRememberMeCookie()
-   {
-      String coockieValue = getCookieValue();
-      if (coockieValue == null)
-         return;
-
-      try
-      {
-         user = service.findByUUID(coockieValue);
-
-         // If the user is an administrator
-         if (user.getRole().equals(UserRole.ADMIN))
-            admin = true;
-         // The user is now logged in
-         loggedIn = true;
-      }
-      catch (NoResultException e)
-      {
-         // The user maybe has an old coockie, let's get rid of it
-         removeCookie();
-      }
-   }
 
    // ======================================
    // = Business methods =
@@ -138,18 +97,6 @@ public class AccountBean implements Serializable
          {
             admin = true;
          }
-         // If the user has clicked on remember me
-         if (rememberMe)
-         {
-            String uuid = UUID.randomUUID().toString();
-            user.setUuid(uuid);
-            addCookie(uuid);
-         }
-         else
-         {
-            user.setUuid(null);
-            removeCookie();
-         }
          // The user is now logged in
          loggedIn = true;
          return "/index";
@@ -169,17 +116,6 @@ public class AccountBean implements Serializable
       Bean<?> myBean = beanManager.getBeans(AccountBean.class).iterator().next();
       ctx.destroy(myBean);
 
-      return "/index";
-   }
-
-   public String doLogoutAndRemoveCookie()
-   {
-      removeCookie();
-      user.setUuid(null);
-      user = service.merge(user);
-      AlterableContext ctx = (AlterableContext) beanManager.getContext(SessionScoped.class);
-      Bean<?> myBean = beanManager.getBeans(AccountBean.class).iterator().next();
-      ctx.destroy(myBean);
       return "/index";
    }
 
@@ -217,38 +153,6 @@ public class AccountBean implements Serializable
                         null));
 
       return "/index";
-   }
-
-   // Cookie
-   private String getCookieValue()
-   {
-      Cookie[] cookies = request.getCookies();
-      if (cookies != null)
-      {
-         for (Cookie cookie : cookies)
-         {
-            if (COOKIE_NAME.equals(cookie.getName()))
-            {
-               return cookie.getValue();
-            }
-         }
-      }
-      return null;
-   }
-
-   private void addCookie(String value)
-   {
-      Cookie cookie = new Cookie(COOKIE_NAME, value);
-      cookie.setPath("/sampleJSFLogin");
-      cookie.setMaxAge(COOKIE_AGE);
-      response.addCookie(cookie);
-   }
-
-   private void removeCookie()
-   {
-      Cookie cookie = new Cookie(COOKIE_NAME, null);
-      cookie.setMaxAge(0);
-      response.addCookie(cookie);
    }
 
    private void resetPasswords()
@@ -314,15 +218,5 @@ public class AccountBean implements Serializable
    public UserRole[] getRoles()
    {
       return UserRole.values();
-   }
-
-   public boolean isRememberMe()
-   {
-      return rememberMe;
-   }
-
-   public void setRememberMe(boolean rememberMe)
-   {
-      this.rememberMe = rememberMe;
    }
 }

@@ -10,7 +10,6 @@ import org.expenses.core.utils.DigestPassword;
 @Table(name = "t_user")
 @NamedQueries({
          @NamedQuery(name = User.FIND_BY_EMAIL, query = "SELECT u FROM User u WHERE u.email = :email"),
-         @NamedQuery(name = User.FIND_BY_UUID, query = "SELECT u FROM User u WHERE u.uuid = :uuid"),
          @NamedQuery(name = User.FIND_BY_LOGIN, query = "SELECT u FROM User u WHERE u.login = :login"),
          @NamedQuery(name = User.FIND_BY_LOGIN_PASSWORD, query = "SELECT u FROM User u WHERE u.login = :login AND u.password = :password"),
          @NamedQuery(name = User.FIND_ALL, query = "SELECT u FROM User u") })
@@ -19,7 +18,6 @@ public class User implements Serializable
 
    public static final String FIND_BY_EMAIL = "User.findByEmail";
    public static final String FIND_BY_LOGIN = "User.findByLogin";
-   public static final String FIND_BY_UUID = "User.findByUUID";
    public static final String FIND_BY_LOGIN_PASSWORD = "User.findByLoginAndPassword";
    public static final String FIND_ALL = "User.findAll";
 
@@ -36,7 +34,6 @@ public class User implements Serializable
 
    @Column
    private String password;
-   private String uuid;
 
    @Column
    private String name;
@@ -99,16 +96,6 @@ public class User implements Serializable
    public void setName(String name)
    {
       this.name = name;
-   }
-
-   public String getUuid()
-   {
-      return uuid;
-   }
-
-   public void setUuid(String uuid)
-   {
-      this.uuid = uuid;
    }
 
    public String getEmail()

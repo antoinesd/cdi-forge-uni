@@ -27,13 +27,6 @@ public class UserService extends AbstractService<User>
       super(User.class);
    }
 
-   public User findByUUID(String coockieValue)
-   {
-      TypedQuery<User> query = getEntityManager().createNamedQuery(User.FIND_BY_UUID, User.class);
-      query.setParameter("uuid", coockieValue);
-      return query.getSingleResult();
-   }
-
    public User findByLoginPassword(String login, String password)
    {
       TypedQuery<User> query = getEntityManager().createNamedQuery(User.FIND_BY_LOGIN_PASSWORD, User.class);
