@@ -35,10 +35,16 @@ servlet-setup --servletVersion 3.1 ;
 # Creates the entities
 # #################
 
+java-new-enum --named UserRole --targetPackage ~.model ;
+java-new-enum-const USER ;
+java-new-enum-const ADMIN ;
+
 jpa-new-entity --named User --tableName t_user ;
 jpa-new-field --named login ;
 jpa-new-field --named password ;
 jpa-new-field --named name ;
+jpa-new-field --named email ;
+jpa-new-field --named role --type ~.model.UserRole ;
 
 
 jpa-new-entity --named Conference --tableName t_conference ;
