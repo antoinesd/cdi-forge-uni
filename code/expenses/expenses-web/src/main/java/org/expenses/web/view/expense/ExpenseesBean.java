@@ -7,7 +7,6 @@ import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -73,8 +72,7 @@ public class ExpenseesBean implements Serializable
       return conference;
    }
 
-   public void setConference(Conference conference)
-   {
+   public void setConference(Conference conference) {
       this.conference = conference;
    }
 
@@ -83,18 +81,12 @@ public class ExpenseesBean implements Serializable
       return expense;
    }
 
-   public void setExpense(Expense expense)
-   {
-      this.expense = expense;
-   }
-
    public Reimbursement getReimbursement()
    {
       return reimbursement;
    }
 
-   public void setReimbursement(Reimbursement reimbursement)
-   {
+   public void setReimbursement(Reimbursement reimbursement) {
       this.reimbursement = reimbursement;
    }
 }

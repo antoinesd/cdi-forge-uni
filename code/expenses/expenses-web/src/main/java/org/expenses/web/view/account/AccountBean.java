@@ -113,29 +113,6 @@ public class AccountBean implements Serializable
       return "/index";
    }
 
-   public String doForgotPassword()
-   {
-      try
-      {
-         user = service.findByEmail(user.getEmail());
-
-         String temporaryPassword = Lorem.getWords(1);
-         user.setPassword(DigestPassword.digest(temporaryPassword));
-         user = service.merge(user);
-         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Email sent",
-                  "An email has been sent to " + user.getEmail() + " with temporary password :" + temporaryPassword));
-         // send an email with the password "dummyPassword"
-         return doLogout();
-      }
-      catch (NoResultException e)
-      {
-         facesContext.addMessage(null,
-                  new FacesMessage(FacesMessage.SEVERITY_WARN, "Unknown email",
-                           "This email address is unknonw in our system"));
-         return null;
-      }
-   }
-
    public String doUpdateProfile()
    {
       if (password1 != null && !password1.isEmpty())

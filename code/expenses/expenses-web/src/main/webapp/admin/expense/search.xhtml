@@ -98,7 +98,7 @@
                     <f:facet name="header">
                         <h:outputText value="Expense Type"/>
                     </f:facet>
-                    <h:link outcome="/expense/view">
+                    <h:link outcome="/admin/expense/view">
                         <f:param name="id" value="#{_item.id}"/>
                         <h:outputText id="itemExpenseType" value="#{_item.expenseType}"/>
                     </h:link>
@@ -107,7 +107,7 @@
                     <f:facet name="header">
                         <h:outputText value="Currency"/>
                     </f:facet>
-                    <h:link outcome="/expense/view">
+                    <h:link outcome="/admin/expense/view">
                         <f:param name="id" value="#{_item.id}"/>
                         <h:outputText id="itemCurrency" value="#{_item.currency}"/>
                     </h:link>

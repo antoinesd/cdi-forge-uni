@@ -106,30 +106,29 @@ public class Expense implements Serializable
    }
 
    @Override
-   public boolean equals(Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
+   public boolean equals(Object o)
+   {
+      if (this == o)
+         return true;
+      if (o == null || getClass() != o.getClass())
+         return false;
       Expense expense = (Expense) o;
       return Objects.equals(description, expense.description) &&
-              Objects.equals(date, expense.date) &&
-              Objects.equals(amount, expense.amount) &&
-              Objects.equals(expenseType, expense.expenseType) &&
-              Objects.equals(currency, expense.currency);
+               Objects.equals(date, expense.date) &&
+               Objects.equals(amount, expense.amount) &&
+               Objects.equals(expenseType, expense.expenseType) &&
+               Objects.equals(currency, expense.currency);
    }
 
    @Override
-   public int hashCode() {
+   public int hashCode()
+   {
       return Objects.hash(description, date, amount, expenseType, currency);
    }
 
    @Override
    public String toString()
    {
-      String result = getClass().getSimpleName() + " ";
-      if (description != null && !description.trim().isEmpty())
-         result += ", description: " + description;
-      if (amount != null)
-         result += ", amount: " + amount;
-      return result;
+      return description + " - " + amount;
    }
 }
