@@ -16,6 +16,12 @@ import javax.persistence.Id;
 public final class ViewUtils
 {
 
+   private ViewUtils()
+   {
+
+      // Can never be called
+   }
+
    public static <T> List<T> asList(Collection<T> collection)
    {
 
@@ -84,11 +90,5 @@ public final class ViewUtils
       }
 
       return null;
-   }
-
-   private ViewUtils()
-   {
-
-      // Can never be called
    }
 }

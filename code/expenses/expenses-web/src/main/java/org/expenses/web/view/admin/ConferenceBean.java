@@ -35,6 +35,16 @@ public class ConferenceBean implements Serializable
     */
 
    private Long id;
+   private Conference conference;
+   @Inject
+   private Conversation conversation;
+   @Inject
+   private ConferenceService service;
+   private int page;
+   private long count;
+   private List<Conference> pageItems;
+   private Conference example = new Conference();
+   private Conference add = new Conference();
 
    public Long getId()
    {
@@ -46,7 +56,9 @@ public class ConferenceBean implements Serializable
       this.id = id;
    }
 
-   private Conference conference;
+   /*
+    * Support updating and deleting Conference entities
+    */
 
    public Conference getConference()
    {
@@ -58,11 +70,9 @@ public class ConferenceBean implements Serializable
       this.conference = conference;
    }
 
-   @Inject
-   private Conversation conversation;
-
-   @Inject
-   private ConferenceService service;
+   /*
+    * Support searching Conference entities with pagination
+    */
 
    public String create()
    {
@@ -101,10 +111,6 @@ public class ConferenceBean implements Serializable
 
       return this.service.findById(id);
    }
-
-   /*
-    * Support updating and deleting Conference entities
-    */
 
    public String update()
    {
@@ -149,16 +155,6 @@ public class ConferenceBean implements Serializable
          return null;
       }
    }
-
-   /*
-    * Support searching Conference entities with pagination
-    */
-
-   private int page;
-   private long count;
-   private List<Conference> pageItems;
-
-   private Conference example = new Conference();
 
    public int getPage()
    {
@@ -207,20 +203,24 @@ public class ConferenceBean implements Serializable
       return this.pageItems;
    }
 
+   /*
+    * Support listing and POSTing back Conference entities (e.g. from inside an HtmlSelectOneMenu)
+    */
+
    public long getCount()
    {
       return this.count;
    }
-
-   /*
-    * Support listing and POSTing back Conference entities (e.g. from inside an HtmlSelectOneMenu)
-    */
 
    public List<Conference> getAll()
    {
 
       return this.service.listAll();
    }
+
+   /*
+    * Support adding children to bidirectional, one-to-many tables
+    */
 
    public Converter getConverter()
    {
@@ -250,12 +250,6 @@ public class ConferenceBean implements Serializable
          }
       };
    }
-
-   /*
-    * Support adding children to bidirectional, one-to-many tables
-    */
-
-   private Conference add = new Conference();
 
    public Conference getAdd()
    {

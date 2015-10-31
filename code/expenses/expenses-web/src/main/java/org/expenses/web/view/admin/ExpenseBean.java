@@ -35,6 +35,16 @@ public class ExpenseBean implements Serializable
     */
 
    private Long id;
+   private Expense expense;
+   @Inject
+   private Conversation conversation;
+   @Inject
+   private ExpenseService service;
+   private int page;
+   private long count;
+   private List<Expense> pageItems;
+   private Expense example = new Expense();
+   private Expense add = new Expense();
 
    public Long getId()
    {
@@ -46,7 +56,9 @@ public class ExpenseBean implements Serializable
       this.id = id;
    }
 
-   private Expense expense;
+   /*
+    * Support updating and deleting Expense entities
+    */
 
    public Expense getExpense()
    {
@@ -58,11 +70,9 @@ public class ExpenseBean implements Serializable
       this.expense = expense;
    }
 
-   @Inject
-   private Conversation conversation;
-
-   @Inject
-   private ExpenseService service;
+   /*
+    * Support searching Expense entities with pagination
+    */
 
    public String create()
    {
@@ -101,10 +111,6 @@ public class ExpenseBean implements Serializable
 
       return this.service.findById(id);
    }
-
-   /*
-    * Support updating and deleting Expense entities
-    */
 
    public String update()
    {
@@ -149,16 +155,6 @@ public class ExpenseBean implements Serializable
          return null;
       }
    }
-
-   /*
-    * Support searching Expense entities with pagination
-    */
-
-   private int page;
-   private long count;
-   private List<Expense> pageItems;
-
-   private Expense example = new Expense();
 
    public int getPage()
    {
@@ -207,20 +203,24 @@ public class ExpenseBean implements Serializable
       return this.pageItems;
    }
 
+   /*
+    * Support listing and POSTing back Expense entities (e.g. from inside an HtmlSelectOneMenu)
+    */
+
    public long getCount()
    {
       return this.count;
    }
-
-   /*
-    * Support listing and POSTing back Expense entities (e.g. from inside an HtmlSelectOneMenu)
-    */
 
    public List<Expense> getAll()
    {
 
       return this.service.listAll();
    }
+
+   /*
+    * Support adding children to bidirectional, one-to-many tables
+    */
 
    public Converter getConverter()
    {
@@ -250,12 +250,6 @@ public class ExpenseBean implements Serializable
          }
       };
    }
-
-   /*
-    * Support adding children to bidirectional, one-to-many tables
-    */
-
-   private Expense add = new Expense();
 
    public Expense getAdd()
    {

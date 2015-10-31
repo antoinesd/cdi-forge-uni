@@ -31,6 +31,19 @@ public class ReimbursementsBean implements Serializable
     */
 
    private Long id;
+   private Reimbursement reimbursement;
+   @Inject
+   private Conversation conversation;
+   @Inject
+   private ReimbursementService service;
+   private int page;
+   private long count;
+   private List<Reimbursement> pageItems;
+   private Reimbursement example = new Reimbursement();
+
+   /*
+    * Support searching Reimbursement entities with pagination
+    */
 
    public Long getId()
    {
@@ -42,8 +55,6 @@ public class ReimbursementsBean implements Serializable
       this.id = id;
    }
 
-   private Reimbursement reimbursement;
-
    public Reimbursement getReimbursement()
    {
       return this.reimbursement;
@@ -53,22 +64,6 @@ public class ReimbursementsBean implements Serializable
    {
       this.reimbursement = reimbursement;
    }
-
-   @Inject
-   private Conversation conversation;
-
-   @Inject
-   private ReimbursementService service;
-
-   /*
-    * Support searching Reimbursement entities with pagination
-    */
-
-   private int page;
-   private long count;
-   private List<Reimbursement> pageItems;
-
-   private Reimbursement example = new Reimbursement();
 
    public int getPage()
    {

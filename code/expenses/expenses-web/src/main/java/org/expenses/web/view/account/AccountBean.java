@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.context.spi.AlterableContext;
-import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.faces.application.FacesMessage;
@@ -18,8 +17,6 @@ import org.expenses.core.model.User;
 import org.expenses.core.model.UserRole;
 import org.expenses.core.service.UserService;
 import org.expenses.core.utils.DigestPassword;
-
-import com.thedeanda.lorem.Lorem;
 
 @Named
 @SessionScoped

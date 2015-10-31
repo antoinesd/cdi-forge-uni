@@ -35,6 +35,16 @@ public class UserBean implements Serializable
     */
 
    private Long id;
+   private User user;
+   @Inject
+   private Conversation conversation;
+   @Inject
+   private UserService service;
+   private int page;
+   private long count;
+   private List<User> pageItems;
+   private User example = new User();
+   private User add = new User();
 
    public Long getId()
    {
@@ -46,7 +56,9 @@ public class UserBean implements Serializable
       this.id = id;
    }
 
-   private User user;
+   /*
+    * Support updating and deleting User entities
+    */
 
    public User getUser()
    {
@@ -58,11 +70,9 @@ public class UserBean implements Serializable
       this.user = user;
    }
 
-   @Inject
-   private Conversation conversation;
-
-   @Inject
-   private UserService service;
+   /*
+    * Support searching User entities with pagination
+    */
 
    public String create()
    {
@@ -101,10 +111,6 @@ public class UserBean implements Serializable
 
       return this.service.findById(id);
    }
-
-   /*
-    * Support updating and deleting User entities
-    */
 
    public String update()
    {
@@ -149,16 +155,6 @@ public class UserBean implements Serializable
          return null;
       }
    }
-
-   /*
-    * Support searching User entities with pagination
-    */
-
-   private int page;
-   private long count;
-   private List<User> pageItems;
-
-   private User example = new User();
 
    public int getPage()
    {
@@ -207,20 +203,24 @@ public class UserBean implements Serializable
       return this.pageItems;
    }
 
+   /*
+    * Support listing and POSTing back User entities (e.g. from inside an HtmlSelectOneMenu)
+    */
+
    public long getCount()
    {
       return this.count;
    }
-
-   /*
-    * Support listing and POSTing back User entities (e.g. from inside an HtmlSelectOneMenu)
-    */
 
    public List<User> getAll()
    {
 
       return this.service.listAll();
    }
+
+   /*
+    * Support adding children to bidirectional, one-to-many tables
+    */
 
    public Converter getConverter()
    {
@@ -250,12 +250,6 @@ public class UserBean implements Serializable
          }
       };
    }
-
-   /*
-    * Support adding children to bidirectional, one-to-many tables
-    */
-
-   private User add = new User();
 
    public User getAdd()
    {

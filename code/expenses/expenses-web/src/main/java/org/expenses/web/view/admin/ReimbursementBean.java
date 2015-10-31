@@ -35,6 +35,16 @@ public class ReimbursementBean implements Serializable
     */
 
    private Long id;
+   private Reimbursement reimbursement;
+   @Inject
+   private Conversation conversation;
+   @Inject
+   private ReimbursementService service;
+   private int page;
+   private long count;
+   private List<Reimbursement> pageItems;
+   private Reimbursement example = new Reimbursement();
+   private Reimbursement add = new Reimbursement();
 
    public Long getId()
    {
@@ -46,7 +56,9 @@ public class ReimbursementBean implements Serializable
       this.id = id;
    }
 
-   private Reimbursement reimbursement;
+   /*
+    * Support updating and deleting Reimbursement entities
+    */
 
    public Reimbursement getReimbursement()
    {
@@ -58,11 +70,9 @@ public class ReimbursementBean implements Serializable
       this.reimbursement = reimbursement;
    }
 
-   @Inject
-   private Conversation conversation;
-
-   @Inject
-   private ReimbursementService service;
+   /*
+    * Support searching Reimbursement entities with pagination
+    */
 
    public String create()
    {
@@ -101,10 +111,6 @@ public class ReimbursementBean implements Serializable
 
       return this.service.findById(id);
    }
-
-   /*
-    * Support updating and deleting Reimbursement entities
-    */
 
    public String update()
    {
@@ -150,16 +156,6 @@ public class ReimbursementBean implements Serializable
          return null;
       }
    }
-
-   /*
-    * Support searching Reimbursement entities with pagination
-    */
-
-   private int page;
-   private long count;
-   private List<Reimbursement> pageItems;
-
-   private Reimbursement example = new Reimbursement();
 
    public int getPage()
    {
@@ -208,20 +204,24 @@ public class ReimbursementBean implements Serializable
       return this.pageItems;
    }
 
+   /*
+    * Support listing and POSTing back Reimbursement entities (e.g. from inside an HtmlSelectOneMenu)
+    */
+
    public long getCount()
    {
       return this.count;
    }
-
-   /*
-    * Support listing and POSTing back Reimbursement entities (e.g. from inside an HtmlSelectOneMenu)
-    */
 
    public List<Reimbursement> getAll()
    {
 
       return this.service.listAll();
    }
+
+   /*
+    * Support adding children to bidirectional, one-to-many tables
+    */
 
    public Converter getConverter()
    {
@@ -251,12 +251,6 @@ public class ReimbursementBean implements Serializable
          }
       };
    }
-
-   /*
-    * Support adding children to bidirectional, one-to-many tables
-    */
-
-   private Reimbursement add = new Reimbursement();
 
    public Reimbursement getAdd()
    {

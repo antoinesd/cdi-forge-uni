@@ -3,7 +3,8 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
-                xmlns:forgeview="http://jboss.org/forge/view" xmlns:p="http://primefaces.org/ui"
+                xmlns:forgeview="http://jboss.org/forge/view"
+                xmlns:p="http://primefaces.org/ui"
                 template="/resources/scaffold/pageTemplate.xhtml">
 
     <f:metadata>
@@ -37,7 +38,8 @@
             <h:panelGrid columnClasses="label,component,required" columns="3">
                 <h:outputLabel for="reimbursementBeanReimbursementDate" value="Date:"/>
                 <h:panelGroup>
-                    <p:calendar id="reimbursementBeanReimbursementDate" display="inline" navigator="true" pattern="d/M/yyyy"
+                    <p:calendar id="reimbursementBeanReimbursementDate" display="inline" navigator="true"
+                                pattern="d/M/yyyy"
                                 value="#{reimbursementBean.reimbursement.date}"/>
                     <h:message for="reimbursementBeanReimbursementDate" styleClass="error"/>
                 </h:panelGroup>

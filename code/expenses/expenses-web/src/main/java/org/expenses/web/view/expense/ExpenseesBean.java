@@ -72,7 +72,8 @@ public class ExpenseesBean implements Serializable
       return conference;
    }
 
-   public void setConference(Conference conference) {
+   public void setConference(Conference conference)
+   {
       this.conference = conference;
    }
 
@@ -86,7 +87,8 @@ public class ExpenseesBean implements Serializable
       return reimbursement;
    }
 
-   public void setReimbursement(Reimbursement reimbursement) {
+   public void setReimbursement(Reimbursement reimbursement)
+   {
       this.reimbursement = reimbursement;
    }
 }

@@ -1,5 +1,7 @@
 package org.expenses.core.model;
 
+import static javax.persistence.FetchType.EAGER;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
@@ -7,8 +9,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.*;
-
-import static javax.persistence.FetchType.*;
 
 @Entity
 @Table(name = "t_reimbursement")
@@ -125,17 +125,21 @@ public class Reimbursement implements Serializable
    }
 
    @Override
-   public boolean equals(Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
+   public boolean equals(Object o)
+   {
+      if (this == o)
+         return true;
+      if (o == null || getClass() != o.getClass())
+         return false;
       Reimbursement that = (Reimbursement) o;
       return Objects.equals(date, that.date) &&
-              Objects.equals(user, that.user) &&
-              Objects.equals(conference, that.conference);
+               Objects.equals(user, that.user) &&
+               Objects.equals(conference, that.conference);
    }
 
    @Override
-   public int hashCode() {
+   public int hashCode()
+   {
       return Objects.hash(date, user, conference);
    }
 
