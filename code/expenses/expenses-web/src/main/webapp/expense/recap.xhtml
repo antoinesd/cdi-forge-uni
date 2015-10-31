@@ -51,6 +51,19 @@
             </h:column>
         </h:dataTable>
 
+        <h:panelGrid columnClasses="label,component,required" columns="3">
+            <h:outputLabel for="expenseBeanExpenseCurrency" value="Want to be reimbursed in:"/>
+            <h:panelGroup>
+                <h:selectOneMenu id="expenseBeanExpenseCurrency" value="#{expenseesBean.expense.currency}">
+                    <f:selectItem/>
+                    <f:selectItem itemValue="USD"/>
+                    <f:selectItem itemValue="EURO"/>
+                </h:selectOneMenu>
+                <h:message for="expenseBeanExpenseCurrency" styleClass="error"/>
+            </h:panelGroup>
+            <h:outputText/>
+        </h:panelGrid>
+
         <h:form>
             <div class="buttons">
                 <h:link value="Back" outcome="/expense/create" styleClass="btn btn-primary"/>

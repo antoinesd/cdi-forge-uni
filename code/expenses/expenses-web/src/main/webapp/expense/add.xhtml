@@ -17,26 +17,23 @@
 
     <ui:define name="main">
         <h:form id="create">
-            <h:messages globalOnly="true" styleClass="error"/>
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
 
             <h:panelGrid columnClasses="label,component,required" columns="3">
                 <h:outputLabel for="reimbursementBeanReimbursementConference" value="Conference:"/>
                 <h:panelGroup>
                     <h:selectOneMenu converter="#{conferenceBean.converter}"
                                      id="reimbursementBeanReimbursementConference"
-                                     value="#{expenseesBean.conference}">
+                                     value="#{expenseesBean.conference}"
+                                     rendered="#{expenseesBean.conference == null}">
                         <f:selectItem/>
                         <f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}"
                                        value="#{conferenceBean.all}" var="_item"/>
                     </h:selectOneMenu>
+                    <h:outputText for="reimbursementBeanReimbursementConference"
+                                   value="#{expenseesBean.conference.name}"
+                                   rendered="#{expenseesBean.conference != null}"/>
                     <h:message for="reimbursementBeanReimbursementConference" styleClass="error"/>
-                </h:panelGroup>
-                <h:outputText/>
-
-                <h:outputLabel for="expenseBeanExpenseDescription" value="Description:"/>
-                <h:panelGroup>
-                    <h:inputText id="expenseBeanExpenseDescription" value="#{expenseesBean.expense.description}"/>
-                    <h:message for="expenseBeanExpenseDescription" styleClass="error"/>
                 </h:panelGroup>
                 <h:outputText/>
 
@@ -47,12 +44,7 @@
                     <h:message for="expenseBeanExpenseDate" styleClass="error"/>
                 </h:panelGroup>
                 <h:outputText/>
-                <h:outputLabel for="expenseBeanExpenseAmount" value="Amount:"/>
-                <h:panelGroup>
-                    <h:inputText id="expenseBeanExpenseAmount" value="#{expenseesBean.expense.amount}"/>
-                    <h:message for="expenseBeanExpenseAmount" styleClass="error"/>
-                </h:panelGroup>
-                <h:outputText/>
+
                 <h:outputLabel for="expenseBeanExpenseExpenseType" value="Expense Type:"/>
                 <h:panelGroup>
                     <h:selectOneMenu id="expenseBeanExpenseExpenseType" value="#{expenseesBean.expense.expenseType}">
@@ -65,6 +57,14 @@
                     <h:message for="expenseBeanExpenseExpenseType" styleClass="error"/>
                 </h:panelGroup>
                 <h:outputText/>
+
+                <h:outputLabel for="expenseBeanExpenseAmount" value="Amount:"/>
+                <h:panelGroup>
+                    <h:inputText id="expenseBeanExpenseAmount" value="#{expenseesBean.expense.amount}"/>
+                    <h:message for="expenseBeanExpenseAmount" styleClass="error"/>
+                </h:panelGroup>
+                <h:outputText/>
+
                 <h:outputLabel for="expenseBeanExpenseCurrency" value="Currency:"/>
                 <h:panelGroup>
                     <h:selectOneMenu id="expenseBeanExpenseCurrency" value="#{expenseesBean.expense.currency}">
@@ -75,6 +75,14 @@
                     <h:message for="expenseBeanExpenseCurrency" styleClass="error"/>
                 </h:panelGroup>
                 <h:outputText/>
+
+                <h:outputLabel for="expenseBeanExpenseDescription" value="Description:"/>
+                <h:panelGroup>
+                    <h:inputText id="expenseBeanExpenseDescription" value="#{expenseesBean.expense.description}"/>
+                    <h:message for="expenseBeanExpenseDescription" styleClass="error"/>
+                </h:panelGroup>
+                <h:outputText/>
+
             </h:panelGrid>
 
             <div class="buttons">

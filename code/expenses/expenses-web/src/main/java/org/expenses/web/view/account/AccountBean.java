@@ -52,9 +52,6 @@ public class AccountBean implements Serializable
    @Inject
    private UserService service;
 
-   @Inject
-   Instance<AccountBean> me;
-
    // ======================================
    // = Business methods =
    // ======================================

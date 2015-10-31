@@ -1,6 +1,7 @@
 package org.expenses.core.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.*;
 
@@ -119,34 +120,16 @@ public class User implements Serializable
    }
 
    @Override
-   public boolean equals(Object obj)
-   {
-      if (this == obj)
-      {
-         return true;
-      }
-      if (!(obj instanceof User))
-      {
-         return false;
-      }
-      User other = (User) obj;
-      if (id != null)
-      {
-         if (!id.equals(other.id))
-         {
-            return false;
-         }
-      }
-      return true;
+   public boolean equals(Object o) {
+      if (this == o) return true;
+      if (o == null || getClass() != o.getClass()) return false;
+      User user = (User) o;
+      return Objects.equals(login, user.login);
    }
 
    @Override
-   public int hashCode()
-   {
-      final int prime = 31;
-      int result = 1;
-      result = prime * result + ((id == null) ? 0 : id.hashCode());
-      return result;
+   public int hashCode() {
+      return Objects.hash(login);
    }
 
    @Override

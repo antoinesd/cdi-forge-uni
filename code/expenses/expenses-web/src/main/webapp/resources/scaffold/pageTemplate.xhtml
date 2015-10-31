@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
     <title>#{empty pageTitle ? 'Page Title' : pageTitle}</title>
     <link rel="icon" href='#{resource["favicon.ico"]}'/>
+    <h:outputScript library="primefaces" name="jquery/jquery.js" />
     <h:outputStylesheet library="webjars" name="bootstrap/2.3.2/css/bootstrap.min.css"/>
     <h:outputStylesheet name="forge-style.css"/>
 </h:head>
@@ -96,7 +96,7 @@
 
     <footer>
         <div id="footer-wrapper">
-            <p:clock />
+            <p>Powered by <a href="http://jboss.org/forge">Forge</a></p>
         </div>
     </footer>
 

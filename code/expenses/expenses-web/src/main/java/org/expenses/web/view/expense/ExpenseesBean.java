@@ -1,7 +1,10 @@
 package org.expenses.web.view.expense;
 
 import java.io.Serializable;
+import java.util.Date;
 
+import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -22,7 +25,7 @@ import org.expenses.core.service.ReimbursementService;
  */
 
 @Named
-@ViewScoped
+@ConversationScoped
 public class ExpenseesBean implements Serializable
 {
 
@@ -32,14 +35,23 @@ public class ExpenseesBean implements Serializable
    @Inject
    private FacesContext facesContext;
 
+   @Inject
+   private Conversation conversation;
+
    private Conference conference;
 
    private Expense expense = new Expense();
 
-   private Reimbursement reimbursement = new Reimbursement();
+   private Reimbursement reimbursement;
 
    public String addExpense()
    {
+      if (this.conversation.isTransient())
+      {
+         this.conversation.begin();
+         reimbursement = new Reimbursement();
+      }
+
       reimbursement.add(expense);
       facesContext.addMessage(null,
                new FacesMessage(FacesMessage.SEVERITY_INFO, "Expense added " + expense.getDescription(), ""));
@@ -49,7 +61,10 @@ public class ExpenseesBean implements Serializable
 
    public String confirm()
    {
+      reimbursement.setDate(new Date());
+      reimbursement.setConference(conference);
       service.persist(reimbursement);
+      this.conversation.end();
       return "/index";
    }
 
