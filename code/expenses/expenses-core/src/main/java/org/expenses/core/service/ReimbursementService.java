@@ -3,6 +3,8 @@ package org.expenses.core.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -24,10 +26,19 @@ import org.expenses.core.model.User;
 @Transactional
 public class ReimbursementService extends AbstractService<Reimbursement>
 {
+   @Inject
+   private Event<Reimbursement> reimbursementEvent;
 
    public ReimbursementService()
    {
       super(Reimbursement.class);
+   }
+
+   public Reimbursement persist(Reimbursement entity)
+   {
+      getEntityManager().persist(entity);
+      reimbursementEvent.fire(entity);
+      return entity;
    }
 
    public Reimbursement findById(Long id)
