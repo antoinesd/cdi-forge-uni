@@ -86,8 +86,8 @@
             </h:panelGrid>
 
             <div class="buttons">
-                <h:commandLink value="Add Expense" action='#{expenseesBean.addExpense}' styleClass="btn btn-primary"/>
-                <h:link value="Finish" outcome="/expense/recap" styleClass="btn btn-primary"/>
+                <h:commandLink value="Add Expense" action="#{expenseesBean.addExpense}" styleClass="btn btn-primary"/>
+                <h:commandLink value="Recap" action="#{expenseesBean.recap}" styleClass="btn btn-primary"/>
             </div>
         </h:form>
     </ui:define>

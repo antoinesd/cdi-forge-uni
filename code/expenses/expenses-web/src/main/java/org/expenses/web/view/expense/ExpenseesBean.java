@@ -3,6 +3,8 @@ package org.expenses.web.view.expense;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
@@ -14,6 +16,7 @@ import org.expenses.core.model.Conference;
 import org.expenses.core.model.Expense;
 import org.expenses.core.model.Reimbursement;
 import org.expenses.core.service.ReimbursementService;
+import org.expenses.core.service.UserService;
 
 /**
  * Main Backing bean for creating expensee.
@@ -30,6 +33,9 @@ public class ExpenseesBean implements Serializable
 
    @Inject
    private ReimbursementService service;
+
+   @Inject
+   private UserService userService;
 
    @Inject
    private FacesContext facesContext;
@@ -58,10 +64,21 @@ public class ExpenseesBean implements Serializable
       return null;
    }
 
-   public String confirm()
+   public String recap()
    {
+      reimbursement.setUser(userService.findById(1000L));
       reimbursement.setDate(new Date());
       reimbursement.setConference(conference);
+      return "/expense/recap";
+   }
+
+   public String back()
+   {
+      return "/expense/create";
+   }
+
+   public String confirm()
+   {
       service.persist(reimbursement);
       this.conversation.end();
       return "/index";

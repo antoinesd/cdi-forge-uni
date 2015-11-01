@@ -26,10 +26,10 @@ INSERT INTO T_EXPENSE (id, version, description, amount, currency, expenseType) 
 INSERT INTO T_EXPENSE (id, version, description, amount, currency, expenseType) VALUES (3005, 1, 'Diner on my own', 34.56, 0, 1);
 INSERT INTO T_EXPENSE (id, version, description, amount, currency, expenseType) VALUES (3006, 1, 'Breakfast', 23.10, 0, 1);
 INSERT INTO T_EXPENSE (id, version, description, amount, currency, expenseType) VALUES (3007, 1, 'Flight with Air France', 345.67, 0, 3);
-INSERT INTO T_REIMBURSEMENT_T_EXPENSE (Reimbursement_id, expenses_id) VALUES (4000, 3003);
-INSERT INTO T_REIMBURSEMENT_T_EXPENSE (Reimbursement_id, expenses_id) VALUES (4000, 3004);
-INSERT INTO T_REIMBURSEMENT_T_EXPENSE (Reimbursement_id, expenses_id) VALUES (4000, 3005);
-INSERT INTO T_REIMBURSEMENT_T_EXPENSE (Reimbursement_id, expenses_id) VALUES (4000, 3007);
+INSERT INTO T_REIMBURSEMENT_T_EXPENSE (Reimbursement_id, expenses_id) VALUES (4001, 3003);
+INSERT INTO T_REIMBURSEMENT_T_EXPENSE (Reimbursement_id, expenses_id) VALUES (4001, 3004);
+INSERT INTO T_REIMBURSEMENT_T_EXPENSE (Reimbursement_id, expenses_id) VALUES (4001, 3005);
+INSERT INTO T_REIMBURSEMENT_T_EXPENSE (Reimbursement_id, expenses_id) VALUES (4001, 3007);
 
 
 INSERT INTO T_REIMBURSEMENT (id, version, currency, user_id, conference_id) VALUES (4002, 1, 0, 1001, 2005);
@@ -37,7 +37,7 @@ INSERT INTO T_EXPENSE (id, version, description, amount, currency, expenseType) 
 INSERT INTO T_EXPENSE (id, version, description, amount, currency, expenseType) VALUES (3009, 1, 'Diner with Red Hater', 234.56, 0, 1);
 INSERT INTO T_EXPENSE (id, version, description, amount, currency, expenseType) VALUES (3010, 1, 'Breakfast', 34.56, 0, 1);
 INSERT INTO T_EXPENSE (id, version, description, amount, currency, expenseType) VALUES (3011, 1, 'Flight with Air France', 1345.67, 0, 3);
-INSERT INTO T_REIMBURSEMENT_T_EXPENSE (Reimbursement_id, expenses_id) VALUES (4000, 3008);
-INSERT INTO T_REIMBURSEMENT_T_EXPENSE (Reimbursement_id, expenses_id) VALUES (4000, 3009);
-INSERT INTO T_REIMBURSEMENT_T_EXPENSE (Reimbursement_id, expenses_id) VALUES (4000, 3010);
-INSERT INTO T_REIMBURSEMENT_T_EXPENSE (Reimbursement_id, expenses_id) VALUES (4000, 3011);
+INSERT INTO T_REIMBURSEMENT_T_EXPENSE (Reimbursement_id, expenses_id) VALUES (4002, 3008);
+INSERT INTO T_REIMBURSEMENT_T_EXPENSE (Reimbursement_id, expenses_id) VALUES (4002, 3009);
+INSERT INTO T_REIMBURSEMENT_T_EXPENSE (Reimbursement_id, expenses_id) VALUES (4002, 3010);
+INSERT INTO T_REIMBURSEMENT_T_EXPENSE (Reimbursement_id, expenses_id) VALUES (4002, 3011);

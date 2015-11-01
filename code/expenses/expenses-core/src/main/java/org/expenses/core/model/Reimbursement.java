@@ -1,5 +1,6 @@
 package org.expenses.core.model;
 
+import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.FetchType.EAGER;
 
 import java.io.Serializable;
@@ -27,7 +28,7 @@ public class Reimbursement implements Serializable
    @Temporal(TemporalType.DATE)
    private Date date;
 
-   @OneToMany(fetch = EAGER)
+   @OneToMany(fetch = EAGER, cascade = PERSIST)
    private Set<Expense> expenses = new HashSet<>();
 
    @Enumerated
