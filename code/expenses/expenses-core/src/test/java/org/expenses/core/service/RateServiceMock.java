@@ -1,5 +1,8 @@
 package org.expenses.core.service;
 
+import javax.enterprise.inject.Alternative;
+
+@Alternative
 public class RateServiceMock implements Rateable
 {
 
