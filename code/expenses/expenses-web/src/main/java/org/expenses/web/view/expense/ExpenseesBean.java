@@ -66,6 +66,7 @@ public class ExpenseesBean implements Serializable
          reimbursement = new Reimbursement();
       }
 
+      expense.setCurrency(currency);
       reimbursement.add(expense);
       facesContext.addMessage(null,
                new FacesMessage(FacesMessage.SEVERITY_INFO, "Expense added " + expense.getDescription(), ""));
