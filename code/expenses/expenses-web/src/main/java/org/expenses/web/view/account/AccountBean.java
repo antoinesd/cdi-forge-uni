@@ -35,7 +35,6 @@ public class AccountBean implements Serializable
    private FacesContext facesContext;
 
    // Logged user
-   @Produces
    private User user = new User();
 
    // Checks if the user is logged in and if he/she is an administrator (UserRole.Admin)
