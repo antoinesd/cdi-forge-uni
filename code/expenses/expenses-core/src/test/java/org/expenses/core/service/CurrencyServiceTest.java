@@ -6,7 +6,7 @@ public class CurrencyServiceTest
 {
 
    @Test
-   public void shoudlCheckChange()
+   public void shouldCheckChange()
    {
    }
 }
