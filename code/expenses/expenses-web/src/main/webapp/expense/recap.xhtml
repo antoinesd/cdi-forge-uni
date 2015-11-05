@@ -53,6 +53,10 @@
             </h:dataTable>
 
             <h:panelGrid columnClasses="label,component,required" columns="3">
+                <h:outputLabel for="expenseBeanTotal" value="Total:"/>
+                <h:outputText id="expenseBeanTotal" value="#{expenseesBean.reimbursement.totalAmount}"/>
+                <h:outputText/>
+
                 <h:outputLabel for="expenseBeanExpenseCurrency" value="Want to be reimbursed in:"/>
                 <h:panelGroup>
                     <h:selectOneMenu id="expenseBeanExpenseCurrency" value="#{expenseesBean.expense.currency}">
@@ -62,6 +66,10 @@
                     </h:selectOneMenu>
                     <h:message for="expenseBeanExpenseCurrency" styleClass="error"/>
                 </h:panelGroup>
+                <h:outputText/>
+
+                <h:outputLabel for="expenseBeanTotalInCurrency" value="Total in currency:"/>
+                <h:outputText id="expenseBeanTotalInCurrency" value="#{expenseesBean.reimbursement.totalAmount}"/>
                 <h:outputText/>
             </h:panelGrid>
 
