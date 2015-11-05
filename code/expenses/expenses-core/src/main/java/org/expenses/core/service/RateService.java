@@ -12,7 +12,7 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
-public class RateService
+public class RateService implements Rateable
 {
 
    @Inject
