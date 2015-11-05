@@ -24,6 +24,8 @@ Antoine Sabot-Durand; Antonio Goncalves
 :dzslides-transition: fade
 :dzslides-fonts: family=Neuton:400,700,800,400italic|Cedarville+Cursive
 :hide-uri-scheme:
+:stylesdir: stylesheets
+:stylesheet: custom.css
 
 
 [.topic.source]
