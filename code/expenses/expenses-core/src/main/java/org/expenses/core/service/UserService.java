@@ -37,13 +37,6 @@ public class UserService extends AbstractService<User>
       return query.getSingleResult();
    }
 
-   public User findByEmail(String email)
-   {
-      TypedQuery<User> query = getEntityManager().createNamedQuery(User.FIND_BY_EMAIL, User.class);
-      query.setParameter("email", email);
-      return query.getSingleResult();
-   }
-
    public List<User> findByLogin(String login)
    {
       return getEntityManager().createNamedQuery(User.FIND_BY_LOGIN, User.class).setParameter("login", login)
