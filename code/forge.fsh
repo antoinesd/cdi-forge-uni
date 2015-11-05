@@ -116,6 +116,11 @@ project-new --named expenses-billing --topLevelPackage org.expenses.billing --ty
 cdi-setup --cdiVersion 1.1 ;
 
 
+# Creating services
+# #################
+cdi-new-bean --named BillingService --targetPackage ~.service ;
+cdi-add-observer-method --named reimbursementToBill --eventType org.expenses.core.model.Reimbursement ;
+
 
 #  #####################################  #
 #  Creates the expenses banking project   #
@@ -126,13 +131,17 @@ cd .. ;
 
 project-new --named expenses-banking --topLevelPackage org.expenses.banking --type jar ;
 
-cdi-new-bean --named BankingService --targetPackage ~.service ;
-cdi-add-observer-method --named reimbursementToBePaid --eventType org.expenses.core.model.Reimbursement ;
-
-
 # Sets the project to use Java EE 7 artifacts
 # #################
 
 cdi-setup --cdiVersion 1.1 ;
+
+
+# Creating services
+# #################
+cdi-new-bean --named BankingService --targetPackage ~.service ;
+cdi-add-observer-method --named reimbursementToBePaid --eventType org.expenses.core.model.Reimbursement ;
+
+
 
 
