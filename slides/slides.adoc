@@ -150,6 +150,11 @@ image::arquillian.png[role="pull-right", width="250"]
 
 
 
+include::parts/extensions.adoc[]
+
+
+
+
 [.topic.intro]
 == Conclusion
 
