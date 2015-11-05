@@ -40,6 +40,16 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.expenses.banking</groupId>
+            <artifactId>expenses-banking</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.expenses.billing</groupId>
+            <artifactId>expenses-billing</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.1-api</artifactId>
             <scope>provided</scope>
