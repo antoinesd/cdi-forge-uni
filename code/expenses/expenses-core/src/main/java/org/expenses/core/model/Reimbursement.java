@@ -117,7 +117,7 @@ public class Reimbursement implements Serializable
 
    public Float getTotalAmount()
    {
-      Float totalAmount = new Float(0);
+      Float totalAmount = 0f;
       for (Expense expense : expenses)
       {
          totalAmount += expense.getAmount();
