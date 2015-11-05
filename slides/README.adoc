@@ -21,6 +21,15 @@ Install http://www.graphviz.org/[Graphviz]:
 brew install graphviz
 ----
 
+== Cloning Repo
+
+This repository includes git submodules for dzslides and Asciidoctor backend.
+
+Before starting working with the repo, the Git submodules must first be initialized by running:
+----
+git submodule update --init
+----
+
 == Build instructions
 
 To generate the HTML presentation, run the following command:
