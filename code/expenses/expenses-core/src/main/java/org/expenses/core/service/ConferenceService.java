@@ -9,6 +9,7 @@ import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.expenses.core.model.Conference;
+import org.expenses.core.utils.Loggable;
 
 /**
  * Transactional service for Conference entities.
@@ -17,6 +18,7 @@ import org.expenses.core.model.Conference;
  */
 
 @Transactional
+@Loggable
 public class ConferenceService extends AbstractService<Conference>
 {
    public ConferenceService()

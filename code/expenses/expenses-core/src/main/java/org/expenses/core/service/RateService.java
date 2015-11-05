@@ -1,5 +1,7 @@
 package org.expenses.core.service;
 
+import org.expenses.core.utils.Loggable;
+
 import java.io.StringReader;
 import java.net.URI;
 import java.util.logging.Logger;
@@ -12,6 +14,7 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
+@Loggable
 public class RateService implements Rateable
 {
 

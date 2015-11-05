@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 
 import org.expenses.core.model.User;
 import org.expenses.core.utils.DigestPassword;
+import org.expenses.core.utils.Loggable;
 
 /**
  * Transactional service for User entities.
@@ -19,6 +20,7 @@ import org.expenses.core.utils.DigestPassword;
  */
 
 @Transactional
+@Loggable
 public class UserService extends AbstractService<User>
 {
 

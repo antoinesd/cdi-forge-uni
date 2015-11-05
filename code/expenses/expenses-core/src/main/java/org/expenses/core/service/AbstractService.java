@@ -19,9 +19,6 @@ public abstract class AbstractService<T> implements Serializable
    @PersistenceContext(unitName = "expenses-pu")
    private EntityManager em;
 
-   @Inject
-   private Logger logger;
-
    private Class<T> entityClass;
 
    public AbstractService()
@@ -40,20 +37,17 @@ public abstract class AbstractService<T> implements Serializable
 
    public T persist(T entity)
    {
-      logger.info("Persist");
       em.persist(entity);
       return entity;
    }
 
    public T findById(Long id)
    {
-      logger.info("Find");
       return em.find(entityClass, id);
    }
 
    public void remove(T entity)
    {
-      logger.info("Remove");
       em.remove(em.merge(entity));
    }
 

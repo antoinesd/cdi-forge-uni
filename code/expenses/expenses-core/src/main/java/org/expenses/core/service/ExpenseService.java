@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import org.expenses.core.model.Currency;
 import org.expenses.core.model.Expense;
 import org.expenses.core.model.ExpenseType;
+import org.expenses.core.utils.Loggable;
 
 /**
  * Transactional service for Expense entities.
@@ -19,6 +20,7 @@ import org.expenses.core.model.ExpenseType;
  */
 
 @Transactional
+@Loggable
 public class ExpenseService extends AbstractService<Expense>
 {
 

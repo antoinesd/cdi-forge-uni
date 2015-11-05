@@ -16,6 +16,7 @@ import org.expenses.core.model.Conference;
 import org.expenses.core.model.Currency;
 import org.expenses.core.model.Reimbursement;
 import org.expenses.core.model.User;
+import org.expenses.core.utils.Loggable;
 
 /**
  * Transactional service for Reimbursement entities.
@@ -24,6 +25,7 @@ import org.expenses.core.model.User;
  */
 
 @Transactional
+@Loggable
 public class ReimbursementService extends AbstractService<Reimbursement>
 {
    @Inject

@@ -4,10 +4,12 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import org.expenses.core.model.Currency;
+import org.expenses.core.utils.Loggable;
 
 import javax.enterprise.context.Dependent;
 
 @ApplicationScoped
+@Loggable
 public class CurrencyService
 {
 
