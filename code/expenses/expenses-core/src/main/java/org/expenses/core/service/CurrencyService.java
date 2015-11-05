@@ -1,12 +1,13 @@
 package org.expenses.core.service;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import org.expenses.core.model.Currency;
 
 import javax.enterprise.context.Dependent;
 
-@Dependent
+@ApplicationScoped
 public class CurrencyService
 {
 
