@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.context.spi.AlterableContext;
+import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.faces.application.FacesMessage;
@@ -34,6 +35,7 @@ public class AccountBean implements Serializable
    private FacesContext facesContext;
 
    // Logged user
+   @Produces
    private User user = new User();
 
    // Checks if the user is logged in and if he/she is an administrator (UserRole.Admin)
@@ -42,9 +44,6 @@ public class AccountBean implements Serializable
 
    private String password1;
    private String password2;
-
-   @Inject
-   private Conversation conversation;
 
    @Inject
    private UserService service;

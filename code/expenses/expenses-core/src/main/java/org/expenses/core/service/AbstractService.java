@@ -2,7 +2,9 @@ package org.expenses.core.service;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Logger;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -16,6 +18,9 @@ public abstract class AbstractService<T> implements Serializable
 
    @PersistenceContext(unitName = "expenses-pu")
    private EntityManager em;
+
+   @Inject
+   private Logger logger;
 
    private Class<T> entityClass;
 
@@ -35,17 +40,20 @@ public abstract class AbstractService<T> implements Serializable
 
    public T persist(T entity)
    {
+      logger.info("Persist");
       em.persist(entity);
       return entity;
    }
 
    public T findById(Long id)
    {
+      logger.info("Find");
       return em.find(entityClass, id);
    }
 
    public void remove(T entity)
    {
+      logger.info("Remove");
       em.remove(em.merge(entity));
    }
 
