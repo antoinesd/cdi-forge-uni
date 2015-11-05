@@ -3,4 +3,4 @@
 	url = git@github.com:antoinesd/asciidoctor-backends.git
 [submodule "slides/dzslides"]
 	path = slides/dzslides
-	url = git@github.com:astefanutti/dzslides.git
+	url = git@github.com:antoinesd/dzslides.git
