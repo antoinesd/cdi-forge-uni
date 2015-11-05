@@ -39,14 +39,14 @@
 
                 <h:outputLabel for="expenseBeanExpenseCurrency" value="Currency:"/>
                 <h:panelGroup>
-                    <h:selectOneMenu id="expenseBeanExpenseCurrency" value="#{expenseesBean.currency}" rendered="#{expenseesBean.conference == null}">
+                    <h:selectOneMenu id="expenseBeanExpenseCurrency" value="#{expenseesBean.currency}" rendered="#{expenseesBean.currency == null}">
                         <f:selectItem/>
                         <f:selectItem itemValue="USD"/>
                         <f:selectItem itemValue="EURO"/>
                     </h:selectOneMenu>
                     <h:outputText for="expenseBeanExpenseCurrency"
                                   value="#{expenseesBean.currency}"
-                                  rendered="#{expenseesBean.conference != null}"/>
+                                  rendered="#{expenseesBean.currency != null}"/>
                     <h:message for="expenseBeanExpenseCurrency" styleClass="error"/>
                 </h:panelGroup>
                 <h:outputText/>

@@ -3,8 +3,6 @@ package org.expenses.web.view.expense;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
@@ -56,8 +54,6 @@ public class ExpenseesBean implements Serializable
 
    private Reimbursement reimbursement;
 
-
-
    public String addExpense()
    {
       if (this.conversation.isTransient())
@@ -79,7 +75,7 @@ public class ExpenseesBean implements Serializable
       reimbursement.setUser(userService.findById(1000L));
       reimbursement.setDate(new Date());
       reimbursement.setConference(conference);
-      currency=reimbursement.getCurrency();
+      reimbursement.setCurrency(currency);
       return "/expense/recap";
    }
 
@@ -121,19 +117,21 @@ public class ExpenseesBean implements Serializable
       this.reimbursement = reimbursement;
    }
 
-
-   public float getTotalAmount() {
-      if(currency.equals(reimbursement.getCurrency()))
+   public float getTotalAmount()
+   {
+      if (currency.equals(reimbursement.getCurrency()))
          return reimbursement.getTotalAmount();
       else
-         return  currencyService.change(reimbursement.getTotalAmount(),currency);
+         return currencyService.change(reimbursement.getTotalAmount(), currency);
    }
 
-   public Currency getCurrency() {
+   public Currency getCurrency()
+   {
       return currency;
    }
 
-   public void setCurrency(Currency currency) {
+   public void setCurrency(Currency currency)
+   {
       this.currency = currency;
    }
 }
