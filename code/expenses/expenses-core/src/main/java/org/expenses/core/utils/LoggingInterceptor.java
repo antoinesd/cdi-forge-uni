@@ -1,8 +1,9 @@
 package org.expenses.core.utils;
 
-import java.io.Serializable;
 import java.util.logging.Logger;
 
+import javax.enterprise.inject.Intercepted;
+import javax.enterprise.inject.spi.Bean;
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
@@ -10,25 +11,27 @@ import javax.interceptor.InvocationContext;
 
 @Loggable
 @Interceptor
-public class LoggingInterceptor implements Serializable
+public class LoggingInterceptor
 {
 
    @Inject
-   private transient Logger logger;
+   private Logger logger;
+
+   @Inject
+   @Intercepted
+   private Bean<?> bean;
 
    @AroundInvoke
    private Object intercept(InvocationContext ic) throws Exception
    {
-      logger.entering(ic.getTarget().getClass().getName(), ic.getMethod().getName());
-      logger.info(">>> " + ic.getTarget().getClass().getName() + " - " + ic.getMethod().getName());
+      logger.info("> > " + bean.getBeanClass().getName() + " - " + ic.getMethod().getName());
       try
       {
          return ic.proceed();
       }
       finally
       {
-         logger.exiting(ic.getTarget().getClass().getName(), ic.getMethod().getName());
-         logger.info("<<< " + ic.getTarget().getClass().getName() + " - " + ic.getMethod().getName());
+         logger.info("< < " + bean.getBeanClass().getName() + " - " + ic.getMethod().getName());
       }
    }
 }
