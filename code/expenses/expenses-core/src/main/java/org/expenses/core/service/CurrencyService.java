@@ -4,6 +4,9 @@ import javax.inject.Inject;
 
 import org.expenses.core.model.Currency;
 
+import javax.enterprise.context.Dependent;
+
+@Dependent
 public class CurrencyService
 {
 
