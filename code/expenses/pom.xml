@@ -10,7 +10,6 @@
     <modules>
         <module>expenses-core</module>
         <module>expenses-web</module>
-        <module>expenses-currency</module>
         <module>expenses-billing</module>
         <module>expenses-banking</module>
     </modules>

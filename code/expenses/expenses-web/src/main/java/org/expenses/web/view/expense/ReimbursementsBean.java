@@ -1,10 +1,13 @@
 package org.expenses.web.view.expense;
 
 import org.expenses.core.model.Reimbursement;
+import org.expenses.core.model.User;
 import org.expenses.core.service.ReimbursementService;
+import org.expenses.web.view.account.LoggedIn;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -24,16 +27,17 @@ public class ReimbursementsBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-   /*
-    * Support creating and retrieving Reimbursement entities
-    */
-
-    private Long id;
-    private Reimbursement reimbursement;
     @Inject
     private Conversation conversation;
     @Inject
     private ReimbursementService service;
+    @Inject
+    @LoggedIn
+    private Instance<User> loggedInUser;
+
+    private Long id;
+    private Reimbursement reimbursement;
+
     private int page;
     private long count;
     private List<Reimbursement> pageItems;
@@ -85,6 +89,8 @@ public class ReimbursementsBean implements Serializable {
     }
 
     public void paginate() {
+
+        example.setUser(loggedInUser.get());
 
         // Populate this.count
         this.count = this.service.count(example);

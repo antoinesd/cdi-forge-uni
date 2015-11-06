@@ -9,6 +9,7 @@ import org.expenses.core.utils.Encrypted;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Instance;
+import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -46,6 +47,8 @@ public class AccountBean implements Serializable {
     private Instance<AccountBean> me;
 
     // Logged user
+    @Produces
+    @LoggedIn
     private User user = new User();
 
     // Checks if the user is logged in and if he/she is an administrator (UserRole.Admin)
@@ -90,6 +93,7 @@ public class AccountBean implements Serializable {
             try {
                 user = service.findByLoginPassword(login, digester.digest(password));
             } catch (NoResultException e) {
+                user = null;
             }
         }
 

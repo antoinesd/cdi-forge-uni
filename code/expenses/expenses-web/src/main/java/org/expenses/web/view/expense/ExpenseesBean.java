@@ -1,15 +1,15 @@
 package org.expenses.web.view.expense;
 
-import org.expenses.core.model.Conference;
-import org.expenses.core.model.Currency;
-import org.expenses.core.model.Expense;
-import org.expenses.core.model.Reimbursement;
+import org.expenses.core.model.*;
 import org.expenses.core.service.CurrencyService;
 import org.expenses.core.service.ReimbursementService;
 import org.expenses.core.service.UserService;
+import org.expenses.web.view.account.LoggedIn;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
+import javax.enterprise.inject.Instance;
+import javax.enterprise.inject.Intercepted;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -44,6 +44,9 @@ public class ExpenseesBean implements Serializable {
     @Inject
     private CurrencyService currencyService;
 
+    @Inject @LoggedIn
+    private Instance<User> loggedInUser;
+
     private Currency currency;
 
     private Conference conference;
@@ -67,7 +70,7 @@ public class ExpenseesBean implements Serializable {
     }
 
     public String recap() {
-        reimbursement.setUser(userService.findById(1000L));
+        reimbursement.setUser(loggedInUser.get());
         reimbursement.setDate(new Date());
         reimbursement.setConference(conference);
         reimbursement.setCurrency(currency);
