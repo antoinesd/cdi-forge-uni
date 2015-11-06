@@ -1,5 +1,5 @@
 INSERT INTO T_USER (id, version, name, email, login, password, role) VALUES (1000, 1, 'Antonio Goncalves', 'antonio.goncalves@gmail.com', 'agoncal', 'lEMDfl4CChEhCBULxNJf/3JdrUx5xz8p4zr/kqIAF9w=', 0);
-INSERT INTO T_USER (id, version, name, email, login, password, role) VALUES (1001, 1, 'Antoine Sabot-Durant', 'antoine@sabot-durand.net', 'antoine_sd', 'mIe72tv4GOvC9jsbvm0xue2BG3e2vHvTffZub1FhpRI=', 0);
+INSERT INTO T_USER (id, version, name, email, login, password, role) VALUES (1001, 1, 'Antoine Sabot-Durand', 'antoine@sabot-durand.net', 'antoine_sd', 'mIe72tv4GOvC9jsbvm0xue2BG3e2vHvTffZub1FhpRI=', 0);
 INSERT INTO T_USER (id, version, name, email, login, password, role) VALUES (1002, 1, 'Super Admin', 'super@admin.com', 'admin', 'jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg=', 1);
 INSERT INTO T_USER (id, version, name, email, login, password, role) VALUES (1003, 1, 'Legacy Joe', 'joe@legacy.com', 'legacy', 'legacy', 1);
 
