@@ -11,7 +11,7 @@ import javax.inject.Inject;
 public class CurrencyService {
 
     @Inject
-    private RateService rateService;
+    private Rateable rateService;
 
     public Float change(Float amount, Currency currency) {
         return (float) (amount * changeRate(currency));
