@@ -2,10 +2,8 @@ package org.expenses.web.view.account;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.Conversation;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.context.spi.AlterableContext;
-import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.faces.application.FacesMessage;
@@ -18,6 +16,8 @@ import org.expenses.core.model.User;
 import org.expenses.core.model.UserRole;
 import org.expenses.core.service.UserService;
 import org.expenses.core.utils.DigestPassword;
+import org.expenses.core.utils.EncryptPassword;
+import org.expenses.core.utils.Encrypted;
 
 @Named
 @SessionScoped
@@ -34,6 +34,12 @@ public class AccountBean implements Serializable
    @Inject
    private FacesContext facesContext;
 
+   @Inject
+   private UserService service;
+
+   @Inject @Encrypted
+   private DigestPassword digestPassword;
+
    // Logged user
    private User user = new User();
 
@@ -43,9 +49,6 @@ public class AccountBean implements Serializable
 
    private String password1;
    private String password2;
-
-   @Inject
-   private UserService service;
 
    // ======================================
    // = Business methods =
@@ -111,7 +114,7 @@ public class AccountBean implements Serializable
    public String doUpdateProfile()
    {
       if (password1 != null && !password1.isEmpty())
-         user.setPassword(DigestPassword.digest(password1));
+         user.setPassword(digestPassword.digest(password1));
       user = service.merge(user);
       resetPasswords();
       admin = user.getRole().equals(UserRole.ADMIN);

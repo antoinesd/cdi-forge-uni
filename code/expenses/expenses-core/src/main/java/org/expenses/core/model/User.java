@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import javax.persistence.*;
 
-import org.expenses.core.utils.DigestPassword;
+import org.expenses.core.utils.EncryptPassword;
 
 @Entity
 @Table(name = "t_user")
@@ -38,12 +38,6 @@ public class User implements Serializable
    private String email;
 
    private UserRole role;
-
-   @PrePersist
-   private void digestPassword()
-   {
-      password = DigestPassword.digest(password);
-   }
 
    public Long getId()
    {

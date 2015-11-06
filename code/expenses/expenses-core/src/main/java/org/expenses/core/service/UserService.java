@@ -3,6 +3,7 @@ package org.expenses.core.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Predicate;
@@ -11,6 +12,7 @@ import javax.transaction.Transactional;
 
 import org.expenses.core.model.User;
 import org.expenses.core.utils.DigestPassword;
+import org.expenses.core.utils.Encrypted;
 import org.expenses.core.utils.Loggable;
 
 /**
@@ -24,16 +26,27 @@ import org.expenses.core.utils.Loggable;
 public class UserService extends AbstractService<User>
 {
 
+   @Inject
+   @Encrypted
+   private DigestPassword digestPassword;
+
    public UserService()
    {
       super(User.class);
+   }
+
+   @Override
+   public User persist(User entity)
+   {
+      entity.setPassword(digestPassword.digest(entity.getPassword()));
+      return super.persist(entity);
    }
 
    public User findByLoginPassword(String login, String password)
    {
       TypedQuery<User> query = getEntityManager().createNamedQuery(User.FIND_BY_LOGIN_PASSWORD, User.class);
       query.setParameter("login", login);
-      query.setParameter("password", DigestPassword.digest(password));
+      query.setParameter("password", digestPassword.digest(password));
       return query.getSingleResult();
    }
 
