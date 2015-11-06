@@ -10,6 +10,7 @@ public class BankingService {
     private Logger logger = Logger.getLogger(BankingService.class.getName());
 
     public void reimbursementToBePaid(@Observes Reimbursement event) {
+        logger.info(" ");
         logger.info("-- BankingService -- ");
         logger.info("-- " + event);
         logger.info("-------------------- ");

@@ -1,16 +1,17 @@
 package org.expenses.billing.service;
 
-import org.expenses.core.model.Reimbursement;
-
 import java.util.logging.Logger;
 
 public class BillingService {
 
     private Logger logger = Logger.getLogger(BillingService.class.getName());
 
-    public void reimbursementToBill(Reimbursement event) {
+    public void reimbursementToBill(String userName, String conferenceName, Float amount) {
+        logger.info(" ");
         logger.info("-- BillingService -- ");
-        logger.info("-- " + event);
+        logger.info("-- " + userName);
+        logger.info("-- " + conferenceName);
+        logger.info("-- " + amount);
         logger.info("-------------------- ");
     }
 }
