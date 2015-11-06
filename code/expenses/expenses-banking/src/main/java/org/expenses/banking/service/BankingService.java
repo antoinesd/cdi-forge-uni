@@ -1,18 +1,15 @@
 package org.expenses.banking.service;
 
-import java.util.logging.Logger;
-
-import javax.enterprise.event.Observes;
-
 import org.expenses.core.model.Reimbursement;
 
-public class BankingService
-{
+import javax.enterprise.event.Observes;
+import java.util.logging.Logger;
 
-   private Logger logger = Logger.getLogger(BankingService.class.getName());
+public class BankingService {
 
-   public void reimbursementToBePaid(@Observes Reimbursement event)
-   {
-      logger.info("&&&&&&&&&&&&&&&&&&& " + event);
-   }
+    private Logger logger = Logger.getLogger(BankingService.class.getName());
+
+    public void reimbursementToBePaid(@Observes Reimbursement event) {
+        logger.info("&&&&&&&&&&&&&&&&&&& " + event);
+    }
 }

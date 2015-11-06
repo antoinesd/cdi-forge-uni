@@ -3,11 +3,9 @@ package org.expenses.core.service;
 import javax.enterprise.inject.Alternative;
 
 @Alternative
-public class RateServiceMock implements Rateable
-{
+public class RateServiceMock implements Rateable {
 
-   public double rate()
-   {
-      return 1.23;
-   }
+    public double rate() {
+        return 1.23;
+    }
 }

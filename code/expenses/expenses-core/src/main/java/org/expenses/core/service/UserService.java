@@ -1,7 +1,9 @@
 package org.expenses.core.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.expenses.core.model.User;
+import org.expenses.core.utils.DigestPassword;
+import org.expenses.core.utils.Encrypted;
+import org.expenses.core.utils.Loggable;
 
 import javax.inject.Inject;
 import javax.persistence.TypedQuery;
@@ -9,11 +11,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
-
-import org.expenses.core.model.User;
-import org.expenses.core.utils.DigestPassword;
-import org.expenses.core.utils.Encrypted;
-import org.expenses.core.utils.Loggable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Transactional service for User entities.
@@ -23,67 +22,58 @@ import org.expenses.core.utils.Loggable;
 
 @Transactional
 @Loggable
-public class UserService extends AbstractService<User>
-{
+public class UserService extends AbstractService<User> {
 
-   @Inject
-   @Encrypted
-   private DigestPassword digestPassword;
+    @Inject
+    @Encrypted
+    private DigestPassword digestPassword;
 
-   public UserService()
-   {
-      super(User.class);
-   }
+    public UserService() {
+        super(User.class);
+    }
 
-   @Override
-   public User persist(User entity)
-   {
-      entity.setPassword(digestPassword.digest(entity.getPassword()));
-      return super.persist(entity);
-   }
+    @Override
+    public User persist(User entity) {
+        entity.setPassword(digestPassword.digest(entity.getPassword()));
+        return super.persist(entity);
+    }
 
-   public User findByLoginPassword(String login, String password)
-   {
-      TypedQuery<User> query = getEntityManager().createNamedQuery(User.FIND_BY_LOGIN_PASSWORD, User.class);
-      query.setParameter("login", login);
-      query.setParameter("password", digestPassword.digest(password));
-      return query.getSingleResult();
-   }
+    public User findByLoginPassword(String login, String password) {
+        TypedQuery<User> query = getEntityManager().createNamedQuery(User.FIND_BY_LOGIN_PASSWORD, User.class);
+        query.setParameter("login", login);
+        query.setParameter("password", password);
+        return query.getSingleResult();
+    }
 
-   public List<User> findByLogin(String login)
-   {
-      return getEntityManager().createNamedQuery(User.FIND_BY_LOGIN, User.class).setParameter("login", login)
-               .getResultList();
-   }
+    public List<User> findByLogin(String login) {
+        return getEntityManager().createNamedQuery(User.FIND_BY_LOGIN, User.class).setParameter("login", login)
+                .getResultList();
+    }
 
-   @Override
-   protected Predicate[] getSearchPredicates(Root<User> root, User example)
-   {
-      CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
-      List<Predicate> predicatesList = new ArrayList<>();
+    @Override
+    protected Predicate[] getSearchPredicates(Root<User> root, User example) {
+        CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
+        List<Predicate> predicatesList = new ArrayList<>();
 
-      String login = example.getLogin();
-      if (login != null && !"".equals(login))
-      {
-         predicatesList.add(builder.like(
-                  builder.lower(root.<String> get("login")),
-                  '%' + login.toLowerCase() + '%'));
-      }
-      String password = example.getPassword();
-      if (password != null && !"".equals(password))
-      {
-         predicatesList.add(builder.like(
-                  builder.lower(root.<String> get("password")),
-                  '%' + password.toLowerCase() + '%'));
-      }
-      String name = example.getName();
-      if (name != null && !"".equals(name))
-      {
-         predicatesList.add(builder.like(
-                  builder.lower(root.<String> get("name")),
-                  '%' + name.toLowerCase() + '%'));
-      }
+        String login = example.getLogin();
+        if (login != null && !"".equals(login)) {
+            predicatesList.add(builder.like(
+                    builder.lower(root.<String>get("login")),
+                    '%' + login.toLowerCase() + '%'));
+        }
+        String password = example.getPassword();
+        if (password != null && !"".equals(password)) {
+            predicatesList.add(builder.like(
+                    builder.lower(root.<String>get("password")),
+                    '%' + password.toLowerCase() + '%'));
+        }
+        String name = example.getName();
+        if (name != null && !"".equals(name)) {
+            predicatesList.add(builder.like(
+                    builder.lower(root.<String>get("name")),
+                    '%' + name.toLowerCase() + '%'));
+        }
 
-      return predicatesList.toArray(new Predicate[predicatesList.size()]);
-   }
+        return predicatesList.toArray(new Predicate[predicatesList.size()]);
+    }
 }

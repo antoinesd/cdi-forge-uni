@@ -1,7 +1,10 @@
 package org.expenses.core.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.expenses.core.model.Conference;
+import org.expenses.core.model.Currency;
+import org.expenses.core.model.Reimbursement;
+import org.expenses.core.model.User;
+import org.expenses.core.utils.Loggable;
 
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
@@ -11,12 +14,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
-
-import org.expenses.core.model.Conference;
-import org.expenses.core.model.Currency;
-import org.expenses.core.model.Reimbursement;
-import org.expenses.core.model.User;
-import org.expenses.core.utils.Loggable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Transactional service for Reimbursement entities.
@@ -26,66 +25,55 @@ import org.expenses.core.utils.Loggable;
 
 @Transactional
 @Loggable
-public class ReimbursementService extends AbstractService<Reimbursement>
-{
-   @Inject
-   private Event<Reimbursement> reimbursementEvent;
+public class ReimbursementService extends AbstractService<Reimbursement> {
+    @Inject
+    private Event<Reimbursement> reimbursementEvent;
 
-   public ReimbursementService()
-   {
-      super(Reimbursement.class);
-   }
+    public ReimbursementService() {
+        super(Reimbursement.class);
+    }
 
-   public Reimbursement persist(Reimbursement entity)
-   {
-      getEntityManager().persist(entity);
-      reimbursementEvent.fire(entity);
-      return entity;
-   }
+    public Reimbursement persist(Reimbursement entity) {
+        getEntityManager().persist(entity);
+        reimbursementEvent.fire(entity);
+        return entity;
+    }
 
-   public Reimbursement findById(Long id)
-   {
+    public Reimbursement findById(Long id) {
 
-      TypedQuery<Reimbursement> findByIdQuery = getEntityManager().createQuery(
-               "SELECT DISTINCT r FROM Reimbursement r LEFT JOIN FETCH r.expenses LEFT JOIN FETCH r.user LEFT JOIN FETCH r.conference WHERE r.id =:entityId ORDER BY r.id",
-               Reimbursement.class);
-      findByIdQuery.setParameter("entityId", id);
-      Reimbursement entity;
-      try
-      {
-         entity = findByIdQuery.getSingleResult();
-      }
-      catch (NoResultException nre)
-      {
-         entity = null;
-      }
-      return entity;
-   }
+        TypedQuery<Reimbursement> findByIdQuery = getEntityManager().createQuery(
+                "SELECT DISTINCT r FROM Reimbursement r LEFT JOIN FETCH r.expenses LEFT JOIN FETCH r.user LEFT JOIN FETCH r.conference WHERE r.id =:entityId ORDER BY r.id",
+                Reimbursement.class);
+        findByIdQuery.setParameter("entityId", id);
+        Reimbursement entity;
+        try {
+            entity = findByIdQuery.getSingleResult();
+        } catch (NoResultException nre) {
+            entity = null;
+        }
+        return entity;
+    }
 
-   @Override
-   protected Predicate[] getSearchPredicates(Root<Reimbursement> root, Reimbursement example)
-   {
+    @Override
+    protected Predicate[] getSearchPredicates(Root<Reimbursement> root, Reimbursement example) {
 
-      CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
-      List<Predicate> predicatesList = new ArrayList<>();
+        CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
+        List<Predicate> predicatesList = new ArrayList<>();
 
-      Currency currency = example.getCurrency();
-      if (currency != null)
-      {
-         predicatesList.add(builder.equal(root.get("currency"), currency));
-      }
-      User user = example.getUser();
-      if (user != null)
-      {
-         predicatesList.add(builder.equal(root.get("user"), user));
-      }
-      Conference conference = example.getConference();
-      if (conference != null)
-      {
-         predicatesList
-                  .add(builder.equal(root.get("conference"), conference));
-      }
+        Currency currency = example.getCurrency();
+        if (currency != null) {
+            predicatesList.add(builder.equal(root.get("currency"), currency));
+        }
+        User user = example.getUser();
+        if (user != null) {
+            predicatesList.add(builder.equal(root.get("user"), user));
+        }
+        Conference conference = example.getConference();
+        if (conference != null) {
+            predicatesList
+                    .add(builder.equal(root.get("conference"), conference));
+        }
 
-      return predicatesList.toArray(new Predicate[predicatesList.size()]);
-   }
+        return predicatesList.toArray(new Predicate[predicatesList.size()]);
+    }
 }

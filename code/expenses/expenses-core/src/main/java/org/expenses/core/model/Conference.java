@@ -1,120 +1,99 @@
 package org.expenses.core.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-import javax.persistence.*;
-
 @Entity
 @Table(name = "t_conference")
-public class Conference implements Serializable
-{
+public class Conference implements Serializable {
 
-   @Id
-   @GeneratedValue(strategy = GenerationType.AUTO)
-   @Column(name = "id", updatable = false, nullable = false)
-   private Long id;
-   @Version
-   @Column(name = "version")
-   private int version;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
+    @Version
+    @Column(name = "version")
+    private int version;
 
-   @Column
-   private String name;
+    private String name;
 
-   @Column
-   @Temporal(TemporalType.DATE)
-   private Date date;
+    @Temporal(TemporalType.DATE)
+    private Date date;
 
-   @Column
-   private String country;
+    private String country;
 
-   @Column
-   private String city;
+    private String city;
 
-   public Long getId()
-   {
-      return this.id;
-   }
+    public Long getId() {
+        return this.id;
+    }
 
-   public void setId(final Long id)
-   {
-      this.id = id;
-   }
+    public void setId(final Long id) {
+        this.id = id;
+    }
 
-   public int getVersion()
-   {
-      return this.version;
-   }
+    public int getVersion() {
+        return this.version;
+    }
 
-   public void setVersion(final int version)
-   {
-      this.version = version;
-   }
+    public void setVersion(final int version) {
+        this.version = version;
+    }
 
-   public String getName()
-   {
-      return name;
-   }
+    public String getName() {
+        return name;
+    }
 
-   public void setName(String name)
-   {
-      this.name = name;
-   }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-   public Date getDate()
-   {
-      return date;
-   }
+    public Date getDate() {
+        return date;
+    }
 
-   public void setDate(Date date)
-   {
-      this.date = date;
-   }
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
-   public String getCountry()
-   {
-      return country;
-   }
+    public String getCountry() {
+        return country;
+    }
 
-   public void setCountry(String country)
-   {
-      this.country = country;
-   }
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
-   public String getCity()
-   {
-      return city;
-   }
+    public String getCity() {
+        return city;
+    }
 
-   public void setCity(String city)
-   {
-      this.city = city;
-   }
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-   @Override
-   public boolean equals(Object o)
-   {
-      if (this == o)
-         return true;
-      if (o == null || getClass() != o.getClass())
-         return false;
-      Conference that = (Conference) o;
-      return Objects.equals(name, that.name) &&
-               Objects.equals(date, that.date) &&
-               Objects.equals(country, that.country) &&
-               Objects.equals(city, that.city);
-   }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Conference that = (Conference) o;
+        return Objects.equals(name, that.name) &&
+                Objects.equals(date, that.date) &&
+                Objects.equals(country, that.country) &&
+                Objects.equals(city, that.city);
+    }
 
-   @Override
-   public int hashCode()
-   {
-      return Objects.hash(name, date, country, city);
-   }
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, date, country, city);
+    }
 
-   @Override
-   public String toString()
-   {
-      return name;
-   }
+    @Override
+    public String toString() {
+        return name;
+    }
 }

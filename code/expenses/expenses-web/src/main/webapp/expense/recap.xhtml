@@ -60,7 +60,7 @@
                 <h:outputLabel for="expenseBeanExpenseCurrency" value="Want to be reimbursed in:"/>
                 <h:panelGroup>
                     <h:selectOneMenu id="expenseBeanExpenseCurrency" value="#{expenseesBean.currency}">
-                        <f:ajax event="change" render="expenseBeanTotalInCurrency" />
+                        <f:ajax event="change" render="expenseBeanTotalInCurrency"/>
                         <f:selectItem/>
                         <f:selectItem itemValue="USD"/>
                         <f:selectItem itemValue="EURO"/>

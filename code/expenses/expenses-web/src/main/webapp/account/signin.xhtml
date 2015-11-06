@@ -21,11 +21,11 @@
             <h:panelGrid columnClasses="label,component,required" columns="2">
                 <label for="inputLogin" class="sr-only">Login</label>
                 <h:inputText id="inputLogin" class="form-control" pt:placeholder="Login"
-                             pt:required="true" pt:autofocus="true" value="#{accountBean.user.login}"/>
+                             pt:required="true" pt:autofocus="true" value="#{accountBean.login}"/>
 
                 <label for="inputPassword" class="sr-only">Password</label>
                 <h:inputText id="inputPassword" pt:type="password" class="form-control" pt:placeholder="Password"
-                             pt:required="true" value="#{accountBean.user.password}"/>
+                             pt:required="true" value="#{accountBean.password}"/>
             </h:panelGrid>
 
             <div class="buttons">

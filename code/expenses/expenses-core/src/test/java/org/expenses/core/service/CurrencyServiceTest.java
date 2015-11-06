@@ -2,11 +2,9 @@ package org.expenses.core.service;
 
 import org.junit.Test;
 
-public class CurrencyServiceTest
-{
+public class CurrencyServiceTest {
 
-   @Test
-   public void shouldCheckChange()
-   {
-   }
+    @Test
+    public void shouldCheckChange() {
+    }
 }

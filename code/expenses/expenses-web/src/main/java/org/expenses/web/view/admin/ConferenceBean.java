@@ -1,7 +1,7 @@
 package org.expenses.web.view.admin;
 
-import java.io.Serializable;
-import java.util.List;
+import org.expenses.core.model.Conference;
+import org.expenses.core.service.ConferenceService;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
@@ -11,9 +11,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import org.expenses.core.model.Conference;
-import org.expenses.core.service.ConferenceService;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Backing bean for Conference entities.
@@ -25,241 +24,200 @@ import org.expenses.core.service.ConferenceService;
 
 @Named
 @ConversationScoped
-public class ConferenceBean implements Serializable
-{
+public class ConferenceBean implements Serializable {
 
-   private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
    /*
     * Support creating and retrieving Conference entities
     */
 
-   private Long id;
-   private Conference conference;
-   @Inject
-   private Conversation conversation;
-   @Inject
-   private ConferenceService service;
-   private int page;
-   private long count;
-   private List<Conference> pageItems;
-   private Conference example = new Conference();
-   private Conference add = new Conference();
+    private Long id;
+    private Conference conference;
+    @Inject
+    private Conversation conversation;
+    @Inject
+    private ConferenceService service;
+    private int page;
+    private long count;
+    private List<Conference> pageItems;
+    private Conference example = new Conference();
+    private Conference add = new Conference();
 
-   public Long getId()
-   {
-      return this.id;
-   }
+    public Long getId() {
+        return this.id;
+    }
 
-   public void setId(Long id)
-   {
-      this.id = id;
-   }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
    /*
     * Support updating and deleting Conference entities
     */
 
-   public Conference getConference()
-   {
-      return this.conference;
-   }
+    public Conference getConference() {
+        return this.conference;
+    }
 
-   public void setConference(Conference conference)
-   {
-      this.conference = conference;
-   }
+    public void setConference(Conference conference) {
+        this.conference = conference;
+    }
 
    /*
     * Support searching Conference entities with pagination
     */
 
-   public String create()
-   {
+    public String create() {
 
-      this.conversation.begin();
-      this.conversation.setTimeout(1800000L);
-      return "create?faces-redirect=true";
-   }
+        this.conversation.begin();
+        this.conversation.setTimeout(1800000L);
+        return "create?faces-redirect=true";
+    }
 
-   public void retrieve()
-   {
+    public void retrieve() {
 
-      if (FacesContext.getCurrentInstance().isPostback())
-      {
-         return;
-      }
+        if (FacesContext.getCurrentInstance().isPostback()) {
+            return;
+        }
 
-      if (this.conversation.isTransient())
-      {
-         this.conversation.begin();
-         this.conversation.setTimeout(1800000L);
-      }
+        if (this.conversation.isTransient()) {
+            this.conversation.begin();
+            this.conversation.setTimeout(1800000L);
+        }
 
-      if (this.id == null)
-      {
-         this.conference = this.example;
-      }
-      else
-      {
-         this.conference = findById(getId());
-      }
-   }
+        if (this.id == null) {
+            this.conference = this.example;
+        } else {
+            this.conference = findById(getId());
+        }
+    }
 
-   public Conference findById(Long id)
-   {
+    public Conference findById(Long id) {
 
-      return this.service.findById(id);
-   }
+        return this.service.findById(id);
+    }
 
-   public String update()
-   {
-      this.conversation.end();
+    public String update() {
+        this.conversation.end();
 
-      try
-      {
-         if (this.id == null)
-         {
-            this.service.persist(this.conference);
+        try {
+            if (this.id == null) {
+                this.service.persist(this.conference);
+                return "search?faces-redirect=true";
+            } else {
+                this.service.merge(this.conference);
+                return "view?faces-redirect=true&id=" + this.conference.getId();
+            }
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(e.getMessage()));
+            return null;
+        }
+    }
+
+    public String delete() {
+        this.conversation.end();
+
+        try {
+            Conference deletableEntity = findById(getId());
+
+            this.service.remove(deletableEntity);
             return "search?faces-redirect=true";
-         }
-         else
-         {
-            this.service.merge(this.conference);
-            return "view?faces-redirect=true&id=" + this.conference.getId();
-         }
-      }
-      catch (Exception e)
-      {
-         FacesContext.getCurrentInstance().addMessage(null,
-                  new FacesMessage(e.getMessage()));
-         return null;
-      }
-   }
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(e.getMessage()));
+            return null;
+        }
+    }
 
-   public String delete()
-   {
-      this.conversation.end();
+    public int getPage() {
+        return this.page;
+    }
 
-      try
-      {
-         Conference deletableEntity = findById(getId());
+    public void setPage(int page) {
+        this.page = page;
+    }
 
-         this.service.remove(deletableEntity);
-         return "search?faces-redirect=true";
-      }
-      catch (Exception e)
-      {
-         FacesContext.getCurrentInstance().addMessage(null,
-                  new FacesMessage(e.getMessage()));
-         return null;
-      }
-   }
+    public int getPageSize() {
+        return 10;
+    }
 
-   public int getPage()
-   {
-      return this.page;
-   }
+    public Conference getExample() {
+        return this.example;
+    }
 
-   public void setPage(int page)
-   {
-      this.page = page;
-   }
+    public void setExample(Conference example) {
+        this.example = example;
+    }
 
-   public int getPageSize()
-   {
-      return 10;
-   }
+    public String search() {
+        this.page = 0;
+        return null;
+    }
 
-   public Conference getExample()
-   {
-      return this.example;
-   }
+    public void paginate() {
 
-   public void setExample(Conference example)
-   {
-      this.example = example;
-   }
+        // Populate this.count
+        this.count = this.service.count(example);
 
-   public String search()
-   {
-      this.page = 0;
-      return null;
-   }
+        // Populate this.pageItems
+        this.pageItems = this.service.page(example, page, getPageSize());
 
-   public void paginate()
-   {
+    }
 
-      // Populate this.count
-      this.count = this.service.count(example);
-
-      // Populate this.pageItems
-      this.pageItems = this.service.page(example, page, getPageSize());
-
-   }
-
-   public List<Conference> getPageItems()
-   {
-      return this.pageItems;
-   }
+    public List<Conference> getPageItems() {
+        return this.pageItems;
+    }
 
    /*
     * Support listing and POSTing back Conference entities (e.g. from inside an HtmlSelectOneMenu)
     */
 
-   public long getCount()
-   {
-      return this.count;
-   }
+    public long getCount() {
+        return this.count;
+    }
 
-   public List<Conference> getAll()
-   {
+    public List<Conference> getAll() {
 
-      return this.service.listAll();
-   }
+        return this.service.listAll();
+    }
 
    /*
     * Support adding children to bidirectional, one-to-many tables
     */
 
-   public Converter getConverter()
-   {
+    public Converter getConverter() {
 
-      return new Converter()
-      {
+        return new Converter() {
 
-         @Override
-         public Object getAsObject(FacesContext context,
-                  UIComponent component, String value)
-         {
+            @Override
+            public Object getAsObject(FacesContext context,
+                                      UIComponent component, String value) {
 
-            return service.findById(Long.valueOf(value));
-         }
-
-         @Override
-         public String getAsString(FacesContext context,
-                  UIComponent component, Object value)
-         {
-
-            if (value == null)
-            {
-               return "";
+                return service.findById(Long.valueOf(value));
             }
 
-            return String.valueOf(((Conference) value).getId());
-         }
-      };
-   }
+            @Override
+            public String getAsString(FacesContext context,
+                                      UIComponent component, Object value) {
 
-   public Conference getAdd()
-   {
-      return this.add;
-   }
+                if (value == null) {
+                    return "";
+                }
 
-   public Conference getAdded()
-   {
-      Conference added = this.add;
-      this.add = new Conference();
-      return added;
-   }
+                return String.valueOf(((Conference) value).getId());
+            }
+        };
+    }
+
+    public Conference getAdd() {
+        return this.add;
+    }
+
+    public Conference getAdded() {
+        Conference added = this.add;
+        this.add = new Conference();
+        return added;
+    }
 }

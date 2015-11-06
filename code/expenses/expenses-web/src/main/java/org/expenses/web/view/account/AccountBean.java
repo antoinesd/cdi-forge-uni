@@ -1,193 +1,200 @@
 package org.expenses.web.view.account;
 
-import java.io.Serializable;
+import org.expenses.core.model.User;
+import org.expenses.core.model.UserRole;
+import org.expenses.core.service.UserService;
+import org.expenses.core.utils.DigestPassword;
+import org.expenses.core.utils.Encrypted;
 
 import javax.enterprise.context.SessionScoped;
-import javax.enterprise.context.spi.AlterableContext;
-import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.NoResultException;
-
-import org.expenses.core.model.User;
-import org.expenses.core.model.UserRole;
-import org.expenses.core.service.UserService;
-import org.expenses.core.utils.DigestPassword;
-import org.expenses.core.utils.EncryptPassword;
-import org.expenses.core.utils.Encrypted;
+import java.io.Serializable;
 
 @Named
 @SessionScoped
-public class AccountBean implements Serializable
-{
+public class AccountBean implements Serializable {
 
-   // ======================================
-   // = Attributes =
-   // ======================================
+    // ======================================
+    // = Attributes =
+    // ======================================
 
-   @Inject
-   private BeanManager beanManager;
+    @Inject
+    private BeanManager beanManager;
 
-   @Inject
-   private FacesContext facesContext;
+    @Inject
+    private FacesContext facesContext;
 
-   @Inject
-   private UserService service;
+    @Inject
+    private UserService service;
 
-   @Inject @Encrypted
-   private DigestPassword digestPassword;
+    @Inject
+    @Encrypted
+    private DigestPassword digestPassword;
 
-   // Logged user
-   private User user = new User();
+    @Inject
+    @Any
+    private Instance<DigestPassword> digestPasswords;
 
-   // Checks if the user is logged in and if he/she is an administrator (UserRole.Admin)
-   private boolean loggedIn;
-   private boolean admin;
+    @Inject
+    private Instance<AccountBean> me;
 
-   private String password1;
-   private String password2;
+    // Logged user
+    private User user = new User();
 
-   // ======================================
-   // = Business methods =
-   // ======================================
+    // Checks if the user is logged in and if he/she is an administrator (UserRole.Admin)
+    private boolean loggedIn;
+    private boolean admin;
 
-   public String doSignup()
-   {
-      // Does the login already exists ?
-      if (service.findByLogin(user.getLogin()).size() > 0)
-      {
-         facesContext.addMessage(null,
-                  new FacesMessage(FacesMessage.SEVERITY_WARN, "Login already exists " + user.getLogin(),
-                           "You must choose a different login"));
-         return null;
-      }
+    private String login;
+    private String password;
+    private String password1;
+    private String password2;
 
-      // Everything is ok, we can create the user
-      user.setPassword(password1);
-      user = service.persist(user);
-      resetPasswords();
-      facesContext.addMessage(null,
-               new FacesMessage(FacesMessage.SEVERITY_INFO, "Hi " + user.getName(), "Welcome to this website"));
-      loggedIn = true;
-      if (user.getRole().equals(UserRole.ADMIN))
-         admin = true;
+    // ======================================
+    // = Business methods =
+    // ======================================
 
-      return "/index";
-   }
+    public String doSignup() {
+        // Does the login already exists ?
+        if (service.findByLogin(user.getLogin()).size() > 0) {
+            facesContext.addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Login already exists " + user.getLogin(),
+                            "You must choose a different login"));
+            return null;
+        }
 
-   public String doSignin()
-   {
-      try
-      {
-         user = service.findByLoginPassword(user.getLogin(), user.getPassword());
-
-         // If the user is an administrator
-         if (user.getRole().equals(UserRole.ADMIN))
-         {
+        // Everything is ok, we can create the user
+        user.setPassword(password1);
+        user = service.persist(user);
+        resetPasswords();
+        facesContext.addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Hi " + user.getName(), "Welcome to this website"));
+        loggedIn = true;
+        if (user.getRole().equals(UserRole.ADMIN))
             admin = true;
-         }
-         // The user is now logged in
-         loggedIn = true;
-         return "/index";
-      }
-      catch (NoResultException e)
-      {
-         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Wrong user/password",
-                  "Check your inputs or ask for a new password"));
-         return null;
-      }
 
-   }
+        return "/index";
+    }
 
-   public String doLogout()
-   {
-      AlterableContext ctx = (AlterableContext) beanManager.getContext(SessionScoped.class);
-      Bean<?> myBean = beanManager.getBeans(AccountBean.class).iterator().next();
-      ctx.destroy(myBean);
+    public String doSignin() {
 
-      return "/index";
-   }
+        // Looks for all password digester implementations
+        for (DigestPassword digester : digestPasswords) {
+            try {
+                user = service.findByLoginPassword(login, digester.digest(password));
+            } catch (NoResultException e) {
+            }
+        }
 
-   public String doUpdateProfile()
-   {
-      if (password1 != null && !password1.isEmpty())
-         user.setPassword(digestPassword.digest(password1));
-      user = service.merge(user);
-      resetPasswords();
-      admin = user.getRole().equals(UserRole.ADMIN);
+        if (user == null) {
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Wrong user/password",
+                    "Check your inputs or ask for a new password"));
+            return null;
+        }
 
-      facesContext.addMessage(null,
-               new FacesMessage(FacesMessage.SEVERITY_INFO, "Profile has been updated for " + user.getName(),
+        // If the user is an administrator
+        if (user.getRole().equals(UserRole.ADMIN)) {
+            admin = true;
+        }
+
+        // The user is now logged in
+        loggedIn = true;
+        return "/index";
+    }
+
+    public String doLogout() {
+        me.destroy(me.get());
+
+        return "/index";
+    }
+
+    public String doUpdateProfile() {
+        if (password1 != null && !password1.isEmpty())
+            user.setPassword(digestPassword.digest(password1));
+        user = service.merge(user);
+        resetPasswords();
+        admin = user.getRole().equals(UserRole.ADMIN);
+
+        facesContext.addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Profile has been updated for " + user.getName(),
                         null));
 
-      return "/index";
-   }
+        return "/index";
+    }
 
-   private void resetPasswords()
-   {
-      password1 = null;
-      password2 = null;
-   }
+    private void resetPasswords() {
+        password1 = null;
+        password2 = null;
+    }
 
-   // ======================================
-   // = Getters & setters =
-   // ======================================
+    // ======================================
+    // = Getters & setters =
+    // ======================================
 
-   public boolean isLoggedIn()
-   {
-      return loggedIn;
-   }
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
 
-   public void setLoggedIn(boolean loggedIn)
-   {
-      this.loggedIn = loggedIn;
-   }
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
 
-   public boolean isAdmin()
-   {
-      return admin;
-   }
+    public boolean isAdmin() {
+        return admin;
+    }
 
-   public void setAdmin(boolean admin)
-   {
-      this.admin = admin;
-   }
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
 
-   public User getUser()
-   {
-      return user;
-   }
+    public User getUser() {
+        return user;
+    }
 
-   public void setUser(User user)
-   {
-      this.user = user;
-   }
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-   public String getPassword1()
-   {
-      return password1;
-   }
+    public String getPassword1() {
+        return password1;
+    }
 
-   public void setPassword1(String password1)
-   {
-      this.password1 = password1;
-   }
+    public void setPassword1(String password1) {
+        this.password1 = password1;
+    }
 
-   public String getPassword2()
-   {
-      return password2;
-   }
+    public String getPassword2() {
+        return password2;
+    }
 
-   public void setPassword2(String password2)
-   {
-      this.password2 = password2;
-   }
+    public void setPassword2(String password2) {
+        this.password2 = password2;
+    }
 
-   public UserRole[] getRoles()
-   {
-      return UserRole.values();
-   }
+    public UserRole[] getRoles() {
+        return UserRole.values();
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
