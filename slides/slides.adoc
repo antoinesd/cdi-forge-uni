@@ -1,4 +1,4 @@
-= CDI & Forge
+= _CDI_ & _Forge_
 Antoine Sabot-Durand; Antonio Goncalves
 :description: CDI & Forge univeristy
 :copyright: CC BY-SA 4.0
@@ -29,75 +29,24 @@ Antoine Sabot-Durand; Antonio Goncalves
 :stylesheet: custom.css
 
 
-[.topic.source]
+[.topic]
 == Antoine Sabot-Durand
 
-====
-* icon:user[] Senior Software Engineer
-* icon:user[] CDI spec lead, Java EE 8 EG
-* icon:institution[] Red Hat, Inc.
+* icon:linux[] Red Hat
+* icon:code[] CDI spec lead
 * icon:twitter[] @antoine_sd
-* icon:rss[] www.next-presso.com
+* icon:rss[] next-presso.com
 * icon:github[] github.com/antoinesd
-====
 
-[.topic.source]
+[.topic]
 == Antonio Goncalves
 
-====
-* icon:user[] Rock Star
+* icon:star[] Rock Star
 * icon:institution[] Self Employed
-* icon:globe[] http://antoniogoncalves.org
+* icon:rss[] antoniogoncalves.org
 * icon:twitter[] @agoncal
 * icon:github[] github.com/agoncal
-====
 
-
-
-[.topic.source]
-== Should I stay or should I go?
-
-====
-* icon:cogs[] A talk about *advanced* CDI
-====
-
-====
-* icon:sign-out[] Might be hard for beginners
-====
-
-====
-* icon:sign-in[] Don't need to be a CDI guru
-====
-
-
-[.topic.source]
-== Should I stay or should I go ?
-
-TIP: If you know the most of these you can stay
-
-[.split]
-* `@Inject`
-* `@Produces`
-* `Event<T>`
-* `@Observes`
-* `@Qualifier`
-* `InjectionPoint`
-
-
-[.topic.source]
-== More concretely
-
-CAUTION: What's included:
-
-. Real use cases from real life with real users
-. New approach to introduce portable extension concepts
-. Code in IDE with tests
-
-CAUTION: What's not included:
-
-. Introduction to CDI
-. Old content on extension
-. Work with Context (need 2 more hours)
 
 
 [.topic.source]
@@ -117,7 +66,6 @@ image::deltaspike.png[role="pull-right", width="300"]
 .. Scheduler
 . More info on http://deltaspike.apache.org
 ====
-
 
 [.topic.source]
 == Tools used in the code 2/2
@@ -141,17 +89,25 @@ image::arquillian.png[role="pull-right", width="250"]
 [.topic.source]
 == Agenda
 
-[.recap]
+[.fartoosmall]
 ====
-* icon:info-circle[] Meet CDI SPI
-* icon:info-circle[] Introducing CDI Extensions
-// * icon:info-circle[] Legacy Code
-* icon:info-circle[] Metrics CDI
-* icon:info-circle[] CDI Quizz
-* icon:info-circle[] Camel CDI
+* icon:clock-o[] Meet CDI
+* icon:clock-o[] Meet ExpensEEs
+* icon:clock-o[] Basic DI
+* icon:clock-o[] Qualifiers
+* icon:clock-o[] Producers
+* icon:clock-o[] Programmatic Lookup
+* icon:clock-o[] Contexts
+* icon:clock-o[] Events
+* icon:clock-o[] Interceptors and Decorators
+* icon:clock-o[] Conclusion
 ====
 
+include::parts/intro.adoc[]
 
+include::parts/expensees.adoc[]
+
+include::parts/inject.adoc[]
 
 include::parts/extensions.adoc[]
 
