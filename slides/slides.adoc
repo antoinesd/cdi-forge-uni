@@ -103,9 +103,9 @@ image::arquillian.png[role="pull-right", width="250"]
 * icon:clock-o[] Conclusion
 ====
 
-include::parts/intro.adoc[]
-
 include::parts/expensees.adoc[]
+
+include::parts/intro.adoc[]
 
 include::parts/inject.adoc[]
 

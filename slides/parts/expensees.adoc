@@ -11,9 +11,9 @@ Expenses made EEsy
 * icon:money[] a web app to manage expenses
 * icon:wrench[] based on Java EE 7
 ** icon:check[] CDI 1.2
-** icon:check[] JPA 2.2
+** icon:check[] JPA 2.1
 ** icon:check[] JSF 2.2
-** icon:check[] JAX-RS 2.2
+** icon:check[] JAX-RS 2.0
 * icon:book[] able to integrate legacy libs
 ====
 
@@ -63,6 +63,37 @@ image:Balsamiq8-ViewExpenses.png[width="90%", align="center", float="right"]
 
 plantuml::schemas/architecture_model.puml[architecture_model, format=svg, width=95%, height=95%]
 
+== !
+
+[.statement]
+Let's Forge ExpensEEs!
+
+
+[.topic.source]
+== JBoss Forge
+
+
+[.statement]
+====
+Forge
+
+image::arquillian.png[role="pull-right", width="250"]
+
+. Arquillian is an integration test platform
+. It integrates with JUnit
+. Create your deployment in a dedicated method
+. And launch your tests against the container of your choice
+. We'll use the `weld-se-embedded` and `weld-ee-embedded` container
+. The right solution to test Java EE code
+. More info on http://arquillian.org
+====
+
+[.recap]
+== Back to demo
+TIP: kljkljkl
+* kjhkhj
+
+
 [.topic]
 == Architecture - _Services_
 
@@ -70,7 +101,3 @@ plantuml::schemas/architecture_service.puml[architecture_service, format=svg, wi
 
 [.topic]
 
-== !
-
-[.statement]
-Let's Forge ExpensEEs!
