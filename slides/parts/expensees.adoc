@@ -99,6 +99,8 @@ TIP: Create JPA Entities
 TIP: Scaffold JSF CRUD pages
 
 TIP: Scaffold REST Endpoint
+
+TIP: Run Forge script
 ====
 
 [.topic]
