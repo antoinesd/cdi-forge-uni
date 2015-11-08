@@ -6,4 +6,8 @@
     <interceptors>
         <class>org.expenses.core.utils.LoggingInterceptor</class>
     </interceptors>
+
+    <alternatives>
+        <class>org.expenses.core.service.RateServiceMock</class>
+    </alternatives>
 </beans>
