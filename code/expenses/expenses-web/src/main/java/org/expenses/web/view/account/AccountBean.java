@@ -1,10 +1,10 @@
 package org.expenses.web.view.account;
 
-import org.expenses.core.model.User;
-import org.expenses.core.model.UserRole;
-import org.expenses.core.service.UserService;
-import org.expenses.core.utils.DigestPassword;
-import org.expenses.core.utils.Encrypted;
+import org.expenses.web.model.User;
+import org.expenses.web.model.UserRole;
+import org.expenses.web.service.UserService;
+import org.expenses.web.beans.DigestPassword;
+import org.expenses.web.beans.Encrypted;
 
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Any;

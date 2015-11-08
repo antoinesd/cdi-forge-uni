@@ -1,8 +1,8 @@
 package org.expenses.web.view.expense;
 
-import org.expenses.core.model.Reimbursement;
-import org.expenses.core.model.User;
-import org.expenses.core.service.ReimbursementService;
+import org.expenses.web.model.Reimbursement;
+import org.expenses.web.model.User;
+import org.expenses.web.service.ReimbursementService;
 import org.expenses.web.view.account.LoggedIn;
 
 import javax.enterprise.context.Conversation;

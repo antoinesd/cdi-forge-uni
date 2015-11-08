@@ -1,7 +1,7 @@
 package org.expenses.web.view.admin;
 
-import org.expenses.core.model.Reimbursement;
-import org.expenses.core.service.ReimbursementService;
+import org.expenses.web.model.Reimbursement;
+import org.expenses.web.service.ReimbursementService;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;

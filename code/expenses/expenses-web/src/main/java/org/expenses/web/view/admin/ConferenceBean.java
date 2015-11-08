@@ -1,7 +1,7 @@
 package org.expenses.web.view.admin;
 
-import org.expenses.core.model.Conference;
-import org.expenses.core.service.ConferenceService;
+import org.expenses.web.model.Conference;
+import org.expenses.web.service.ConferenceService;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;

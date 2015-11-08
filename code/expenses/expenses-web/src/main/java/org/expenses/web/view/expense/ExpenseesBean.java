@@ -1,15 +1,14 @@
 package org.expenses.web.view.expense;
 
-import org.expenses.core.model.*;
-import org.expenses.core.service.CurrencyService;
-import org.expenses.core.service.ReimbursementService;
-import org.expenses.core.service.UserService;
+import org.expenses.web.model.*;
+import org.expenses.web.service.CurrencyService;
+import org.expenses.web.service.ReimbursementService;
+import org.expenses.web.service.UserService;
 import org.expenses.web.view.account.LoggedIn;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.inject.Instance;
-import javax.enterprise.inject.Intercepted;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
