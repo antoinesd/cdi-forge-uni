@@ -77,6 +77,10 @@ include::parts/aop.adoc[]
 
 include::parts/qualifiers.adoc[]
 
+include::parts/programmatic-lookup.adoc[]
+
+
+
 include::parts/extensions.adoc[]
 
 
