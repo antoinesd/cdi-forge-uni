@@ -134,6 +134,8 @@ TIP: Add Java EE 7 dependencies
 
 TIP: Less EJB More CDI
 
+TIP: Webjar for Twitter Bootstrap
+
 TIP: 2 hours later...
 ====
 

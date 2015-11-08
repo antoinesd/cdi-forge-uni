@@ -1,8 +1,8 @@
 package org.expenses.web.view.admin;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import org.expenses.web.model.Currency;
+import org.expenses.web.model.Expense;
+import org.expenses.web.model.ExpenseType;
 
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
@@ -23,10 +23,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-
-import org.expenses.web.model.Expense;
-import org.expenses.web.model.Currency;
-import org.expenses.web.model.ExpenseType;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Backing bean for Expense entities.
@@ -43,253 +42,246 @@ import org.expenses.web.model.ExpenseType;
 @ConversationScoped
 public class ExpenseBean implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
 	/*
-	 * Support creating and retrieving Expense entities
+     * Support creating and retrieving Expense entities
 	 */
 
-	private Long id;
+    private Long id;
+    private Expense expense;
+    @Inject
+    private Conversation conversation;
+    @PersistenceContext(unitName = "expenses-pu", type = PersistenceContextType.EXTENDED)
+    private EntityManager entityManager;
+    private int page;
+    private long count;
+    private List<Expense> pageItems;
+    private Expense example = new Expense();
+    @Resource
+    private SessionContext sessionContext;
+    private Expense add = new Expense();
 
-	public Long getId() {
-		return this.id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	private Expense expense;
-
-	public Expense getExpense() {
-		return this.expense;
-	}
-
-	public void setExpense(Expense expense) {
-		this.expense = expense;
-	}
-
-	@Inject
-	private Conversation conversation;
-
-	@PersistenceContext(unitName = "expenses-pu", type = PersistenceContextType.EXTENDED)
-	private EntityManager entityManager;
-
-	public String create() {
-
-		this.conversation.begin();
-		this.conversation.setTimeout(1800000L);
-		return "create?faces-redirect=true";
-	}
-
-	public void retrieve() {
-
-		if (FacesContext.getCurrentInstance().isPostback()) {
-			return;
-		}
-
-		if (this.conversation.isTransient()) {
-			this.conversation.begin();
-			this.conversation.setTimeout(1800000L);
-		}
-
-		if (this.id == null) {
-			this.expense = this.example;
-		} else {
-			this.expense = findById(getId());
-		}
-	}
-
-	public Expense findById(Long id) {
-
-		return this.entityManager.find(Expense.class, id);
-	}
+    public Long getId() {
+        return this.id;
+    }
 
 	/*
 	 * Support updating and deleting Expense entities
 	 */
 
-	public String update() {
-		this.conversation.end();
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-		try {
-			if (this.id == null) {
-				this.entityManager.persist(this.expense);
-				return "search?faces-redirect=true";
-			} else {
-				this.entityManager.merge(this.expense);
-				return "view?faces-redirect=true&id=" + this.expense.getId();
-			}
-		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(e.getMessage()));
-			return null;
-		}
-	}
-
-	public String delete() {
-		this.conversation.end();
-
-		try {
-			Expense deletableEntity = findById(getId());
-
-			this.entityManager.remove(deletableEntity);
-			this.entityManager.flush();
-			return "search?faces-redirect=true";
-		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(e.getMessage()));
-			return null;
-		}
-	}
+    public Expense getExpense() {
+        return this.expense;
+    }
 
 	/*
 	 * Support searching Expense entities with pagination
 	 */
 
-	private int page;
-	private long count;
-	private List<Expense> pageItems;
+    public void setExpense(Expense expense) {
+        this.expense = expense;
+    }
 
-	private Expense example = new Expense();
+    public String create() {
 
-	public int getPage() {
-		return this.page;
-	}
+        this.conversation.begin();
+        this.conversation.setTimeout(1800000L);
+        return "create?faces-redirect=true";
+    }
 
-	public void setPage(int page) {
-		this.page = page;
-	}
+    public void retrieve() {
 
-	public int getPageSize() {
-		return 10;
-	}
+        if (FacesContext.getCurrentInstance().isPostback()) {
+            return;
+        }
 
-	public Expense getExample() {
-		return this.example;
-	}
+        if (this.conversation.isTransient()) {
+            this.conversation.begin();
+            this.conversation.setTimeout(1800000L);
+        }
 
-	public void setExample(Expense example) {
-		this.example = example;
-	}
+        if (this.id == null) {
+            this.expense = this.example;
+        } else {
+            this.expense = findById(getId());
+        }
+    }
 
-	public String search() {
-		this.page = 0;
-		return null;
-	}
+    public Expense findById(Long id) {
 
-	public void paginate() {
+        return this.entityManager.find(Expense.class, id);
+    }
 
-		CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
+    public String update() {
+        this.conversation.end();
 
-		// Populate this.count
+        try {
+            if (this.id == null) {
+                this.entityManager.persist(this.expense);
+                return "search?faces-redirect=true";
+            } else {
+                this.entityManager.merge(this.expense);
+                return "view?faces-redirect=true&id=" + this.expense.getId();
+            }
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(e.getMessage()));
+            return null;
+        }
+    }
 
-		CriteriaQuery<Long> countCriteria = builder.createQuery(Long.class);
-		Root<Expense> root = countCriteria.from(Expense.class);
-		countCriteria = countCriteria.select(builder.count(root)).where(
-				getSearchPredicates(root));
-		this.count = this.entityManager.createQuery(countCriteria)
-				.getSingleResult();
+    public String delete() {
+        this.conversation.end();
 
-		// Populate this.pageItems
+        try {
+            Expense deletableEntity = findById(getId());
 
-		CriteriaQuery<Expense> criteria = builder.createQuery(Expense.class);
-		root = criteria.from(Expense.class);
-		TypedQuery<Expense> query = this.entityManager.createQuery(criteria
-				.select(root).where(getSearchPredicates(root)));
-		query.setFirstResult(this.page * getPageSize()).setMaxResults(
-				getPageSize());
-		this.pageItems = query.getResultList();
-	}
+            this.entityManager.remove(deletableEntity);
+            this.entityManager.flush();
+            return "search?faces-redirect=true";
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(e.getMessage()));
+            return null;
+        }
+    }
 
-	private Predicate[] getSearchPredicates(Root<Expense> root) {
+    public int getPage() {
+        return this.page;
+    }
 
-		CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
-		List<Predicate> predicatesList = new ArrayList<Predicate>();
+    public void setPage(int page) {
+        this.page = page;
+    }
 
-		String description = this.example.getDescription();
-		if (description != null && !"".equals(description)) {
-			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("description")),
-					'%' + description.toLowerCase() + '%'));
-		}
-		ExpenseType expenseType = this.example.getExpenseType();
-		if (expenseType != null) {
-			predicatesList.add(builder.equal(root.get("expenseType"),
-					expenseType));
-		}
-		Currency currency = this.example.getCurrency();
-		if (currency != null) {
-			predicatesList.add(builder.equal(root.get("currency"), currency));
-		}
+    public int getPageSize() {
+        return 10;
+    }
 
-		return predicatesList.toArray(new Predicate[predicatesList.size()]);
-	}
+    public Expense getExample() {
+        return this.example;
+    }
 
-	public List<Expense> getPageItems() {
-		return this.pageItems;
-	}
+    public void setExample(Expense example) {
+        this.example = example;
+    }
 
-	public long getCount() {
-		return this.count;
-	}
+    public String search() {
+        this.page = 0;
+        return null;
+    }
+
+    public void paginate() {
+
+        CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
+
+        // Populate this.count
+
+        CriteriaQuery<Long> countCriteria = builder.createQuery(Long.class);
+        Root<Expense> root = countCriteria.from(Expense.class);
+        countCriteria = countCriteria.select(builder.count(root)).where(
+                getSearchPredicates(root));
+        this.count = this.entityManager.createQuery(countCriteria)
+                .getSingleResult();
+
+        // Populate this.pageItems
+
+        CriteriaQuery<Expense> criteria = builder.createQuery(Expense.class);
+        root = criteria.from(Expense.class);
+        TypedQuery<Expense> query = this.entityManager.createQuery(criteria
+                .select(root).where(getSearchPredicates(root)));
+        query.setFirstResult(this.page * getPageSize()).setMaxResults(
+                getPageSize());
+        this.pageItems = query.getResultList();
+    }
+
+    private Predicate[] getSearchPredicates(Root<Expense> root) {
+
+        CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
+        List<Predicate> predicatesList = new ArrayList<Predicate>();
+
+        String description = this.example.getDescription();
+        if (description != null && !"".equals(description)) {
+            predicatesList.add(builder.like(
+                    builder.lower(root.<String>get("description")),
+                    '%' + description.toLowerCase() + '%'));
+        }
+        ExpenseType expenseType = this.example.getExpenseType();
+        if (expenseType != null) {
+            predicatesList.add(builder.equal(root.get("expenseType"),
+                    expenseType));
+        }
+        Currency currency = this.example.getCurrency();
+        if (currency != null) {
+            predicatesList.add(builder.equal(root.get("currency"), currency));
+        }
+
+        return predicatesList.toArray(new Predicate[predicatesList.size()]);
+    }
 
 	/*
 	 * Support listing and POSTing back Expense entities (e.g. from inside an
 	 * HtmlSelectOneMenu)
 	 */
 
-	public List<Expense> getAll() {
+    public List<Expense> getPageItems() {
+        return this.pageItems;
+    }
 
-		CriteriaQuery<Expense> criteria = this.entityManager
-				.getCriteriaBuilder().createQuery(Expense.class);
-		return this.entityManager.createQuery(
-				criteria.select(criteria.from(Expense.class))).getResultList();
-	}
+    public long getCount() {
+        return this.count;
+    }
 
-	@Resource
-	private SessionContext sessionContext;
+    public List<Expense> getAll() {
 
-	public Converter getConverter() {
-
-		final ExpenseBean ejbProxy = this.sessionContext
-				.getBusinessObject(ExpenseBean.class);
-
-		return new Converter() {
-
-			@Override
-			public Object getAsObject(FacesContext context,
-					UIComponent component, String value) {
-
-				return ejbProxy.findById(Long.valueOf(value));
-			}
-
-			@Override
-			public String getAsString(FacesContext context,
-					UIComponent component, Object value) {
-
-				if (value == null) {
-					return "";
-				}
-
-				return String.valueOf(((Expense) value).getId());
-			}
-		};
-	}
+        CriteriaQuery<Expense> criteria = this.entityManager
+                .getCriteriaBuilder().createQuery(Expense.class);
+        return this.entityManager.createQuery(
+                criteria.select(criteria.from(Expense.class))).getResultList();
+    }
 
 	/*
 	 * Support adding children to bidirectional, one-to-many tables
 	 */
 
-	private Expense add = new Expense();
+    public Converter getConverter() {
 
-	public Expense getAdd() {
-		return this.add;
-	}
+        final ExpenseBean ejbProxy = this.sessionContext
+                .getBusinessObject(ExpenseBean.class);
 
-	public Expense getAdded() {
-		Expense added = this.add;
-		this.add = new Expense();
-		return added;
-	}
+        return new Converter() {
+
+            @Override
+            public Object getAsObject(FacesContext context,
+                                      UIComponent component, String value) {
+
+                return ejbProxy.findById(Long.valueOf(value));
+            }
+
+            @Override
+            public String getAsString(FacesContext context,
+                                      UIComponent component, Object value) {
+
+                if (value == null) {
+                    return "";
+                }
+
+                return String.valueOf(((Expense) value).getId());
+            }
+        };
+    }
+
+    public Expense getAdd() {
+        return this.add;
+    }
+
+    public Expense getAdded() {
+        Expense added = this.add;
+        this.add = new Expense();
+        return added;
+    }
 }

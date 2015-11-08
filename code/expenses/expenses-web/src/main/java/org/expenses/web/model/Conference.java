@@ -7,6 +7,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "t_conference")
+@XmlRootElement
 public class Conference implements Serializable {
 
     @Id
