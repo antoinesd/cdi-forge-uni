@@ -56,12 +56,13 @@ Antoine Sabot-Durand; Antonio Goncalves
 * icon:clock-o[] Meet ExpensEEs
 * icon:clock-o[] Meet CDI
 * icon:clock-o[] Basic DI
-* icon:clock-o[] Qualifiers
 * icon:clock-o[] Producers
+* icon:clock-o[] Interceptors
+* icon:clock-o[] Qualifiers
 * icon:clock-o[] Programmatic Lookup
 * icon:clock-o[] Contexts
 * icon:clock-o[] Events
-* icon:clock-o[] Interceptors and Decorators
+* icon:clock-o[] Extensions
 * icon:clock-o[] Conclusion
 ====
 
