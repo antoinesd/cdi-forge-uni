@@ -79,7 +79,7 @@ include::parts/qualifiers.adoc[]
 
 include::parts/programmatic-lookup.adoc[]
 
-
+include::parts/contexts.adoc[]
 
 include::parts/extensions.adoc[]
 

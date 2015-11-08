@@ -1,0 +1,71 @@
+[.intro]
+== Contexts
+
+Beans life and death
+
+[.topic]
+== Bean, Scope and Contexts
+
+TIP: All _Beans_ have a _scope_ defined by an _annotation_
+
+TIP: Each _scope_ is associated to a _context_ object
+
+TIP: So each _bean_ is bound to a _context_
+
+TIP: The context is in charge of _creating_ bean instances
+
+TIP: The _Container_ is in charge of _creating_ and _destroying_ _contexts_
+
+
+[.source]
+== Available scopes
+
+TIP: CDI provides the following _built-in_ scopes (and associated contexts):
+
+[.fartoosmall]
+====
+* icon:recycle[] `@Dependent` (default) bean has the same scope than its injector
+* icon:recycle[] `@ApplicationScoped` instance is linked to application lifecycle
+* icon:recycle[] `@SessionScoped` instance is linked to http session lifecycle
+* icon:recycle[] `@RequestScoped` instance is liked to http request lifecycle
+* icon:recycle[] `@ConversationScoped` lifecycle manually controlled within session
+====
+
+CAUTION: Instance is _created_ at _first request_ and _destroyed_ with its _bound context_
+
+TIP: _CDI SPI_ allows third party to create their _custom contexts_
+
+[.source]
+== Examples
+
+[source, subs="verbatim,quotes"]
+----
+public class BaseHelloService implements HelloService { ... } //<1>
+
+[highlight]*@RequestScoped* //<2>
+public class RequestService {
+    _@Inject_ HelloService service; 
+}
+
+[highlight]*@ApplicationScoped*  //<3>
+public class ApplicationService {
+    _@Inject_ RequestService service; //<4>
+}
+----
+<1> Bean has default scope `@Dependent`, instances are created for each injection
+<2> Bean is `@RequestScoped`. Instance is created by request context and destroyed with request context
+<3> Bean is `@ApplicationScoped`. Instance is created by application context and will live during all application
+<4> No problem to inject bean from an other scope: CDI will provide the right bean
+
+[.source]
+== Good to know
+
+TIP: _instances_ are _created_ when _first accessed_ not with their context
+
+TIP: A bean _instance_ is a _singleton_ in its _context_
+
+TIP: With _SPI_ you can _manually destroy_ an instance in a context
+
+TIP: A context can be _inactive_ without being destroyed
+
+TIP: _Request context_ is _more_ than a mapping to `ServletRequest` lifecycle
