@@ -90,3 +90,17 @@ public class MyBean {
 <1> `select()` also accepts a type.
 
 TIP: you can use `TypeLiteral` to create instances of parameterized types
+
+
+[.recap]
+== Back to demo
+[.statement]
+====
+TIP: Loop through all `DigestPassword`
+
+TIP: Thanks to `@Any`
+
+TIP: Use either `@Encrypted` or `@Clear`
+
+
+====
