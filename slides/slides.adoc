@@ -109,6 +109,8 @@ include::parts/expensees.adoc[]
 
 include::parts/inject.adoc[]
 
+include::parts/producers.adoc[]
+
 include::parts/extensions.adoc[]
 
 

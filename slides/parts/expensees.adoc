@@ -67,3 +67,10 @@ plantuml::schemas/architecture_model.puml[architecture_model, format=svg, width=
 == Architecture - _Services_
 
 plantuml::schemas/architecture_service.puml[architecture_service, format=svg, width=95%, height=95%]
+
+[.topic]
+
+== !
+
+[.statement]
+Let's Forge ExpensEEs!
