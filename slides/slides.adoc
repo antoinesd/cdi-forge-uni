@@ -81,7 +81,20 @@ include::parts/programmatic-lookup.adoc[]
 
 include::parts/contexts.adoc[]
 
+// Invalidation session
+
+// Creation de scope
+
+// Alternatives
+
+include::parts/events.adoc[]
+
+
 include::parts/extensions.adoc[]
+
+include::parts/spi.adoc[]
+
+
 
 
 

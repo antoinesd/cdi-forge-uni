@@ -247,6 +247,72 @@ public class MyBean2 {
 <4> this injection point has `@Default` qualifier
 
 
+[.topic]
+== Bean Types
+
+TIP: A bean has a set of types depending on its definition
+
+TIP: Bean types set for a managed bean contains the bean class, every superclass and all interfaces it implements directly or indirectly.
+
+TIP: Bean types can be restricted by using `@Typed` annotation (`Object` is always in the set)
+
+
+[.topic]
+== Bean types Example
+
+[source, subs="verbatim,quotes", role="smaller"]
+----
+public interface HelloService extends Hello { ... }
+
+public class MyBean { //<1>
+    *@Produces*
+    public HelloService prodHelloService() { ... } //<2>
+}
+
+  public class FrHelloService extends GenericService<String> implements HelloService { ... } //<3>
+
+  [highlight]*@Typed({HelloService.class})*
+ public class FrHelloService extends GenericService<String> implements HelloService { ... } //<4>
+----
+<1> class `MyBean` and `Object`
+<2> `HelloService`, `Hello` and `Object`
+<3> `FrHelloService`, `GenericService<String>`, `HelloService`, `Hello` and  `Object`
+<4> `HelloService` and  `Object`
+
+[.topic]
+== Parameterized types count
+
+TIP: Parameterized types information is kept (i.e. no type erasure)
+
+[source, subs="verbatim,quotes"]
+----
+public class MyBean {
+
+    *@Inject*
+    [highlight]#Service<User># userService;
+
+    *@Inject*
+    [highlight]#Service<Staff># staffService;    
+}
+----
+
+TIP: Injection points above can be satisfied without ambiguity
+
+[.topic]
+== Performing Typesafe Resolution
+
+TIP: When _resolving a bean_ to be injected to an _injection point_...
+
+TIP: ...the _container_ considers _bean type_ and _qualifiers_.
+
+TIP: If the bean has a _bean type_ that matches _injection point type_...
+
+TIP: ...and the bean has all the _qualifiers_ of the injection point...
+
+TIP: ...the bean is _assignable_ to the _injection point_.
+
+
+
 [.recap]
 == Back to demo
 [.statement]
