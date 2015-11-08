@@ -464,3 +464,18 @@ image:processAnnotatedTypeCart.png[width="280",role="pull-left"]
 TIP: A `ProcessAnnotatedType<T>` event is fired for each type being discovered at boot time
 
 TIP: Observing `ProcessAnnotatedType<Foo>` allows you to prevent `Foo` to be deployed as a bean by calling `ProcessAnnotatedType#veto()`
+
+
+[.recap]
+== Back to demo
+[.statement]
+====
+TIP: We don't have the code of the `BillingService`
+
+TIP: Create a `BillingServiceExtension` which calls `BillingService`
+
+TIP: Using observers `BillingServiceObserver`
+
+TIP: Extension has to be enabled
+
+====
