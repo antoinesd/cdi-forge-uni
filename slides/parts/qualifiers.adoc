@@ -245,3 +245,17 @@ public class MyBean2 {
 <2> this bean has `@Default`, `@Named` and `@Any` qualifiers
 <3> this bean has `@Language(FRENCH)`, `@Named` and `@Any` qualifiers
 <4> this injection point has `@Default` qualifier
+
+
+[.recap]
+== Back to demo
+[.statement]
+====
+TIP: Create a `@Clear` qualifier
+
+TIP: Create a `@Encrypted` qualifier
+
+TIP: Inject encrypted password digest
+
+
+====
