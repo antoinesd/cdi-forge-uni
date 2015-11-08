@@ -126,3 +126,27 @@ public [highlight]*abstract* class HelloDecorator [highlight]*implements HelloSe
 <4> Decorated bean is annotated with `@Delegate` (other beans could be injected in decorator)
 <5> Decorating method is called instead of decorated bean method. Delegate can be used in it.
 
+[.recap]
+== Back to demo
+[.statement]
+====
+TIP: Create a `@Loggable` interceptor binding
+
+TIP: Create a `LoggingInterceptor`
+
+TIP: Add `LoggingInterceptor` to each service
+
+====
+
+
+[.recap]
+== Back to demo
+[.statement]
+====
+TIP: Login page
+
+TIP: New passwords are encrypted
+
+TIP: Old passwords are in clear
+
+====
