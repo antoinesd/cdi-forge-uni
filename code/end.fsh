@@ -116,3 +116,12 @@ cdi-add-observer-method --named reimbursementToBePaid --eventType ~.model.Reimbu
 cdi-new-extension --named BillingServiceExtension --enable --targetPackage ~.extensions ;
 cdi-new-bean --named BillingServiceObserver --targetPackage ~.extensions ;
 
+
+# Test
+# ###########################
+
+arquillian-setup --arquillianVersion 1.1.10.Final --testFramework junit --testFrameworkVersion 4.12 --containerAdapter weld-ee-embedded-1.1 --containerAdapterVersion 1.0.0.CR9 --weld-core-version 2.2.6.Final --slf4j-simple-version 1.7.9 ;
+
+arquillian-create-test --archiveType JAR --targets ~.service.CurrencyService ;
+
+
