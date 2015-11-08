@@ -11,7 +11,7 @@ web.ExpenseBean ..> service.ExpenseService : @Inject
 web.ReimbursementBean ..> service.ReimbursementService : @Inject
 web.UserBean ..> service.UserService : @Inject
 service.ConferenceService ..> model.Conference : use
-service.ExpenseService ..> model.ExpenseService : use
+service.ExpenseService ..> model.Expense : use
 service.ReimbursementService ..> model.Reimbursement : use
 service.UserService ..> model.User : use
 

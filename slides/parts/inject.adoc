@@ -1,5 +1,5 @@
 [.intro]
-== Basic DI
+== @Inject
 
 [.topic]
 == _Almost_ Everything is a bean
@@ -81,47 +81,6 @@ public class MyBean {
 
 TIP: all initializer methods are called at bean instantiation
 
-[.topic]
-== One more thing...
-
-TIP: A bean support standard lifecycle callbacks
-
-[source, subs="verbatim,quotes"]
-----
-public class MyBean {
-    *@Inject*
-    private HelloService service;
-
-    [highlight]*@PostConstruct* //<1>
-    public void init() { ... }
-
-    [highlight]*@PreDestroy* //<2>
-    public void bye() { ... }
-}
-----
-<1> `@PostConstruct` is called after all injections are done
-<2> `@PreDestroy` is called before destroying the instance
-
-
-[.topic]
-== Other Injection Targets In Java EE
-
-TIP: *EJB* session beans, *Interceptors* and *Decorators* are also *CDI beans*
-
-TIP: You can create your own injection target with *CDI SPI*
-
-TIP: A lot of *Java EE Components* support `@Inject`:
-
-[.smallest]
-====
-[.split]
-* icon:sign-in[] Servlets
-* icon:sign-in[] Servlet Filters
-* icon:sign-in[] Event Listeners
-* icon:sign-in[] JAX-RS components
-* icon:sign-in[] Websocket Endpoints
-* icon:sign-in[] JPA Entity Listeners
-====
 
 [.topic]
 == There could be only one
@@ -138,3 +97,12 @@ TIP: If multiple beans are eligible for it, the injection point is _ambiguous_
 CAUTION: In both case a `DeploymentException` is thrown by the container
 
 
+[.recap]
+== Back to demo
+[.statement]
+====
+TIP: Inject a Logger
+
+TIP: Log service
+
+====

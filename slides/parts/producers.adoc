@@ -112,6 +112,18 @@ public class ProducingBean {
 ----
 <1> The container resolves `MyBean` and passes it to the producer when an instance of the bean is requested
 
+[.recap]
+== Back to demo
+[.statement]
+====
+TIP: Produce a Logger
+
+TIP: Inject a logger
+
+TIP: To log service _(doesn't change)_
+
+====
+
 [.topic]
 == Accessing Injection Point metadata
 
@@ -134,3 +146,15 @@ public class ProducingBean {
 --
 `InjectionPoint` can also be injected in managed bean
 --
+
+[.recap]
+== Back to demo
+[.statement]
+====
+TIP: Produce a Logger with `InjectionPoint` API
+
+TIP: Inject a logger _(doesn't change)_
+
+TIP: To log service _(doesn't change)_
+
+====

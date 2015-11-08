@@ -8,13 +8,13 @@ Expenses made EEsy
 
 [.smallest]
 ====
-* icon:money[] a web app to manage expenses
-* icon:wrench[] based on Java EE 7
+* icon:money[] A web app to manage expenses
+* icon:wrench[] Based on Java EE 7
 ** icon:check[] CDI 1.2
 ** icon:check[] JPA 2.1
 ** icon:check[] JSF 2.2
 ** icon:check[] JAX-RS 2.0
-* icon:book[] able to integrate legacy libs
+* icon:book[] Able to integrate legacy libs
 ====
 
 [.topic]
@@ -77,27 +77,65 @@ Let's Forge ExpensEEs!
 ====
 Forge
 
-image::arquillian.png[role="pull-right", width="250"]
+image::jbossforge.png[role="pull-right", width="250"]
 
-. Arquillian is an integration test platform
-. It integrates with JUnit
-. Create your deployment in a dedicated method
-. And launch your tests against the container of your choice
-. We'll use the `weld-se-embedded` and `weld-ee-embedded` container
-. The right solution to test Java EE code
-. More info on http://arquillian.org
+. Generation & Scaffolding tool
+. Shell commands & IDE Integration
+. Gets you start quickly
+. Takes care of integration
+. Plugin based
+. Java EE... But anything else really
+. More info on http://forge.jboss.org/
 ====
 
 [.recap]
 == Back to demo
-TIP: kljkljkl
-* kjhkhj
+[.statement]
+====
+TIP: Run JBoss Forge
+
+TIP: Create JPA Entities
+
+TIP: Scaffold JSF CRUD pages
+
+TIP: Scaffold REST Endpoint
+====
+
+[.topic]
+== Architecture Forge
+
+plantuml::schemas/architecture_forgeee6.puml[format=svg, width=95%, height=95%]
 
 
 [.topic]
-== Architecture - _Services_
+== Not Finished Yet
 
-plantuml::schemas/architecture_service.puml[architecture_service, format=svg, width=95%, height=95%]
+. Only a CRUD app
+. No "Create expenses" Wizard
+. No Login/logout
+. Primefaces
+. Java EE 6 instead of Java EE 7
+. JTA 1.2 @Transactional
+. JPA 2.1 Insert data in DB
+. Not in full CDI programming model !
+
+
+[.recap]
+== Back to demo
+[.statement]
+====
+TIP: Refactor the app
+
+TIP: Add a service layer
+
+TIP: Add Java EE 7 dependencies
+
+TIP: Less EJB More CDI
+
+TIP: 2 hours later...
+====
 
 [.topic]
+== New Architecture
 
+plantuml::schemas/architecture_forgeee7.puml[format=svg, width=95%, height=95%]
