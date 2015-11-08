@@ -73,6 +73,8 @@ include::parts/inject.adoc[]
 
 include::parts/producers.adoc[]
 
+include::parts/aop.adoc[]
+
 include::parts/extensions.adoc[]
 
 
