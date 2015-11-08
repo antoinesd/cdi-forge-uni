@@ -1,4 +1,4 @@
-package org.expenses.web.view;
+package org.expenses.web.view.admin;
 
 import java.io.Serializable;
 import java.util.ArrayList;

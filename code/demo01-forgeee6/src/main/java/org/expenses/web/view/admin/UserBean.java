@@ -1,4 +1,4 @@
-package org.expenses.web.view;
+package org.expenses.web.view.admin;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,17 +24,15 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import org.expenses.web.model.Reimbursement;
-import org.expenses.web.model.Conference;
-import org.expenses.web.model.Currency;
 import org.expenses.web.model.User;
+import org.expenses.web.model.UserRole;
 
 /**
- * Backing bean for Reimbursement entities.
+ * Backing bean for User entities.
  * <p/>
- * This class provides CRUD functionality for all Reimbursement entities. It
- * focuses purely on Java EE 6 standards (e.g. <tt>&#64;ConversationScoped</tt>
- * for state management, <tt>PersistenceContext</tt> for persistence,
+ * This class provides CRUD functionality for all User entities. It focuses
+ * purely on Java EE 6 standards (e.g. <tt>&#64;ConversationScoped</tt> for
+ * state management, <tt>PersistenceContext</tt> for persistence,
  * <tt>CriteriaBuilder</tt> for searches) rather than introducing a CRUD
  * framework or custom base class.
  */
@@ -42,12 +40,12 @@ import org.expenses.web.model.User;
 @Named
 @Stateful
 @ConversationScoped
-public class ReimbursementBean implements Serializable {
+public class UserBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	/*
-	 * Support creating and retrieving Reimbursement entities
+	 * Support creating and retrieving User entities
 	 */
 
 	private Long id;
@@ -60,14 +58,14 @@ public class ReimbursementBean implements Serializable {
 		this.id = id;
 	}
 
-	private Reimbursement reimbursement;
+	private User user;
 
-	public Reimbursement getReimbursement() {
-		return this.reimbursement;
+	public User getUser() {
+		return this.user;
 	}
 
-	public void setReimbursement(Reimbursement reimbursement) {
-		this.reimbursement = reimbursement;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Inject
@@ -95,19 +93,19 @@ public class ReimbursementBean implements Serializable {
 		}
 
 		if (this.id == null) {
-			this.reimbursement = this.example;
+			this.user = this.example;
 		} else {
-			this.reimbursement = findById(getId());
+			this.user = findById(getId());
 		}
 	}
 
-	public Reimbursement findById(Long id) {
+	public User findById(Long id) {
 
-		return this.entityManager.find(Reimbursement.class, id);
+		return this.entityManager.find(User.class, id);
 	}
 
 	/*
-	 * Support updating and deleting Reimbursement entities
+	 * Support updating and deleting User entities
 	 */
 
 	public String update() {
@@ -115,12 +113,11 @@ public class ReimbursementBean implements Serializable {
 
 		try {
 			if (this.id == null) {
-				this.entityManager.persist(this.reimbursement);
+				this.entityManager.persist(this.user);
 				return "search?faces-redirect=true";
 			} else {
-				this.entityManager.merge(this.reimbursement);
-				return "view?faces-redirect=true&id="
-						+ this.reimbursement.getId();
+				this.entityManager.merge(this.user);
+				return "view?faces-redirect=true&id=" + this.user.getId();
 			}
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -133,7 +130,7 @@ public class ReimbursementBean implements Serializable {
 		this.conversation.end();
 
 		try {
-			Reimbursement deletableEntity = findById(getId());
+			User deletableEntity = findById(getId());
 
 			this.entityManager.remove(deletableEntity);
 			this.entityManager.flush();
@@ -146,14 +143,14 @@ public class ReimbursementBean implements Serializable {
 	}
 
 	/*
-	 * Support searching Reimbursement entities with pagination
+	 * Support searching User entities with pagination
 	 */
 
 	private int page;
 	private long count;
-	private List<Reimbursement> pageItems;
+	private List<User> pageItems;
 
-	private Reimbursement example = new Reimbursement();
+	private User example = new User();
 
 	public int getPage() {
 		return this.page;
@@ -167,11 +164,11 @@ public class ReimbursementBean implements Serializable {
 		return 10;
 	}
 
-	public Reimbursement getExample() {
+	public User getExample() {
 		return this.example;
 	}
 
-	public void setExample(Reimbursement example) {
+	public void setExample(User example) {
 		this.example = example;
 	}
 
@@ -187,7 +184,7 @@ public class ReimbursementBean implements Serializable {
 		// Populate this.count
 
 		CriteriaQuery<Long> countCriteria = builder.createQuery(Long.class);
-		Root<Reimbursement> root = countCriteria.from(Reimbursement.class);
+		Root<User> root = countCriteria.from(User.class);
 		countCriteria = countCriteria.select(builder.count(root)).where(
 				getSearchPredicates(root));
 		this.count = this.entityManager.createQuery(countCriteria)
@@ -195,40 +192,53 @@ public class ReimbursementBean implements Serializable {
 
 		// Populate this.pageItems
 
-		CriteriaQuery<Reimbursement> criteria = builder
-				.createQuery(Reimbursement.class);
-		root = criteria.from(Reimbursement.class);
-		TypedQuery<Reimbursement> query = this.entityManager
-				.createQuery(criteria.select(root).where(
-						getSearchPredicates(root)));
+		CriteriaQuery<User> criteria = builder.createQuery(User.class);
+		root = criteria.from(User.class);
+		TypedQuery<User> query = this.entityManager.createQuery(criteria
+				.select(root).where(getSearchPredicates(root)));
 		query.setFirstResult(this.page * getPageSize()).setMaxResults(
 				getPageSize());
 		this.pageItems = query.getResultList();
 	}
 
-	private Predicate[] getSearchPredicates(Root<Reimbursement> root) {
+	private Predicate[] getSearchPredicates(Root<User> root) {
 
 		CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 		List<Predicate> predicatesList = new ArrayList<Predicate>();
 
-		Currency currency = this.example.getCurrency();
-		if (currency != null) {
-			predicatesList.add(builder.equal(root.get("currency"), currency));
+		String login = this.example.getLogin();
+		if (login != null && !"".equals(login)) {
+			predicatesList.add(builder.like(
+					builder.lower(root.<String> get("login")),
+					'%' + login.toLowerCase() + '%'));
 		}
-		User user = this.example.getUser();
-		if (user != null) {
-			predicatesList.add(builder.equal(root.get("user"), user));
+		String password = this.example.getPassword();
+		if (password != null && !"".equals(password)) {
+			predicatesList.add(builder.like(
+					builder.lower(root.<String> get("password")),
+					'%' + password.toLowerCase() + '%'));
 		}
-		Conference conference = this.example.getConference();
-		if (conference != null) {
-			predicatesList
-					.add(builder.equal(root.get("conference"), conference));
+		String name = this.example.getName();
+		if (name != null && !"".equals(name)) {
+			predicatesList.add(builder.like(
+					builder.lower(root.<String> get("name")),
+					'%' + name.toLowerCase() + '%'));
+		}
+		String email = this.example.getEmail();
+		if (email != null && !"".equals(email)) {
+			predicatesList.add(builder.like(
+					builder.lower(root.<String> get("email")),
+					'%' + email.toLowerCase() + '%'));
+		}
+		UserRole role = this.example.getRole();
+		if (role != null) {
+			predicatesList.add(builder.equal(root.get("role"), role));
 		}
 
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);
 	}
 
-	public List<Reimbursement> getPageItems() {
+	public List<User> getPageItems() {
 		return this.pageItems;
 	}
 
@@ -237,17 +247,16 @@ public class ReimbursementBean implements Serializable {
 	}
 
 	/*
-	 * Support listing and POSTing back Reimbursement entities (e.g. from inside
-	 * an HtmlSelectOneMenu)
+	 * Support listing and POSTing back User entities (e.g. from inside an
+	 * HtmlSelectOneMenu)
 	 */
 
-	public List<Reimbursement> getAll() {
+	public List<User> getAll() {
 
-		CriteriaQuery<Reimbursement> criteria = this.entityManager
-				.getCriteriaBuilder().createQuery(Reimbursement.class);
+		CriteriaQuery<User> criteria = this.entityManager.getCriteriaBuilder()
+				.createQuery(User.class);
 		return this.entityManager.createQuery(
-				criteria.select(criteria.from(Reimbursement.class)))
-				.getResultList();
+				criteria.select(criteria.from(User.class))).getResultList();
 	}
 
 	@Resource
@@ -255,8 +264,8 @@ public class ReimbursementBean implements Serializable {
 
 	public Converter getConverter() {
 
-		final ReimbursementBean ejbProxy = this.sessionContext
-				.getBusinessObject(ReimbursementBean.class);
+		final UserBean ejbProxy = this.sessionContext
+				.getBusinessObject(UserBean.class);
 
 		return new Converter() {
 
@@ -275,7 +284,7 @@ public class ReimbursementBean implements Serializable {
 					return "";
 				}
 
-				return String.valueOf(((Reimbursement) value).getId());
+				return String.valueOf(((User) value).getId());
 			}
 		};
 	}
@@ -284,15 +293,15 @@ public class ReimbursementBean implements Serializable {
 	 * Support adding children to bidirectional, one-to-many tables
 	 */
 
-	private Reimbursement add = new Reimbursement();
+	private User add = new User();
 
-	public Reimbursement getAdd() {
+	public User getAdd() {
 		return this.add;
 	}
 
-	public Reimbursement getAdded() {
-		Reimbursement added = this.add;
-		this.add = new Reimbursement();
+	public User getAdded() {
+		User added = this.add;
+		this.add = new User();
 		return added;
 	}
 }
