@@ -72,3 +72,47 @@ scaffold-generate --provider Faces --targets org.expenses.web.model.* --webRoot 
  
 rest-generate-endpoints-from-entities --targets org.expenses.web.model.Conference ;
 
+
+# Adding services
+# ###########################
+
+java-new-class --named AbstractService --abstract --targetPackage ~.service --serializable ;
+java-new-class --named ConferenceService --targetPackage ~.service ;
+java-new-class --named CurrencyService --targetPackage ~.service ;
+java-new-class --named ExpenseService --targetPackage ~.service ;
+java-new-class --named RateService --targetPackage ~.service ;
+java-new-class --named RateServiceMock --targetPackage ~.service ;
+java-new-class --named ReimbursementService --targetPackage ~.service ;
+java-new-class --named UserService --targetPackage ~.service ;
+java-new-interface --named Rateable --targetPackage ~.service ;
+
+
+# Adding beans
+# ###########################
+
+cdi-new-qualifier --named Clear ;
+cdi-new-qualifier --named Encrypted ;
+
+java-new-interface --named DigestPassword --targetPackage ~.beans ;
+java-new-class --named ClearPassword --targetPackage ~.beans ;
+java-new-class --named EncryptPassword --targetPackage ~.beans ;
+
+cdi-new-interceptor-binding --named Loggable ;
+cdi-new-interceptor --named LoggingInterceptor --interceptorBinding ~.beans.Loggable ;
+
+cdi-new-bean --named LoggerProducer ;
+
+
+# Adding BankingService
+# ###########################
+
+java-new-class --named BankingService --targetPackage org.expenses.banking ;
+cdi-add-observer-method --named reimbursementToBePaid --eventType ~.model.Reimbursement ;
+
+
+# Extension
+# ###########################
+
+cdi-new-extension --named BillingServiceExtension --enable --targetPackage ~.extensions ;
+cdi-new-bean --named BillingServiceObserver --targetPackage ~.extensions ;
+

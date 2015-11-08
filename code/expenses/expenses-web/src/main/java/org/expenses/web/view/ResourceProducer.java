@@ -1,4 +1,4 @@
-package org.expenses.web.utils;
+package org.expenses.web.view;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;

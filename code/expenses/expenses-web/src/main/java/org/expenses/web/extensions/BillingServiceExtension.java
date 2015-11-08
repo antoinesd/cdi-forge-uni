@@ -1,4 +1,4 @@
-package org.expenses.web.extension;
+package org.expenses.web.extensions;
 
 
 import javax.enterprise.event.Observes;
