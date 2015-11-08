@@ -18,8 +18,8 @@ public class CurrencyServiceTest {
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addPackages(true, "org.expenses.core")
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+                .addPackages(true, "org.expenses.web")
+                .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
 
     @Inject
