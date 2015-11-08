@@ -75,6 +75,8 @@ include::parts/producers.adoc[]
 
 include::parts/aop.adoc[]
 
+include::parts/qualifiers.adoc[]
+
 include::parts/extensions.adoc[]
 
 
