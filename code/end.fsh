@@ -1,25 +1,7 @@
-project-new --named expenses --type parent ;
-
-#  #################################  #
-#  Creates the expenses core project  #
-#  #################################  #
-
-project-new --named expenses-core --topLevelPackage org.expenses.core --type jar ;
-
-# Sets the project to use Java EE 7 artifacts
-# #################
-
-jpa-setup --jpaVersion 2.1 --persistenceUnitName expenses-pu ;
-cdi-setup --cdiVersion 1.1 ;
-
-
 
 #  ################################  #
 #  Creates the expenses web project  #
 #  ################################  #
-
-cd ~~ ;
-cd .. ;
 
 project-new --named expenses-web --topLevelPackage org.expenses.web --type war ;
 
@@ -30,6 +12,7 @@ jpa-setup --jpaVersion 2.1 --persistenceUnitName expenses-pu ;
 cdi-setup --cdiVersion 1.1 ;
 faces-setup --facesVersion 2.2 ;
 servlet-setup --servletVersion 3.1 ;
+rest-setup --jaxrsVersion 2.0 ;
 
 
 # Creates the entities
@@ -84,64 +67,8 @@ jpa-new-field --named conference --type ~.model.Conference --relationshipType Ma
 scaffold-generate --provider Faces --targets org.expenses.web.model.* --webRoot admin ;
 
 
-
-#  #####################################  #
-#  Creates the expenses currency project  #
-#  #####################################  #
-
-cd ~~ ;
-cd .. ;
-
-project-new --named expenses-currency --topLevelPackage org.expenses.currency --type jar ;
-
-# Sets the project to use Java EE 7 artifacts
-# #################
-
-cdi-setup --cdiVersion 1.1 ;
-
-
-
-#  #####################################  #
-#  Creates the expenses billing project   #
-#  #####################################  #
-
-cd ~~ ;
-cd .. ;
-
-project-new --named expenses-billing --topLevelPackage org.expenses.billing --type jar ;
-
-# Sets the project to use Java EE 7 artifacts
-# #################
-
-cdi-setup --cdiVersion 1.1 ;
-
-
-# Creating services
-# #################
-cdi-new-bean --named BillingService --targetPackage ~.service ;
-cdi-add-observer-method --named reimbursementToBill --eventType org.expenses.core.model.Reimbursement ;
-
-
-#  #####################################  #
-#  Creates the expenses banking project   #
-#  #####################################  #
-
-cd ~~ ;
-cd .. ;
-
-project-new --named expenses-banking --topLevelPackage org.expenses.banking --type jar ;
-
-# Sets the project to use Java EE 7 artifacts
-# #################
-
-cdi-setup --cdiVersion 1.1 ;
-
-
-# Creating services
-# #################
-cdi-new-bean --named BankingService --targetPackage ~.service ;
-cdi-add-observer-method --named reimbursementToBePaid --eventType org.expenses.core.model.Reimbursement ;
-
-
-
+# Scaffolds REST endpoints
+# ###########################
+ 
+rest-generate-endpoints-from-entities --targets org.expenses.web.model.Conference ;
 
