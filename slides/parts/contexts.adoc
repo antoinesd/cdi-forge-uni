@@ -112,7 +112,17 @@ public class WizardBean {
     conversation.[highlight]*end()*
     ...
  }
-
-
 }
 ----
+
+[.recap]
+== Back to demo
+[.statement]
+====
+TIP: Wizard to create new expenses
+
+TIP: Use of `@ConversationScoped`
+
+TIP: JSF deals with `cid`
+
+====
