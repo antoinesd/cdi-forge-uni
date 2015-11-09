@@ -88,6 +88,7 @@ public class AccountBean implements Serializable {
         for (DigestPassword digester : digestPasswords) {
             try {
                 user = service.findByLoginPassword(login, digester.digest(password));
+                break;
             } catch (NoResultException e) {
                 user = null;
             }

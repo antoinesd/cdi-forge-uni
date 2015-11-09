@@ -7,6 +7,8 @@ import org.expenses.web.model.UserRole;
 import org.expenses.web.service.UserService;
 
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Instance;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -78,9 +80,10 @@ public class AccountBean implements Serializable {
 
         // Looks for all password digester implementations
         for (DigestPassword digester : digestPasswords) {
-        try {
+            try {
                 user = service.findByLoginPassword(login, digester.digest(password));
-        } catch (NoResultException e) {
+                break;
+            } catch (NoResultException e) {
                 user = null;
             }
         }
