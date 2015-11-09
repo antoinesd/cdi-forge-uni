@@ -1,7 +1,7 @@
 @startuml
 
 User "1" *-- "many" Reimbursement : contains
-Reimbursement "1" *-- "many" Expense : contains
+Reimbursement "1" *-right- "many" Expense : contains
 Conference "1" *-- "many" Reimbursement : contains
 
 class Conference {

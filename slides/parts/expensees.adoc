@@ -77,7 +77,7 @@ Let's Forge ExpensEEs!
 ====
 Forge
 
-image::jbossforge.png[role="pull-right", width="250"]
+image::jbossforge.png[role="pull-right", width="200"]
 
 . Generation & Scaffolding tool
 . Shell commands & IDE Integration
