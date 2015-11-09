@@ -1,14 +1,13 @@
 package org.expenses.web.service;
 
+import org.expenses.web.beans.Service;
 import org.expenses.web.model.Currency;
 import org.expenses.web.model.Expense;
 import org.expenses.web.model.ExpenseType;
-import org.expenses.web.beans.Loggable;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +17,7 @@ import java.util.List;
  * This class provides CRUD functionality for all Expense entities.
  */
 
-@Transactional
-@Loggable
+@Service
 public class ExpenseService extends AbstractService<Expense> {
 
     public ExpenseService() {

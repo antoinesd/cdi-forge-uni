@@ -1,16 +1,15 @@
 package org.expenses.web.service;
 
+import org.expenses.web.beans.Service;
 import org.expenses.web.model.User;
 import org.expenses.web.beans.DigestPassword;
 import org.expenses.web.beans.Encrypted;
-import org.expenses.web.beans.Loggable;
 
 import javax.inject.Inject;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +19,7 @@ import java.util.List;
  * This class provides CRUD functionality for all User entities.
  */
 
-@Transactional
-@Loggable
+@Service
 public class UserService extends AbstractService<User> {
 
     @Inject
