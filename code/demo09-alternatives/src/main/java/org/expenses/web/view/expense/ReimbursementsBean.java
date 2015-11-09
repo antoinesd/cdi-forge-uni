@@ -1,15 +1,14 @@
 package org.expenses.web.view.expense;
 
+import org.expenses.web.beans.Wizard;
 import org.expenses.web.model.Reimbursement;
 import org.expenses.web.model.User;
 import org.expenses.web.service.ReimbursementService;
 import org.expenses.web.view.account.LoggedIn;
 
 import javax.enterprise.context.Conversation;
-import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
@@ -21,8 +20,7 @@ import java.util.List;
  * <tt>CriteriaBuilder</tt> for searches) rather than introducing a CRUD framework or custom base class.
  */
 
-@Named
-@ConversationScoped
+@Wizard
 public class ReimbursementsBean implements Serializable {
 
     private static final long serialVersionUID = 1L;

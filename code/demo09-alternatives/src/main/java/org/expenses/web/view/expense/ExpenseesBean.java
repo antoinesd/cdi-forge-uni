@@ -1,5 +1,6 @@
 package org.expenses.web.view.expense;
 
+import org.expenses.web.beans.Wizard;
 import org.expenses.web.model.*;
 import org.expenses.web.service.CurrencyService;
 import org.expenses.web.service.ReimbursementService;
@@ -7,12 +8,10 @@ import org.expenses.web.service.UserService;
 import org.expenses.web.view.account.LoggedIn;
 
 import javax.enterprise.context.Conversation;
-import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.inject.Instance;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -24,8 +23,7 @@ import java.util.Date;
  * <tt>CriteriaBuilder</tt> for searches) rather than introducing a CRUD framework or custom base class.
  */
 
-@Named
-@ConversationScoped
+@Wizard
 public class ExpenseesBean implements Serializable {
 
     @Inject
