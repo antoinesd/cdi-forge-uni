@@ -112,6 +112,8 @@ plantuml::diagrams/architecture_forgeee6.puml[format=svg, width=95%, height=95%]
 [.topic]
 == Not Finished Yet
 
+[.statement]
+====
 . Only a CRUD app
 . No "Create expenses" Wizard
 . No Login/logout
@@ -120,7 +122,7 @@ plantuml::diagrams/architecture_forgeee6.puml[format=svg, width=95%, height=95%]
 . JTA 1.2 @Transactional
 . JPA 2.1 Insert data in DB
 . Not in full CDI programming model !
-
+====
 
 [.recap]
 == Back to demo
