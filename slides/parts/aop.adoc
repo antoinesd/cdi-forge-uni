@@ -136,6 +136,8 @@ TIP: Create a `LoggingInterceptor`
 
 TIP: Add `LoggingInterceptor` to each service
 
+TIP: Enable interceptor in the `beans.xml`
+
 ====
 
 

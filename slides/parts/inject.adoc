@@ -101,8 +101,8 @@ CAUTION: In both case a `DeploymentException` is thrown by the container
 == Back to demo
 [.statement]
 ====
-TIP: Inject a Logger
+TIP: Inject a Logger into `UserService`
 
-TIP: Log service
+TIP: Log a message in `persist` method
 
 ====

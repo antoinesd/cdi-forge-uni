@@ -116,11 +116,9 @@ public class ProducingBean {
 == Back to demo
 [.statement]
 ====
-TIP: Produce a Logger
+TIP: The class `LoggerProducer` produces a Logger
 
-TIP: Inject a logger
-
-TIP: To log service _(doesn't change)_
+TIP: Injecting a logger in service _doesn't change_
 
 ====
 
@@ -151,10 +149,8 @@ public class ProducingBean {
 == Back to demo
 [.statement]
 ====
-TIP: Produce a Logger with `InjectionPoint` API
+TIP: Add `InjectionPoint` API to the producer
 
-TIP: Inject a logger _(doesn't change)_
-
-TIP: To log service _(doesn't change)_
+TIP: Injecting a logger in service _doesn't change_
 
 ====
