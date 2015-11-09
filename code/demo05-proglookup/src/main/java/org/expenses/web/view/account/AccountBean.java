@@ -1,15 +1,12 @@
 package org.expenses.web.view.account;
 
+import org.expenses.web.beans.DigestPassword;
+import org.expenses.web.beans.Encrypted;
 import org.expenses.web.model.User;
 import org.expenses.web.model.UserRole;
 import org.expenses.web.service.UserService;
-import org.expenses.web.beans.DigestPassword;
-import org.expenses.web.beans.Encrypted;
 
 import javax.enterprise.context.SessionScoped;
-import javax.enterprise.inject.Any;
-import javax.enterprise.inject.Instance;
-import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -39,12 +36,7 @@ public class AccountBean implements Serializable {
     @Any
     private Instance<DigestPassword> digestPasswords;
 
-    @Inject
-    private Instance<AccountBean> me;
-
     // Logged user
-    @Produces
-    @LoggedIn
     private User user = new User();
 
     // Checks if the user is logged in and if he/she is an administrator (UserRole.Admin)
@@ -86,9 +78,9 @@ public class AccountBean implements Serializable {
 
         // Looks for all password digester implementations
         for (DigestPassword digester : digestPasswords) {
-            try {
+        try {
                 user = service.findByLoginPassword(login, digester.digest(password));
-            } catch (NoResultException e) {
+        } catch (NoResultException e) {
                 user = null;
             }
         }
@@ -110,8 +102,6 @@ public class AccountBean implements Serializable {
     }
 
     public String doLogout() {
-        me.destroy(me.get());
-
         return "/index";
     }
 
