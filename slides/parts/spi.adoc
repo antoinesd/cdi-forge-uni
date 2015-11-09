@@ -41,13 +41,13 @@ TIP: ...for annotated types
 [.topic.source]
 == SPI for type meta-model
 
-plantuml::schemas/spi_type_metamodel.puml[format=svg, width=100%, height=95%]
+plantuml::diagrams/spi_type_metamodel.puml[format=svg, width=100%, height=95%]
 
 
 [.topic.source]
 == SPI dedicated to CDI meta-model
 
-plantuml::schemas/spi_cdi_metamodel.puml[format=svg, width=100%]
+plantuml::diagrams/spi_cdi_metamodel.puml[format=svg, width=100%]
 
 
 [.topic.source]
@@ -153,13 +153,13 @@ public class MyService {
 [.topic.source]
 == SPI providing CDI entry points
 
-plantuml::schemas/spi_entrypoints.puml[format=svg, width=100%, height=95%]
+plantuml::diagrams/spi_entrypoints.puml[format=svg, width=100%, height=95%]
 
 
 [.topic.source]
 == SPI dedicated to extensions
 
-plantuml::schemas/spi_extensions.puml[format=svg, width=100%, height=100%]
+plantuml::diagrams/spi_extensions.puml[format=svg, width=100%, height=100%]
 
 
 [.topic.source]

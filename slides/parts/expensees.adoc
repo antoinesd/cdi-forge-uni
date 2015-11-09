@@ -61,7 +61,7 @@ image:Balsamiq8-ViewExpenses.png[width="90%", align="center", float="right"]
 [.topic]
 == Architecture - _Model_
 
-plantuml::schemas/architecture_model.puml[architecture_model, format=svg, width=95%, height=95%]
+plantuml::diagrams/architecture_model.puml[architecture_model, format=svg, width=95%, height=95%]
 
 == !
 
@@ -106,7 +106,7 @@ TIP: Run Forge script
 [.topic]
 == Architecture Forge
 
-plantuml::schemas/architecture_forgeee6.puml[format=svg, width=95%, height=95%]
+plantuml::diagrams/architecture_forgeee6.puml[format=svg, width=95%, height=95%]
 
 
 [.topic]
@@ -142,4 +142,4 @@ TIP: 2 hours later...
 [.topic]
 == New Architecture
 
-plantuml::schemas/architecture_forgeee7.puml[format=svg, width=95%, height=95%]
+plantuml::diagrams/architecture_forgeee7.puml[format=svg, width=95%, height=95%]

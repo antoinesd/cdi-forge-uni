@@ -85,9 +85,9 @@ public class CdiExtension [highlight]#implements Extension# {
 == Bean manager lifecycle
 
 
-plantuml::schemas/lifecycle.puml[cdi-lifecycle, format=svg, width=95%, height=85%]
+plantuml::diagrams/lifecycle.puml[cdi-lifecycle, format=svg, width=95%, height=85%]
 
-plantuml::schemas/lifecyclelegend.puml[cdi-lifecycle-legend, format=svg, width=230, height=40, role=pull-right]
+plantuml::diagrams/lifecyclelegend.puml[cdi-lifecycle-legend, format=svg, width=230, height=40, role=pull-right]
 
 
 [.topic.source]
