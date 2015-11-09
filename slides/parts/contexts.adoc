@@ -126,3 +126,60 @@ TIP: Use of `@ConversationScoped`
 TIP: JSF deals with `cid`
 
 ====
+
+[.topic]
+== Contexts are not always convenient
+
+[.statement]
+====
+CAUTION: Lifecycle _magic_ management can limit you
+
+CAUTION: Bean instances are destroyed only when context ends
+
+CAUTION: And you might want to get rid of instance but keep the context
+
+CAUTION: CDI 1.1 added a programmatic way to destroy an instance
+====
+
+[.source]
+== Example - Logout and session invalidation
+
+[source, subs="verbatim,quotes"]
+----
+@Inject FacesContext facesContext;
+
+public String logout(){
+    try{
+        facesContext.getExternalContext().invalidateSession();
+        return "success?faces-redirect=true"; <1>
+    }
+    catch(Exception e){
+        return "error";
+    }
+}
+----
+<1> redirect is important to end current request and kill the session effectively
+
+TIP: we might want to keep the current session and logout user
+
+TIP: not a good practice to call UI layer from service to perform business
+
+[.source]
+== Example - Do logout in a CDI way
+
+[source, subs="verbatim,quotes"]
+----
+@Named
+@SessionScoped
+public class AccountBean implements Serializable {
+
+    @Inject
+    private Instance<AccountBean> myInstance;
+
+    public String doLogout() {
+        myInstance.*destroy*(myInstance.get()); <1>
+        return "/index";
+    }
+----
+<1> Since CDI 1.1, `Instance` provides a `destroy()` method to remove an instance from its context
+
