@@ -317,11 +317,13 @@ TIP: ...the bean is _assignable_ to the _injection point_.
 == Back to demo
 [.statement]
 ====
-TIP: Create a `@Clear` qualifier
+TIP: Create a `@Clear` and `@Encrypted` qualifiers
 
-TIP: Create a `@Encrypted` qualifier
+TIP: Create a `DigestPassword` interface
 
-TIP: Inject encrypted password digest
+TIP: Two implementations `ClearPassword` and `EncryptPassword`
+
+TIP: Inject encrypted password digest into `AccountBean` and `UserService`
 
 
 ====

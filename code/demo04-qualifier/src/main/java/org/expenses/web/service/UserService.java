@@ -1,8 +1,11 @@
 package org.expenses.web.service;
 
 import org.expenses.web.model.User;
+import org.expenses.web.beans.DigestPassword;
+import org.expenses.web.beans.Encrypted;
 import org.expenses.web.beans.Loggable;
 
+import javax.inject.Inject;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Predicate;
@@ -21,12 +24,17 @@ import java.util.List;
 @Loggable
 public class UserService extends AbstractService<User> {
 
+    @Inject
+    @Encrypted
+    private DigestPassword digestPassword;
+
     public UserService() {
         super(User.class);
     }
 
     @Override
     public User persist(User entity) {
+        entity.setPassword(digestPassword.digest(entity.getPassword()));
         return super.persist(entity);
     }
 

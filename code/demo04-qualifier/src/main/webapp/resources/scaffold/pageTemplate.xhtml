@@ -23,6 +23,17 @@
                     <h:outputText value=",  #{request.userPrincipal.name}" rendered="#{request.userPrincipal !=null} "/>
                 </h:link>
             </div>
+            <div id="navbar">
+                <h:form>
+                    <h:panelGroup layout="block" class="form-group">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown active">
+                                <h:link outcome="/account/signin.xhtml" value="Connexion"/>
+                            </li>
+                        </ul>
+                    </h:panelGroup>
+                </h:form>
+            </div>
         </div>
     </div>
 
