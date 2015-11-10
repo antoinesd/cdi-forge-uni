@@ -183,3 +183,13 @@ public class AccountBean implements Serializable {
 ----
 <1> Since CDI 1.1, `Instance` provides a `destroy()` method to remove an instance from its context
 
+
+[.recap]
+== Back to demo
+[.statement]
+====
+TIP: `AccountBean` injects a reference to itself
+
+TIP: `AccountBean` destroys it for logout
+
+====
