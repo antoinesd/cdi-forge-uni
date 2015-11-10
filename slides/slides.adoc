@@ -86,7 +86,7 @@ include::parts/contexts.adoc[]
 
 // Creation de scope
 
-// Alternatives
+include::parts/alternatives_stereotypes.adoc[]
 
 include::parts/events.adoc[]
 
