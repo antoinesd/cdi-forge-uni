@@ -6,6 +6,6 @@ import javax.enterprise.inject.Alternative;
 public class RateServiceMock implements Rateable {
 
     public double rate() {
-        return 1.23;
+        return 99.99;
     }
 }
