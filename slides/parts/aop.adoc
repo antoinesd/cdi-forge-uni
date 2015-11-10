@@ -140,15 +140,3 @@ TIP: Enable interceptor in the `beans.xml`
 
 ====
 
-
-[.recap]
-== Back to demo
-[.statement]
-====
-TIP: Login page
-
-TIP: New passwords are encrypted
-
-TIP: Old passwords are in clear
-
-====
