@@ -95,7 +95,7 @@ include::parts/extensions.adoc[]
 
 include::parts/spi.adoc[]
 
-
+include::parts/cdi2.adoc[]
 
 
 
@@ -107,13 +107,16 @@ include::parts/spi.adoc[]
 [.topic.source]
 == References
 
+[.statement]
+====
 NOTE: CDI Specification - http://cdi-spec.org
 
+NOTE: Code & slides repository - https://github.com/antoinesd/cdi-forge-uni
 
 NOTE: Slides generated with _Asciidoctor_, _PlantUML_ and _DZSlides_ backend
 
 NOTE: Original slide template - _Dan Allen_ & _Sarah White_
-
+====
 
 [.topic.ending, hrole="name"]
 == Antoine Sabot-Durand Antonio Goncalves

@@ -1,5 +1,5 @@
 [.topic.intro]
-== Meet CDI SPI
+== Understanding SPI to build CDI extensions
 image:3d-chess.png[width="110%"]
 ==!
 
@@ -49,7 +49,7 @@ plantuml::diagrams/spi_type_metamodel.puml[format=svg, width=100%, height=95%]
 
 plantuml::diagrams/spi_cdi_metamodel.puml[format=svg, width=100%]
 
-
+////
 [.topic.source]
 == This SPI can be used in your code (1/2)
 
@@ -148,7 +148,7 @@ public class MyService {
   }
 }
 ----
-
+////
 
 [.topic.source]
 == SPI providing CDI entry points
@@ -175,6 +175,13 @@ TIP: A `ProcessAnnotatedType<T>` event is fired for each type being discovered a
 
 TIP: Observing `ProcessAnnotatedType<Foo>` allows you to prevent `Foo` to be deployed as a bean by calling `ProcessAnnotatedType#veto()`
 
+
+[.recap]
+== Back to demo
+
+TIP: We got this Javadoc:
+
+image:billing-service.png[width="90%", align="center", float="right"]
 
 [.recap]
 == Back to demo
