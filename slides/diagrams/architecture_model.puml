@@ -1,8 +1,8 @@
 @startuml
 
-User "1" *-- "many" Reimbursement : contains
-Reimbursement "1" *-right- "many" Expense : contains
-Conference "1" *-- "many" Reimbursement : contains
+User "1" --* "*" Reimbursement
+Reimbursement "1" *-right- "*" Expense
+Conference "1" --* "*" Reimbursement
 
 class Conference {
    -String name

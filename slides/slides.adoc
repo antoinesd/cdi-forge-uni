@@ -41,8 +41,8 @@ Antoine Sabot-Durand; Antonio Goncalves
 [.topic]
 == Antonio Goncalves
 
-* icon:star[] Rock Star
-* icon:institution[] Self Employed
+* icon:star[] Java Champion
+* icon:institution[] Contractor developper
 * icon:rss[] antoniogoncalves.org
 * icon:twitter[] @agoncal
 * icon:github[] github.com/agoncal
