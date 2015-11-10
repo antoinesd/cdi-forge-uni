@@ -1,6 +1,6 @@
-= _CDI_ & _Forge_
+= Extend Java EE with _CDI_
 Antoine Sabot-Durand; Antonio Goncalves
-:description: CDI & Forge univeristy
+:description: CDI Univeristy
 :copyright: CC BY-SA 4.0
 :backend: dzslides
 :sectids!:
