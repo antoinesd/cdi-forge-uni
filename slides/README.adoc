@@ -1,4 +1,4 @@
-= CDI & Forge university
+= CDI & Forge university Slides
 
 == Presentations
 
